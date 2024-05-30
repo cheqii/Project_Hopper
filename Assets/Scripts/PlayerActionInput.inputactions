@@ -1,0 +1,45 @@
+{
+    "name": "PlayerActionInput",
+    "maps": [
+        {
+            "name": "PlayerAction",
+            "id": "30e5e169-5cc5-42f1-96cd-300c85e7781b",
+            "actions": [
+                {
+                    "name": "Action",
+                    "type": "Value",
+                    "id": "dabc7950-26ac-4332-8841-e5e9be32ba3c",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2",
+                    "interactions": "Press",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "7c668237-4ddb-4336-acae-068c1c873e6d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f2c5e657-783b-4a3e-aee2-93a3add85924",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
