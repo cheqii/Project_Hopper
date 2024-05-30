@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace Character
@@ -10,12 +13,16 @@ namespace Character
         [SerializeField] private float jumpForce;
         [SerializeField] private bool isGrounded;
         private Rigidbody2D rb;
-
+        
         [Header("Tilemaps")]
-        [SerializeField] private Tilemap groudTile;
+        [SerializeField] private GroundTile groundTile;
 
-        [SerializeField] private Color32 normalHeart;
-        [SerializeField] private Color32 blankHeath;
+        [SerializeField] private int stepCount;
+        public int StepCount
+        {
+            get => stepCount;
+            set => stepCount = value;
+        }
 
         private PlayerActionInput _control;
 
@@ -31,63 +38,77 @@ namespace Character
 
         private void OnDisable()
         {
-            
             _control.Disable();
         }
 
         // Start is called before the first frame update
         void Start()
         {
+            groundTile = FindObjectOfType<GroundTile>();
+            
             rb = GetComponent<Rigidbody2D>();
             
             health = maxHealth;
 
             _control.PlayerAction.Action.performed += ctx => Jump(ctx.ReadValue<Vector2>());
+            
+            // groundTile
         }
 
         // Update is called once per frame
         void Update()
-        {
-            // if (Input.GetKeyDown(KeyCode.Space))
-            // {
-            //     print("jump");
-            //     rb.velocity = (Vector2.up * jumpForce);
-            // }
-            //
-            // if (Input.GetKeyDown(KeyCode.O))
-            // {
-            //     print("input here");
-            // }
-        }
-
-        private void GetInput() // call this in update function but physics in fixed updated
         {
             
         }
 
         private void Jump(Vector2 direction)
         {
-            if (CanMove(direction))
+            if (isGrounded)
             {
-                transform.position += (Vector3) direction;
-                print("Jump");
+                rb.velocity = direction * jumpForce;
+
+                stepCount++;
+                
+                StartCoroutine(groundTile.MoveGroundTile());
             }
-            // rb.velocity = (Vector2.up * jumpForce);
-        }
-
-        private bool CanMove(Vector2 direction)
-        {
-            Vector3Int gridPos = groudTile.WorldToCell(transform.position + (Vector3) direction);
-            
-            if(!groudTile.HasTile(gridPos))
-               return false;
-
-            return true;
         }
 
         public override void TakeDamage(int damage)
         {
             base.TakeDamage(damage);
         }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = true;
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = false;
+            }
+        }
+        
+        // private IEnumerator MoveGroundTile()
+        // {
+        //     var startPos = groundTile.transform.position;
+        //     var endPos = startPos + Vector3.left;
+        //
+        //     float elapsedTime = 0;
+        //     
+        //     while (elapsedTime < moveDuration)
+        //     {
+        //         groundTile.transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / moveDuration);
+        //         elapsedTime += Time.deltaTime * tileMoveSpeed;
+        //         yield return null;
+        //     }
+        //
+        //     groundTile.transform.position = endPos;
+        // }
     }
 }
