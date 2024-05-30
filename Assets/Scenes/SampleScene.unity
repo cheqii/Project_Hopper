@@ -123,6 +123,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &174793485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 174793486}
+  - component: {fileID: 174793487}
+  m_Layer: 6
+  m_Name: parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &174793486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174793485}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 605183988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &174793487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174793485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d139f2607ca62c44d8664c0be4101c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMoveSpeed: 5
+  moveDuration: 1
 --- !u!1 &242009849
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +395,6 @@ GameObject:
   - component: {fileID: 605183993}
   - component: {fileID: 605183992}
   - component: {fileID: 605183991}
-  - component: {fileID: 605183994}
   m_Layer: 6
   m_Name: Ground Tile
   m_TagString: Ground
@@ -369,7 +414,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 174793486}
   m_Father: {fileID: 242009851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &605183989
@@ -591,20 +637,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &605183994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 605183987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d139f2607ca62c44d8664c0be4101c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileMoveSpeed: 5
-  moveDuration: 1
 --- !u!1 &629570596
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,8 +850,8 @@ MonoBehaviour:
   maxHealth: 0
   jumpForce: 5
   isGrounded: 0
-  groundTile: {fileID: 0}
   stepCount: 0
+  level: {fileID: 893951788}
 --- !u!212 &644898871
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -984,7 +1016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5125497c4dc2b429764410d747e07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  retainStep: 10
+  retainStep: 7
   currentStep: 4
   nextStep: 4
   targetStep: 4
@@ -992,6 +1024,8 @@ MonoBehaviour:
   tile: {fileID: 11400000, guid: 4c6539b1edd081845b50e1d932be143a, type: 2}
   groundPrefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
   groundList: []
+  parent: {fileID: 174793486}
+  ableToGenerate: 0
 --- !u!4 &893951789
 Transform:
   m_ObjectHideFlags: 0

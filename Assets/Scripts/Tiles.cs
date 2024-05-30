@@ -19,6 +19,8 @@ public enum TilesType
 public class Tiles : MonoBehaviour
 {
     [SerializeField] protected TilesType _tilesType;
+
+    private float camEdge;
     // Player.
     private void Awake()
     {
@@ -28,12 +30,17 @@ public class Tiles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        camEdge = Camera.main.ScreenToViewportPoint(Vector3.zero).x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if()
+        if (transform.position.x < camEdge)
+        {
+            Destroy(gameObject,1f);
+        }
     }
+    
+    
 }

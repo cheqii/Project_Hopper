@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundTile : MonoBehaviour
+public class MoveGroundTile : MonoBehaviour
 {
     [SerializeField] private float tileMoveSpeed = 5f;
     [SerializeField] private float moveDuration = 1f;
@@ -19,7 +19,7 @@ public class GroundTile : MonoBehaviour
         
     }
     
-    public IEnumerator MoveGroundTile()
+    public IEnumerator MoveTile()
     {
         var startPos = transform.position;
         var endPos = startPos + Vector3.left;
@@ -34,5 +34,10 @@ public class GroundTile : MonoBehaviour
         }
 
         transform.position = endPos;
+    }
+
+    public void ResetPositon()
+    {
+        transform.position = Vector3.zero;
     }
 }
