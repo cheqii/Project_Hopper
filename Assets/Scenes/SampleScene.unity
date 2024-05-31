@@ -655,7 +655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &629570597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,7 +851,6 @@ MonoBehaviour:
   jumpForce: 5
   isGrounded: 0
   stepCount: 0
-  level: {fileID: 893951788}
 --- !u!212 &644898871
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1020,8 +1019,6 @@ MonoBehaviour:
   currentStep: 4
   nextStep: 4
   targetStep: 4
-  groundTile: {fileID: 605183990}
-  tile: {fileID: 11400000, guid: 4c6539b1edd081845b50e1d932be143a, type: 2}
   groundPrefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
   parent: {fileID: 174793486}
   ableToGenerate: 0

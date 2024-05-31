@@ -36,9 +36,14 @@ public class Tiles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckObjectOutOfCameraLeftEdge(1f);
+    }
+
+    void CheckObjectOutOfCameraLeftEdge(float delay = 0)
+    {
         if (transform.position.x < camEdge)
         {
-            Destroy(gameObject,1f);
+            Destroy(gameObject,delay);
         }
     }
     

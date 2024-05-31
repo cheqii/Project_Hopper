@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Character
 {
@@ -15,16 +16,17 @@ namespace Character
             get => stepCount;
             set => stepCount = value;
         }
-
+        
+        private PlayerActionInput _control;
         
         private MoveGroundTile groundTile;
-        private PlayerActionInput _control;
-
-        public LevelGenerator level;
+        private LevelGenerator level;
+        
         private void Awake()
         {
             _control = new PlayerActionInput();
             groundTile = FindObjectOfType<MoveGroundTile>();
+            level = FindObjectOfType<LevelGenerator>();
         }
 
         private void OnEnable()
@@ -44,8 +46,7 @@ namespace Character
             
             health = maxHealth;
 
-            _control.PlayerAction.Action.performed += ctx => Jump(ctx.ReadValue<Vector2>());
-            // groundTile
+            _control.PlayerAction.Jump.performed += Jump;
         }
 
         // Update is called once per frame
@@ -54,15 +55,13 @@ namespace Character
             
         }
 
-        private void Jump(Vector2 direction)
+        private void Jump(InputAction.CallbackContext callbackContext)
         {
-            if (isGrounded)
-            {
-                rb.velocity = direction * jumpForce;
-                stepCount++;
-                StartCoroutine(groundTile.MoveTile());
-                StartCoroutine(level.CheckCurrentPlayerStep());
-            }
+            if (!isGrounded) return;
+            rb.velocity = Vector2.up * jumpForce;
+            stepCount++;
+            StartCoroutine(groundTile.MoveTile());
+            StartCoroutine(level.CheckCurrentPlayerStep());
         }
 
         public override void TakeDamage(int damage)

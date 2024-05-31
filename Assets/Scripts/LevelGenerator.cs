@@ -86,23 +86,21 @@ public class LevelGenerator : MonoBehaviour
         //     else
         //         nextStep--;
         // }
-
-        // StartCoroutine(CheckCurrentPlayerStep());
+        
         if (ableToGenerate)
         {
             for (int i = 0; i < targetStep; i++)
             {
-                GenerateStep(currentStep + 1 + i);
+                GenerateStep((currentStep + 1) + i);
             }
         }
     }
 
     public void GenerateStep(int step)
     {
-        Vector3 position = new Vector3((int)step, 0, 0);
+        Vector3 position = new Vector3(step, 0, 0);
         var ground = Instantiate(groundPrefab, position, quaternion.identity, parent);
-        ground.transform.localPosition = new Vector3(Mathf.FloorToInt(ground.transform.localPosition.x),
-            ground.transform.position.y, 0f);
+        ground.transform.localPosition = new Vector3(Mathf.FloorToInt(ground.transform.localPosition.x), ground.transform.position.y, 0f);
     }
 
     public IEnumerator CheckCurrentPlayerStep()
