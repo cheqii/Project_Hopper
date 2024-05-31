@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Character;
+using DG.Tweening;
 using UnityEngine;
 
 public enum TilesType
@@ -21,6 +22,8 @@ public class Tiles : MonoBehaviour
     [SerializeField] protected TilesType _tilesType;
 
     private float camEdge;
+
+    [SerializeField] private float delay;
     // Player.
     private void Awake()
     {
@@ -39,11 +42,11 @@ public class Tiles : MonoBehaviour
         CheckObjectOutOfCameraLeftEdge(1f);
     }
 
-    void CheckObjectOutOfCameraLeftEdge(float delay = 0)
+    void CheckObjectOutOfCameraLeftEdge(float t = 0)
     {
-        if (transform.position.x < camEdge)
+        if (transform.position.x + 2 < camEdge)
         {
-            Destroy(gameObject,delay);
+            gameObject.SetActive(false);
         }
     }
     

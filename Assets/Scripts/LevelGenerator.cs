@@ -18,12 +18,6 @@ public class LevelGenerator : MonoBehaviour
     [Range(0, 10)]
     [SerializeField] private int targetStep = 4;
 
-    [Header("Tilemap")]
-    [SerializeField] private GameObject groundPrefab;
-    
-    [SerializeField] private Transform parent;
-    [SerializeField] private bool ableToGenerate;
-    
     private Player _player;
 
     private void Awake()
@@ -37,24 +31,11 @@ public class LevelGenerator : MonoBehaviour
         {
             GenerateStep(i);
         }
-        
-        // GenerateStep(retainStep);
     }
 
     private void Update()
     {
-        // GeneratePlatform();
-    }
-
-    private void FixedUpdate()
-    {
         GeneratePlatform();
-    }
-
-
-    void GenerateNextStep()
-    {
-        
     }
 
     private void GeneratePlatform()
@@ -87,31 +68,21 @@ public class LevelGenerator : MonoBehaviour
         //         nextStep--;
         // }
         
-        if (ableToGenerate)
+        if (_player.StepCount % 4 == 0 && _player._Control.PlayerAction.Jump.WasPressedThisFrame())
         {
-            for (int i = 0; i < targetStep; i++)
+            for (int i = 0; i < retainStep; i++)
             {
-                GenerateStep((currentStep + 1) + i);
+                GenerateStep(currentStep + i);
             }
         }
     }
 
-    public void GenerateStep(int step)
+    public void GenerateStep(int step = default, float height = default)
     {
-        Vector3 position = new Vector3(step, 0, 0);
-        var ground = Instantiate(groundPrefab, position, quaternion.identity, parent);
-        ground.transform.localPosition = new Vector3(Mathf.FloorToInt(ground.transform.localPosition.x), ground.transform.position.y, 0f);
-    }
-
-    public IEnumerator CheckCurrentPlayerStep()
-    {
-        if (_player.StepCount % 4 == 0 && _player.StepCount != 0)
-        {
-            print("check player step");
-            ableToGenerate = true;
-            yield return new WaitForFixedUpdate();
-            ableToGenerate = false;
-        }
-        else ableToGenerate = false;
+        var tile = ObjectPool.Instance.GetPooledObject();
+        if (tile == null) return;
+        Vector3 position = new Vector3(step, height, 0);
+        tile.transform.position = position;
+        tile.SetActive(true);
     }
 }

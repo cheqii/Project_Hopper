@@ -8,28 +8,25 @@ namespace Character
         [SerializeField] private int maxHealth;
         [SerializeField] private float jumpForce;
         [SerializeField] private bool isGrounded;
-        // public bool IsGrounded { get; private set; }
-
-        private Rigidbody2D rb;
-
+        public bool IsGrounded => isGrounded;
+        
+        [Space]
         [SerializeField] private int stepCount;
         public int StepCount
         {
             get => stepCount;
             set => stepCount = value;
         }
-        
+
+        private Rigidbody2D rb;
+
+        [Header("Input System")]
         private PlayerActionInput _control;
         public PlayerActionInput _Control => _control;
-
-        private MoveGroundTile groundTile;
-        private LevelGenerator level;
         
         private void Awake()
         {
             _control = new PlayerActionInput();
-            groundTile = FindObjectOfType<MoveGroundTile>();
-            level = FindObjectOfType<LevelGenerator>();
         }
 
         private void OnEnable()
@@ -63,8 +60,7 @@ namespace Character
             if (!isGrounded) return;
             rb.velocity = Vector2.up * jumpForce;
             stepCount++;
-            // StartCoroutine(groundTile.MoveTile());
-            // StartCoroutine(level.CheckCurrentPlayerStep());
+            ScoreManager.Instance.UpdateScoreText(stepCount);
         }
 
         public override void TakeDamage(int damage)

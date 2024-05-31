@@ -9,7 +9,7 @@ public class MoveGroundTile : MonoBehaviour
 {
     [SerializeField] private float moveDuration = 1f;
     [SerializeField] private Player _player;
-    // Update is called once per frame
+    
     void Update()
     {
         MoveTile();
@@ -18,12 +18,7 @@ public class MoveGroundTile : MonoBehaviour
     private void MoveTile()
     {
         var endPos = transform.position + Vector3.left;
-        if(_player._Control.PlayerAction.Jump.WasPressedThisFrame())
+        if(_player._Control.PlayerAction.Jump.WasPressedThisFrame() && _player.IsGrounded)
             transform.DOLocalMove(endPos,  moveDuration);
-    }
-
-    public void ResetPositon()
-    {
-        transform.position = Vector3.zero;
     }
 }
