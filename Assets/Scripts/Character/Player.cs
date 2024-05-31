@@ -8,6 +8,8 @@ namespace Character
         [SerializeField] private int maxHealth;
         [SerializeField] private float jumpForce;
         [SerializeField] private bool isGrounded;
+        // public bool IsGrounded { get; private set; }
+
         private Rigidbody2D rb;
 
         [SerializeField] private int stepCount;
@@ -18,7 +20,8 @@ namespace Character
         }
         
         private PlayerActionInput _control;
-        
+        public PlayerActionInput _Control => _control;
+
         private MoveGroundTile groundTile;
         private LevelGenerator level;
         
@@ -60,8 +63,8 @@ namespace Character
             if (!isGrounded) return;
             rb.velocity = Vector2.up * jumpForce;
             stepCount++;
-            StartCoroutine(groundTile.MoveTile());
-            StartCoroutine(level.CheckCurrentPlayerStep());
+            // StartCoroutine(groundTile.MoveTile());
+            // StartCoroutine(level.CheckCurrentPlayerStep());
         }
 
         public override void TakeDamage(int damage)
@@ -69,7 +72,7 @@ namespace Character
             base.TakeDamage(damage);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionStay2D(Collision2D other)
         {
             if (other.gameObject.CompareTag("Ground"))
             {

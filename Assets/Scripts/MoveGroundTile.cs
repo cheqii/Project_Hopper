@@ -1,39 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Character;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MoveGroundTile : MonoBehaviour
 {
-    [SerializeField] private float tileMoveSpeed = 5f;
     [SerializeField] private float moveDuration = 1f;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    [SerializeField] private Player _player;
     // Update is called once per frame
     void Update()
     {
-        
+        MoveTile();
     }
-    
-    public IEnumerator MoveTile()
+
+    private void MoveTile()
     {
-        var startPos = transform.position;
-        var endPos = startPos + Vector3.left;
-
-        float elapsedTime = 0;
-            
-        while (elapsedTime < moveDuration)
-        {
-            transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / moveDuration);
-            elapsedTime += Time.deltaTime * tileMoveSpeed;
-            yield return null;
-        }
-
-        transform.position = endPos;
+        var endPos = transform.position + Vector3.left;
+        if(_player._Control.PlayerAction.Jump.WasPressedThisFrame())
+            transform.DOLocalMove(endPos,  moveDuration);
     }
 
     public void ResetPositon()

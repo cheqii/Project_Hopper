@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d139f2607ca62c44d8664c0be4101c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMoveSpeed: 5
   moveDuration: 1
+  _player: {fileID: 644898870}
 --- !u!1 &242009849
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +849,7 @@ MonoBehaviour:
   attackDamage: 0
   maxHealth: 0
   jumpForce: 5
-  isGrounded: 0
+  isGrounded: 1
   stepCount: 0
 --- !u!212 &644898871
 SpriteRenderer:
