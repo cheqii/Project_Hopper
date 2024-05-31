@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour
     [Range(0, 20)]
     public int poolSize;
 
-    public Transform parent;
+    public Transform poolObjectParent;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class ObjectPool : MonoBehaviour
         GameObject temp;
         for (int i = 0; i < poolSize; i++)
         {
-            temp = Instantiate(prefabToPool, parent);
+            temp = Instantiate(prefabToPool, poolObjectParent);
             temp.SetActive(false);
             pooledObjects.Add(temp);
         }

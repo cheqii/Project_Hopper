@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Character;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -31,53 +32,28 @@ public class LevelGenerator : MonoBehaviour
         {
             GenerateStep(i);
         }
+
+        _player._Control.PlayerAction.Jump.performed += GeneratePlatform;
     }
 
     private void Update()
     {
-        GeneratePlatform();
+        // GeneratePlatform();
     }
 
-    private void GeneratePlatform()
+    private void GeneratePlatform(InputAction.CallbackContext callback)
     {
-        // if (currentStep == targetStep && retainStep > 0)
-        // {
-        //     nextStep = _player.StepCount;
-        //     retainStep--;
-        // }
-        // else if (currentStep == targetStep && retainStep <= 0)
-        // {
-        //     var rand = Random.Range(0, 1);
-        //     if (rand <= 0)
-        //         targetStep = currentStep - Random.Range(1, 3);
-        //     else
-        //         targetStep = currentStep + Random.Range(1, 3);
-        //
-        //     if (targetStep > 8)
-        //         targetStep = 8;
-        //     else if (targetStep < 1)
-        //         targetStep = 1;
-        //     retainStep = Random.Range(1, 5);
-        // }
-        //
-        // if (currentStep != targetStep)
-        // {
-        //     if (currentStep < targetStep)
-        //         nextStep++;
-        //     else
-        //         nextStep--;
-        // }
-        
-        if (_player.StepCount % 4 == 0 && _player._Control.PlayerAction.Jump.WasPressedThisFrame())
+        if(!_player.IsGrounded) return;
+        if (_player.StepCount % 4 == 0 && _player.StepCount != 0)
         {
             for (int i = 0; i < retainStep; i++)
             {
-                GenerateStep(currentStep + i);
+                GenerateStep((retainStep - targetStep) + i);
             }
         }
     }
 
-    public void GenerateStep(int step = default, float height = default)
+    private void GenerateStep(int step = default, float height = default)
     {
         var tile = ObjectPool.Instance.GetPooledObject();
         if (tile == null) return;

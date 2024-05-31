@@ -23,6 +23,8 @@ namespace Character
         [Header("Input System")]
         private PlayerActionInput _control;
         public PlayerActionInput _Control => _control;
+
+        public MoveGroundTile moveTile;
         
         private void Awake()
         {
@@ -45,7 +47,7 @@ namespace Character
             rb = GetComponent<Rigidbody2D>();
             
             health = maxHealth;
-
+            
             _control.PlayerAction.Jump.performed += Jump;
         }
 
@@ -55,12 +57,11 @@ namespace Character
             
         }
 
-        private void Jump(InputAction.CallbackContext callbackContext)
+        private void Jump(InputAction.CallbackContext callback)
         {
             if (!isGrounded) return;
             rb.velocity = Vector2.up * jumpForce;
             stepCount++;
-            ScoreManager.Instance.UpdateScoreText(stepCount);
         }
 
         public override void TakeDamage(int damage)

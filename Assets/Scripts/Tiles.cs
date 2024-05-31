@@ -44,7 +44,7 @@ public class Tiles : MonoBehaviour
 
     void CheckObjectOutOfCameraLeftEdge(float t = 0)
     {
-        if (transform.position.x + 2 < camEdge)
+        if (transform.position.x + 1 < camEdge)
         {
             gameObject.SetActive(false);
         }
