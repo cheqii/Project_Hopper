@@ -913,7 +913,7 @@ Transform:
   m_GameObject: {fileID: 644898867}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1, y: 0, z: 0}
+  m_LocalPosition: {x: 1.1, y: 1, z: 0}
   m_LocalScale: {x: 0.8, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1023,7 +1023,6 @@ MonoBehaviour:
   groundTile: {fileID: 605183990}
   tile: {fileID: 11400000, guid: 4c6539b1edd081845b50e1d932be143a, type: 2}
   groundPrefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
-  groundList: []
   parent: {fileID: 174793486}
   ableToGenerate: 0
 --- !u!4 &893951789

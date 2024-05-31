@@ -19,17 +19,12 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private int targetStep = 4;
 
     [Header("Tilemap")]
-    [SerializeField] private Tilemap groundTile;
-    [SerializeField] private Tile tile;
     [SerializeField] private GameObject groundPrefab;
     
-    [SerializeField] private List<GameObject> groundList = new List<GameObject>();
     [SerializeField] private Transform parent;
-    private Player _player;
-
-    private Vector3 tempTilePos;
-
     [SerializeField] private bool ableToGenerate;
+    
+    private Player _player;
 
     private void Awake()
     {
@@ -95,18 +90,19 @@ public class LevelGenerator : MonoBehaviour
         // StartCoroutine(CheckCurrentPlayerStep());
         if (ableToGenerate)
         {
-            // GenerateStep(4);
-            for (int i = 0; i <= retainStep; i++)
+            for (int i = 0; i < targetStep; i++)
             {
-                GenerateStep(_player.StepCount + i);
+                GenerateStep(currentStep + 1 + i);
             }
         }
     }
 
     public void GenerateStep(int step)
     {
-        Vector3 position = new Vector3((int)step, -1, 0);
-        Instantiate(groundPrefab, position, quaternion.identity, parent);
+        Vector3 position = new Vector3((int)step, 0, 0);
+        var ground = Instantiate(groundPrefab, position, quaternion.identity, parent);
+        ground.transform.localPosition = new Vector3(Mathf.FloorToInt(ground.transform.localPosition.x),
+            ground.transform.position.y, 0f);
     }
 
     public IEnumerator CheckCurrentPlayerStep()
