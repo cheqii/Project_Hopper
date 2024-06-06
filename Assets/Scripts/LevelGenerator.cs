@@ -1,24 +1,25 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Character;
-using Unity.Mathematics;
+using ObjectPool;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
     [Range(0, 10)]
     [SerializeField] private int retainStep = 7;
-    [Range(0, 10)]
-    [SerializeField] private int currentStep = 4;
-    [Range(0, 10)]
-    [SerializeField] private int nextStep = 4;
-    [Range(0, 10)]
-    [SerializeField] private int targetStep = 4;
+    
+    [SerializeField] private GameObject normalTilePrefab;
+    [SerializeField] private List<GameObject> allTilePrefab;
 
+    [SerializeField] private float tileMaxHeight = 0.2f;
+    [SerializeField] private float currentHeight = 0f;
+
+    private int lastTileIndex;
+    private int firstTileIndex;
+    
     private Player _player;
 
     private void Awake()
@@ -30,35 +31,60 @@ public class LevelGenerator : MonoBehaviour
     {
         for (int i = 0; i <= retainStep; i++)
         {
-            GenerateStep(i);
+            GenerateTile(i, true);
         }
-
-        _player._Control.PlayerAction.Jump.performed += GeneratePlatform;
+        _player._Control.PlayerAction.Jump.performed += GeneratePlatformByStep;
     }
 
-    private void Update()
-    {
-        // GeneratePlatform();
-    }
-
-    private void GeneratePlatform(InputAction.CallbackContext callback)
+    private void GeneratePlatformByStep(InputAction.CallbackContext callback = default)
     {
         if(!_player.IsGrounded) return;
-        if (_player.StepCount % 4 == 0 && _player.StepCount != 0)
+        var stepCount = _player.StepCount;
+        if (stepCount >= 4)
         {
-            for (int i = 0; i < retainStep; i++)
-            {
-                GenerateStep((retainStep - targetStep) + i);
-            }
+            print("test = 4");
+            GenerateTile(++stepCount);
+            GenerateTile(++stepCount);
+            ReturnOldTile();
         }
     }
 
-    private void GenerateStep(int step = default, float height = default)
+    private void GenerateTile(int step = default , bool initialGenerate = false)
     {
-        var tile = ObjectPool.Instance.GetPooledObject();
-        if (tile == null) return;
-        Vector3 position = new Vector3(step, height, 0);
-        tile.transform.position = position;
-        tile.SetActive(true);
+        GameObject tilePrefab = normalTilePrefab;
+        if (!initialGenerate)
+        {
+            var heightDifference = (Random.value > 0.5f) ? tileMaxHeight : -tileMaxHeight;
+            currentHeight += heightDifference;
+            
+            tilePrefab = allTilePrefab[Random.Range(0, allTilePrefab.Count)];
+        }
+
+        var position = new Vector3(step, currentHeight, 0f);
+        var newTile = PoolManager.SpawnObject(tilePrefab, RoundVector(position), Quaternion.identity);
+    }
+
+    private void ReturnOldTile()
+    {
+        if (lastTileIndex - firstTileIndex > retainStep)
+        {
+            var oldTile = PoolManager.Instance.root.GetChild(0);
+            PoolManager.ReleaseObject(oldTile.gameObject);
+            firstTileIndex++;
+        }
+    }
+
+    private void GenerateInitialTile(int step = default)
+    {
+        Vector3 position = new Vector3(step, 0, 0);
+        var tile = PoolManager.SpawnObject(normalTilePrefab, RoundVector(position), Quaternion.identity);
+    }
+
+    private Vector3 RoundVector(Vector3 vector)
+    {
+        return new Vector3(
+            Mathf.Round(vector.x * 10.0f) / 10.0f,
+            Mathf.Round(vector.y * 10.0f) / 10.0f,
+            Mathf.Round(vector.z * 10.0f) / 10.0f);
     }
 }

@@ -132,8 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 45086114}
-  - component: {fileID: 45086113}
   - component: {fileID: 45086115}
+  - component: {fileID: 45086116}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -141,22 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &45086113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45086112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4002e2d9b16689f46a4ee36556a7de1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObjects: []
-  prefabToPool: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
-  poolSize: 20
-  poolObjectParent: {fileID: 174793486}
 --- !u!4 &45086114
 Transform:
   m_ObjectHideFlags: 0
@@ -184,6 +168,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b3e817c416a2544901b87e89d4151f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &45086116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45086112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ac5d7ed776e3f48b6e2e5f0daf8524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logStatus: 1
+  root: {fileID: 174793486}
 --- !u!1 &174793485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,9 +1075,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   retainStep: 7
-  currentStep: 5
-  nextStep: 4
-  targetStep: 4
+  normalTilePrefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
+  allTilePrefab:
+  - {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
+  - {fileID: 9047672543347342820, guid: e868d0cf45b36c94c977d1c0c7047dd9, type: 3}
+  tileMaxHeight: 0.2
+  currentHeight: 0
 --- !u!4 &893951789
 Transform:
   m_ObjectHideFlags: 0

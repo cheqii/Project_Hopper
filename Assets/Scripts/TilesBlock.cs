@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Character;
 using DG.Tweening;
+using ObjectPool;
 using UnityEngine;
 
 public enum TilesType
@@ -17,11 +18,10 @@ public enum TilesType
     Cloud,
     Door
 }
-public class Tiles : MonoBehaviour
-{
-    [SerializeField] protected TilesType _tilesType;
 
-    private float camEdge;
+public sealed class TilesBlock : MonoBehaviour
+{
+    private float camEdgeX;
 
     [SerializeField] private float delay;
     // Player.
@@ -33,22 +33,33 @@ public class Tiles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camEdge = Camera.main.ScreenToViewportPoint(Vector3.zero).x;
+        camEdgeX = Camera.main.ScreenToViewportPoint(Vector3.zero).x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckObjectOutOfCameraLeftEdge(1f);
+        CheckObjectOutOfCameraLeftEdge(3f);
     }
 
     void CheckObjectOutOfCameraLeftEdge(float t = 0)
     {
-        if (transform.position.x + 1 < camEdge)
+        if (transform.position.x + 1 < camEdgeX)
         {
-            gameObject.SetActive(false);
+            PoolManager.ReleaseObject(gameObject);
         }
+
+        // if (transform.position.x - 9 > camEdgeX)
+        // {
+        //     PoolManager.ReleaseObject(gameObject);
+        //     // Destroy(gameObject);
+        // }
     }
-    
-    
+
+    public void BlockBehavior()
+    {
+        
+    }
+
+
 }

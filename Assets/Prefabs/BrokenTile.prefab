@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8247244107324271926}
   - component: {fileID: 4639773211059950559}
   m_Layer: 6
-  m_Name: Box-500
+  m_Name: BrokenTile
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2d9553687694aa042adfa2c96eeea9aa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.68356436, g: 0.5840602, b: 0.7075472, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

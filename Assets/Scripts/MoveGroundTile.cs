@@ -22,7 +22,6 @@ public class MoveGroundTile : MonoBehaviour
     {
         if(!_player.IsGrounded) return;
         var endPos = transform.position + Vector3.left;
-        if(_player._Control.PlayerAction.Jump.WasPressedThisFrame() && _player.IsGrounded)
-            transform.DOLocalMove(endPos,  moveDuration);
+        transform.DOLocalMove(endPos,  moveDuration);
     }
 }
