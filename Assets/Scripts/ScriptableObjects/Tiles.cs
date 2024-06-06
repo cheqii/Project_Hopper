@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Tiles : MonoBehaviour
+namespace ScriptableObjects
 {
-    // Start is called before the first frame update
-    void Start()
+    [CreateAssetMenu(menuName = "TileData", fileName = "Tiles", order = 0)]
+    public class Tiles : ScriptableObject
     {
-        
-    }
+        public string name;
+        public TilesType type;
+        public GameObject prefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Range(0, 10)] 
+        public int generateChance;
     }
 }

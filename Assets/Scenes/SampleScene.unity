@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ac5d7ed776e3f48b6e2e5f0daf8524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logStatus: 1
+  logStatus: 0
   root: {fileID: 174793486}
 --- !u!1 &174793485
 GameObject:
@@ -1076,9 +1076,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   retainStep: 7
   normalTilePrefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
-  allTilePrefab:
-  - {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
-  - {fileID: 9047672543347342820, guid: e868d0cf45b36c94c977d1c0c7047dd9, type: 3}
+  allTiles:
+  - {fileID: 11400000, guid: 303a86d2334f985479df50a9c64ed68a, type: 2}
+  - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
   tileMaxHeight: 0.2
   currentHeight: 0
 --- !u!4 &893951789

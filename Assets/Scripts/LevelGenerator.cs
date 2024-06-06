@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Character;
 using ObjectPool;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -12,7 +13,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private int retainStep = 7;
     
     [SerializeField] private GameObject normalTilePrefab;
-    [SerializeField] private List<GameObject> allTilePrefab;
+    [SerializeField] private List<Tiles> allTiles;
 
     [SerializeField] private float tileMaxHeight = 0.2f;
     [SerializeField] private float currentHeight = 0f;
@@ -51,13 +52,13 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateTile(int step = default , bool initialGenerate = false)
     {
-        GameObject tilePrefab = normalTilePrefab;
+        var tilePrefab = normalTilePrefab;
         if (!initialGenerate)
         {
             var heightDifference = (Random.value > 0.5f) ? tileMaxHeight : -tileMaxHeight;
             currentHeight += heightDifference;
-            
-            tilePrefab = allTilePrefab[Random.Range(0, allTilePrefab.Count)];
+
+            tilePrefab = GetRandomTile();
         }
 
         var position = new Vector3(step, currentHeight, 0f);
@@ -74,10 +75,31 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateInitialTile(int step = default)
+    private GameObject GetRandomTile()
     {
-        Vector3 position = new Vector3(step, 0, 0);
-        var tile = PoolManager.SpawnObject(normalTilePrefab, RoundVector(position), Quaternion.identity);
+        // var totalChance = 0;
+        // foreach (var tiles in allTiles)
+        // {
+        //     totalChance += tiles.generateChance;
+        // }
+        //
+        // var rand = Random.Range(0, totalChance);
+        // print($"random = {rand}");
+        // print($"total chance = {totalChance}");
+        // foreach (var tiles in allTiles)
+        // {
+        //     print("hello world");
+        //     if (totalChance < tiles.generateChance)
+        //     {
+        //         print("is this random???");
+        //         return tiles.prefab;
+        //     }
+        //     
+        //     rand -= tiles.generateChance;
+        // }
+        //
+        
+        return normalTilePrefab;
     }
 
     private Vector3 RoundVector(Vector3 vector)

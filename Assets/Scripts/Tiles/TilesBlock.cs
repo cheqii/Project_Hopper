@@ -19,7 +19,7 @@ public enum TilesType
     Door
 }
 
-public sealed class TilesBlock : MonoBehaviour
+public class TilesBlock : MonoBehaviour
 {
     private float camEdgeX;
 
