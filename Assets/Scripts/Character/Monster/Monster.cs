@@ -1,3 +1,5 @@
+using System;
+using TilesScript;
 using UnityEngine;
 
 namespace Character.Monster
@@ -29,6 +31,18 @@ namespace Character.Monster
         {
             if(other.CompareTag("Player"))
                 Attack();
+        }
+
+        protected void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.collider.CompareTag("Ground"))
+            {
+                var tile = other.gameObject.GetComponent<TilesBlock>();
+                if(tile.Type == TilesType.Normal) return;
+                gameObject.SetActive(false);
+                print("monster touch tiles");
+            }
+            // gameObject.transform.parent.gameObject.SetActive(true);
         }
     }
 }

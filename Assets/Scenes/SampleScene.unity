@@ -926,6 +926,7 @@ MonoBehaviour:
   currentHeight: 0
   monsterTile:
   - {fileID: 11400000, guid: b1cd694fad9d96241ba12d6592423551, type: 2}
+  - {fileID: 11400000, guid: 92127a9b66fbe9f45a7e2ef1cd37aae4, type: 2}
 --- !u!4 &893951789
 Transform:
   m_ObjectHideFlags: 0
@@ -1573,7 +1574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: groundLayer.m_Bits
-      value: 320
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x

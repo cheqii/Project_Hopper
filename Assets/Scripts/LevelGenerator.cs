@@ -3,6 +3,7 @@ using Character;
 using ObjectPool;
 using ScriptableObjects;
 using TilesScript;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -63,7 +64,15 @@ public class LevelGenerator : MonoBehaviour
 
         var position = new Vector3(step, currentHeight, 0f);
         var newTile = PoolManager.SpawnObject(tilePrefab, RoundVector(position), Quaternion.identity);
-        newTile.GetComponent<TilesBlock>()._Player = _player;
+        var tile = newTile.GetComponent<TilesBlock>();
+        tile._Player = _player;
+
+        if (newTile.transform.childCount > 0)
+            Destroy(newTile.transform.GetChild(0).gameObject);
+        
+        if(initialGenerate) return;
+        var monsterPos = new Vector3(position.x, position.y + 1);
+        var monster = Instantiate(GetRandomMonster(), RoundVector(monsterPos), Quaternion.identity, newTile.transform);
     }
 
     private GameObject GetRandomTile()
@@ -89,6 +98,28 @@ public class LevelGenerator : MonoBehaviour
     }
 
     #endregion
+    
+    private GameObject GetRandomMonster()
+    {
+        var totalChance = 0;
+        foreach (var tiles in monsterTile)
+        {
+            totalChance += tiles.generateChance;
+        }
+
+        var rand = Random.Range(0, totalChance);
+        foreach (var tiles in monsterTile)
+        {
+            if (rand < tiles.generateChance)
+            {
+                return tiles.prefab;
+            }
+
+            rand -= tiles.generateChance;
+        }
+
+        return monsterTile[0].prefab;
+    }
 
     private Vector3 RoundVector(Vector3 vector)
     {

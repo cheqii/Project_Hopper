@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c03accdb34f46343a4cdca241d394e7, type: 3}
   m_Name: NullTiles
   m_EditorClassIdentifier: 
-  name: null
-  prefab: {fileID: 7664658124250246193, guid: ed381d685eb65ba408dea067c1b18726, type: 3}
-  generateChance: 100
+  name: monDummy
+  prefab: {fileID: 8392800452355147999, guid: c82fbf2453445ca4c80895bb84ada0e7, type: 3}
+  generateChance: 20

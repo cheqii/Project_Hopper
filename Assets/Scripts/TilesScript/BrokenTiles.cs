@@ -12,17 +12,17 @@ namespace TilesScript
         protected override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
-            StartCoroutine(Broken(delay));
+            Invoke(nameof(BrokeTile), delay);
         }
 
         protected override void OnCollisionEnter2D(Collision2D other)
         {
+            if (!other.gameObject.CompareTag("Player")) return;
             base.OnCollisionEnter2D(other);
         }
 
-        IEnumerator Broken(float t)
+        void BrokeTile()
         {
-            yield return new WaitForSeconds(t);
             PoolManager.ReleaseObject(gameObject);
             print("broken Tile");
         }

@@ -76,15 +76,15 @@ namespace Character
         
         public bool PlayerCheckGround()
         {
-            var startPos = transform.position + new Vector3(-0.5f, -0.55f);
-            var endPos = transform.position + new Vector3(0.5f, -0.55f);
+            var startPos = transform.position + new Vector3(-0.4f, -0.55f);
+            var endPos = transform.position + new Vector3(0.4f, -0.55f);
             return Physics2D.Linecast(startPos, endPos, groundLayer);
         }
 
         private void OnDrawGizmos()
         {
-            var startPos = transform.position + new Vector3(-0.5f, -0.55f);
-            var endPos = transform.position + new Vector3(0.5f, -0.55f);
+            var startPos = transform.position + new Vector3(-0.4f, -0.55f);
+            var endPos = transform.position + new Vector3(0.4f, -0.55f);
             Gizmos.DrawLine(startPos, endPos);
         }
 

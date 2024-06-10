@@ -38,11 +38,11 @@ namespace TilesScript
         [SerializeField] protected float delay;
 
         [Header("Object layer")]
-        [SerializeField] private GameObject objectOnTile;
+        [SerializeField] protected GameObject objectOnTile;
         [SerializeField] private LayerMask objectLayer;
         
         [Header("Player layer")]
-        [SerializeField] private GameObject playerOnTile;
+        [SerializeField] protected GameObject playerOnTile;
         [SerializeField] private LayerMask playerLayer;
 
         // Start is called before the first frame update
@@ -61,11 +61,6 @@ namespace TilesScript
             }
         }
 
-        protected virtual void OnCollisionStay2D(Collision2D other)
-        {
-        
-        }
-        
         protected virtual void CheckPlayerOnTile()
         {
             var startPos = transform.position + new Vector3(-0.5f, 0.55f);

@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: -1455586401182013408}
   - component: {fileID: 929046517190484064}
   m_Layer: 8
-  m_Name: Slime
+  m_Name: Slime 1
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,7 +281,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.29656097, g: 0.5188679, b: 0.23740655, a: 1}
+  m_Color: {r: 0.9622642, g: 0.5811588, b: 0.14070843, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
