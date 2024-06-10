@@ -13,11 +13,6 @@ public class MoveGroundTile : MonoBehaviour
         _player._Control.PlayerAction.Jump.performed += MoveTile;
     }
 
-    void Update()
-    {
-        // MoveTile();
-    }
-
     private void MoveTile(InputAction.CallbackContext callback)
     {
         if(!_player.IsGrounded) return;

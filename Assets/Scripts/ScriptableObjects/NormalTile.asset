@@ -15,4 +15,4 @@ MonoBehaviour:
   name: NormalTile
   type: 0
   prefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
-  generateChance: 5
+  generateChance: 50

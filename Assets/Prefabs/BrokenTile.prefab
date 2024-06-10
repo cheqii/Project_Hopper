@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3364157627842728293}
   - component: {fileID: 4656757942830312385}
   - component: {fileID: 8247244107324271926}
-  - component: {fileID: 4639773211059950559}
+  - component: {fileID: 4323345519940030486}
+  - component: {fileID: -4424758205836463743}
   m_Layer: 6
   m_Name: BrokenTile
   m_TagString: Ground
@@ -146,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0029117465, y: 0.3194108}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -157,9 +158,24 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Size: {x: 0.8010012, y: 0.28095505}
   m_EdgeRadius: 0
---- !u!114 &4639773211059950559
+--- !u!114 &4323345519940030486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047672543347342820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8b01f8a11b16a49b2b6f166c293396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
+  allTiles: []
+  time: 0.33
+--- !u!114 &-4424758205836463743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,5 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1218549fce93d54ba2dce544bed0da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilesType: 0
-  delay: 1.5
+  delay: 0
+  allTiles:
+  - {fileID: 11400000, guid: 303a86d2334f985479df50a9c64ed68a, type: 2}
+  - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}

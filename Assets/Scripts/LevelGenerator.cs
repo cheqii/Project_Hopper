@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Character;
 using ObjectPool;
 using ScriptableObjects;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
@@ -18,9 +19,6 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float tileMaxHeight = 0.2f;
     [SerializeField] private float currentHeight = 0f;
 
-    private int lastTileIndex;
-    private int firstTileIndex;
-    
     private Player _player;
 
     private void Awake()
@@ -40,14 +38,8 @@ public class LevelGenerator : MonoBehaviour
     private void GeneratePlatformByStep(InputAction.CallbackContext callback = default)
     {
         if(!_player.IsGrounded) return;
-        var stepCount = _player.StepCount;
-        if (stepCount >= 4)
-        {
-            print("test = 4");
-            GenerateTile(++stepCount);
-            GenerateTile(++stepCount);
-            ReturnOldTile();
-        }
+        var step = retainStep;
+        GenerateTile(++step);
     }
 
     private void GenerateTile(int step = default , bool initialGenerate = false)
@@ -55,8 +47,17 @@ public class LevelGenerator : MonoBehaviour
         var tilePrefab = normalTilePrefab;
         if (!initialGenerate)
         {
-            var heightDifference = (Random.value > 0.5f) ? tileMaxHeight : -tileMaxHeight;
-            currentHeight += heightDifference;
+            if (currentHeight >= 0 || currentHeight < 0)
+            {
+                var check = (!(Random.value > 0.5f));
+                if (!check)
+                    currentHeight += 0;
+                else                                                                         
+                {
+                    var heightDifference = (Random.value > 0.5f) ? tileMaxHeight : -tileMaxHeight;
+                    currentHeight += heightDifference;
+                }
+            }
 
             tilePrefab = GetRandomTile();
         }
@@ -65,39 +66,23 @@ public class LevelGenerator : MonoBehaviour
         var newTile = PoolManager.SpawnObject(tilePrefab, RoundVector(position), Quaternion.identity);
     }
 
-    private void ReturnOldTile()
-    {
-        if (lastTileIndex - firstTileIndex > retainStep)
-        {
-            var oldTile = PoolManager.Instance.root.GetChild(0);
-            PoolManager.ReleaseObject(oldTile.gameObject);
-            firstTileIndex++;
-        }
-    }
-
     private GameObject GetRandomTile()
     {
-        // var totalChance = 0;
-        // foreach (var tiles in allTiles)
-        // {
-        //     totalChance += tiles.generateChance;
-        // }
-        //
-        // var rand = Random.Range(0, totalChance);
-        // print($"random = {rand}");
-        // print($"total chance = {totalChance}");
-        // foreach (var tiles in allTiles)
-        // {
-        //     print("hello world");
-        //     if (totalChance < tiles.generateChance)
-        //     {
-        //         print("is this random???");
-        //         return tiles.prefab;
-        //     }
-        //     
-        //     rand -= tiles.generateChance;
-        // }
-        //
+        var totalChance = 0;
+        foreach (var tiles in allTiles)
+        {
+            totalChance += tiles.generateChance;
+        }
+        
+        var rand = Random.Range(0, totalChance);
+        foreach (var tiles in allTiles)
+        {
+            if (rand < tiles.generateChance)
+            {
+                return tiles.prefab;
+            }
+            rand -= tiles.generateChance;
+        }
         
         return normalTilePrefab;
     }

@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c03accdb34f46343a4cdca241d394e7, type: 3}
-  m_Name: BrokenTile
+  m_Script: {fileID: 11500000, guid: f2c3f41c5accb0b42bc1749178cedf66, type: 3}
+  m_Name: Jump
   m_EditorClassIdentifier: 
-  name: BrokenTile
-  type: 2
-  prefab: {fileID: 9047672543347342820, guid: e868d0cf45b36c94c977d1c0c7047dd9, type: 3}
-  generateChance: 30
+  Listeners: []

@@ -1,65 +1,40 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Character;
 using DG.Tweening;
 using ObjectPool;
 using UnityEngine;
-
-public enum TilesType
-{
-    Normal,
-    Falling,
-    Broken,
-    TNT,
-    Spear,
-    Rock,
-    Axe,
-    Cloud,
-    Door
-}
+using UnityEngine.InputSystem;
 
 public class TilesBlock : MonoBehaviour
 {
     private float camEdgeX;
-
+    private Player _player;
+    private GameObject playerObject;
+    
     [SerializeField] private float delay;
-    // Player.
+
     private void Awake()
     {
-        
+        if (playerObject != null) return;
+        playerObject = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Start is called before the first frame update
     void Start()
     {
         camEdgeX = Camera.main.ScreenToViewportPoint(Vector3.zero).x;
+        _player = playerObject.GetComponent<Player>();
+        _player._Control.PlayerAction.Jump.performed += CheckObjectOutOfCameraLeftEdge;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CheckObjectOutOfCameraLeftEdge(InputAction.CallbackContext callback = default)
     {
-        CheckObjectOutOfCameraLeftEdge(3f);
-    }
-
-    void CheckObjectOutOfCameraLeftEdge(float t = 0)
-    {
-        if (transform.position.x + 1 < camEdgeX)
-        {
+        if (transform.position.x + 0.5f < camEdgeX)
             PoolManager.ReleaseObject(gameObject);
-        }
-
-        // if (transform.position.x - 9 > camEdgeX)
-        // {
-        //     PoolManager.ReleaseObject(gameObject);
-        //     // Destroy(gameObject);
-        // }
     }
 
-    public void BlockBehavior()
+    protected virtual void OnCollisionStay2D(Collision2D other)
     {
         
     }
-
 
 }

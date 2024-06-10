@@ -23,8 +23,6 @@ namespace Character
         [Header("Input System")]
         private PlayerActionInput _control;
         public PlayerActionInput _Control => _control;
-
-        public MoveGroundTile moveTile;
         
         private void Awake()
         {

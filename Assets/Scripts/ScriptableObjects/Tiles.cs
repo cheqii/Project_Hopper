@@ -6,10 +6,9 @@ namespace ScriptableObjects
     public class Tiles : ScriptableObject
     {
         public string name;
-        public TilesType type;
         public GameObject prefab;
 
-        [Range(0, 10)] 
+        [Range(0, 100)] 
         public int generateChance;
     }
 }
