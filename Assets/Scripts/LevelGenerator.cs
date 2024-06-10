@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Character;
 using ObjectPool;
 using ScriptableObjects;
+using TilesScript;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -35,7 +36,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void GeneratePlatformByStep(InputAction.CallbackContext callback = default)
     {
-        if(!_player.IsGrounded) return;
+        if(!_player.PlayerCheckGround()) return;
         var step = retainStep;
         GenerateTile(++step);
     }
@@ -57,43 +58,34 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
 
-            tilePrefab = GetRandomTile(allTiles);
+            tilePrefab = GetRandomTile();
         }
 
         var position = new Vector3(step, currentHeight, 0f);
         var newTile = PoolManager.SpawnObject(tilePrefab, RoundVector(position), Quaternion.identity);
-        
-        // if(newTile.transform.childCount != 0)
-        //     Destroy(newTile.transform.GetChild(0).gameObject);
-        
-        if(initialGenerate) return;
-        var monsterPos = new Vector3(position.x, position.y + 1);
-        var monster = Instantiate(GetRandomTile(monsterTile), RoundVector(monsterPos), Quaternion.identity, newTile.transform);
+        newTile.GetComponent<TilesBlock>()._Player = _player;
     }
 
-    private GameObject GetRandomTile(List<Tiles> tilesList = default)
+    private GameObject GetRandomTile()
     {
         var totalChance = 0;
-        if (tilesList != null)
+        foreach (var tiles in allTiles)
         {
-            foreach (var tiles in tilesList)
-            {
-                totalChance += tiles.generateChance;
-            }
-
-            var rand = Random.Range(0, totalChance);
-            foreach (var tiles in tilesList)
-            {
-                if (rand < tiles.generateChance)
-                {
-                    return tiles.prefab;
-                }
-
-                rand -= tiles.generateChance;
-            }
+            totalChance += tiles.generateChance;
         }
 
-        return null;
+        var rand = Random.Range(0, totalChance);
+        foreach (var tiles in allTiles)
+        {
+            if (rand < tiles.generateChance)
+            {
+                return tiles.prefab;
+            }
+
+            rand -= tiles.generateChance;
+        }
+
+        return normalTilePrefab;
     }
 
     #endregion

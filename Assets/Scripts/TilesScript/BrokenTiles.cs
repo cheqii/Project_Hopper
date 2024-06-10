@@ -9,15 +9,16 @@ namespace TilesScript
 {
     public class BrokenTiles : TilesBlock
     {
-        [SerializeField] private float time = 0.5f;
-
-        protected override void OnCollisionStay2D(Collision2D other)
+        // [SerializeField] private float time = 0.5f;
+        protected override void CheckPlayerOnTile()
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                if(other.gameObject.GetComponent<Player>().IsGrounded)
-                    StartCoroutine(Broken(time));
-            }
+            base.CheckPlayerOnTile();
+            StartCoroutine(Broken(delay));
+        }
+
+        protected override void OnCollisionEnter2D(Collision2D other)
+        {
+            base.OnCollisionEnter2D(other);
         }
 
         IEnumerator Broken(float t)

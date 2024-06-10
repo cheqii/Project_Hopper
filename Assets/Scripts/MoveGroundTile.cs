@@ -15,7 +15,7 @@ public class MoveGroundTile : MonoBehaviour
 
     private void MoveTile(InputAction.CallbackContext callback)
     {
-        if(!_player.IsGrounded) return;
+        if(!_player.PlayerCheckGround()) return;
         var endPos = transform.position + Vector3.left;
         transform.DOLocalMove(endPos,  moveDuration);
     }

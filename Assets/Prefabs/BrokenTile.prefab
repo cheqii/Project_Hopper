@@ -171,6 +171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8b01f8a11b16a49b2b6f166c293396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
   type: 2
-  delay: 0
-  time: 0.33
+  delay: 0.33
+  objectOnTile: {fileID: 0}
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerOnTile: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
