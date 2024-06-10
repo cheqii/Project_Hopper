@@ -6,6 +6,8 @@ namespace Character
     {
         [Header("Character Attributes")]
         [SerializeField] protected int health;
+        public int Health => health;
+        
         [SerializeField] protected int attackDamage;
 
         public virtual void TakeDamage(int damage)

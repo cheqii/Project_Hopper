@@ -8,8 +8,12 @@ namespace Character
         [SerializeField] private int maxHealth;
         [SerializeField] private float jumpForce;
         [SerializeField] private bool isGrounded;
-        public bool IsGrounded => isGrounded;
-        
+        public bool IsGrounded
+        {
+            get => isGrounded;
+            set => isGrounded = value;
+        }
+
         [Space]
         [SerializeField] private int stepCount;
         public int StepCount
@@ -23,7 +27,7 @@ namespace Character
         [Header("Input System")]
         private PlayerActionInput _control;
         public PlayerActionInput _Control => _control;
-        
+
         private void Awake()
         {
             _control = new PlayerActionInput();
@@ -52,7 +56,7 @@ namespace Character
         // Update is called once per frame
         void Update()
         {
-            
+            // Physics2D.Raycast()
         }
 
         private void Jump(InputAction.CallbackContext callback)
@@ -60,11 +64,14 @@ namespace Character
             if (!isGrounded) return;
             rb.velocity = Vector2.up * jumpForce;
             stepCount++;
+            
+            GameManager._instance.UpdatePlayerScore(1);
         }
 
         public override void TakeDamage(int damage)
         {
             base.TakeDamage(damage);
+            GameManager._instance.UpdatePlayerHealth();
         }
 
         private void OnCollisionStay2D(Collision2D other)

@@ -1,39 +1,37 @@
-using System;
 using System.Collections.Generic;
 using Character;
 using ObjectPool;
 using ScriptableObjects;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
+    [SerializeField] private Player _player;
+
+    [Header("Generate Tile Attributes")]
     [Range(0, 10)]
     [SerializeField] private int retainStep = 7;
-    
+
     [SerializeField] private GameObject normalTilePrefab;
     [SerializeField] private List<Tiles> allTiles;
 
     [SerializeField] private float tileMaxHeight = 0.2f;
     [SerializeField] private float currentHeight = 0f;
 
-    private Player _player;
-
-    private void Awake()
-    {
-        _player = FindObjectOfType<Player>();
-    }
-
+    [Header("Generate Monster")] 
+    [SerializeField] private List<Tiles> monsterTile;
     private void Start()
     {
+        _player._Control.PlayerAction.Jump.performed += GeneratePlatformByStep;
         for (int i = 0; i <= retainStep; i++)
         {
             GenerateTile(i, true);
         }
-        _player._Control.PlayerAction.Jump.performed += GeneratePlatformByStep;
     }
+
+    #region -Tile Generate Method-
 
     private void GeneratePlatformByStep(InputAction.CallbackContext callback = default)
     {
@@ -59,33 +57,46 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
 
-            tilePrefab = GetRandomTile();
+            tilePrefab = GetRandomTile(allTiles);
         }
 
         var position = new Vector3(step, currentHeight, 0f);
         var newTile = PoolManager.SpawnObject(tilePrefab, RoundVector(position), Quaternion.identity);
+        
+        // if(newTile.transform.childCount != 0)
+        //     Destroy(newTile.transform.GetChild(0).gameObject);
+        
+        if(initialGenerate) return;
+        var monsterPos = new Vector3(position.x, position.y + 1);
+        var monster = Instantiate(GetRandomTile(monsterTile), RoundVector(monsterPos), Quaternion.identity, newTile.transform);
     }
 
-    private GameObject GetRandomTile()
+    private GameObject GetRandomTile(List<Tiles> tilesList = default)
     {
         var totalChance = 0;
-        foreach (var tiles in allTiles)
+        if (tilesList != null)
         {
-            totalChance += tiles.generateChance;
-        }
-        
-        var rand = Random.Range(0, totalChance);
-        foreach (var tiles in allTiles)
-        {
-            if (rand < tiles.generateChance)
+            foreach (var tiles in tilesList)
             {
-                return tiles.prefab;
+                totalChance += tiles.generateChance;
             }
-            rand -= tiles.generateChance;
+
+            var rand = Random.Range(0, totalChance);
+            foreach (var tiles in tilesList)
+            {
+                if (rand < tiles.generateChance)
+                {
+                    return tiles.prefab;
+                }
+
+                rand -= tiles.generateChance;
+            }
         }
-        
-        return normalTilePrefab;
+
+        return null;
     }
+
+    #endregion
 
     private Vector3 RoundVector(Vector3 vector)
     {
