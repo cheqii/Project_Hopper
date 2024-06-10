@@ -45,11 +45,6 @@ namespace TilesScript
         [SerializeField] private GameObject playerOnTile;
         [SerializeField] private LayerMask playerLayer;
 
-        private void Awake()
-        {
-            _player = GameManager._instance.player;
-        }
-
         // Start is called before the first frame update
         void Start()
         {

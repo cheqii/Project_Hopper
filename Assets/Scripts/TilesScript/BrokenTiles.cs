@@ -9,7 +9,6 @@ namespace TilesScript
 {
     public class BrokenTiles : TilesBlock
     {
-        // [SerializeField] private float time = 0.5f;
         protected override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
