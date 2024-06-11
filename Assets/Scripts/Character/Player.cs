@@ -21,6 +21,9 @@ namespace Character
         
         [Header("Facing Object")]
         [SerializeField] private InteractableObject facingObject;
+
+        [Header("Player Action Event")]
+        [SerializeField] private Nf_GameEvent jumpEvent;
         
         private void Awake()
         {
@@ -67,6 +70,7 @@ namespace Character
         {
             if (!PlayerCheckGround()) return;
 
+            jumpEvent.Raise();
             isGuard = false;
             var tempPos = transform.position;
             transform.DOJump(tempPos, jumpForce, 0, .5f);

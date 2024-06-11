@@ -30,7 +30,6 @@ public class LevelGenerator : MonoBehaviour
     
     private void Start()
     {
-        _player._Control.PlayerAction.Jump.performed += GeneratePlatformByStep;
         for (int i = 0; i <= retainStep; i++)
         {
             GenerateTile(i, true);
@@ -39,7 +38,7 @@ public class LevelGenerator : MonoBehaviour
 
     #region -Tile Generate Method-
 
-    private void GeneratePlatformByStep(InputAction.CallbackContext callback = default)
+    public void GeneratePlatformByStep()
     {
         if(!_player.PlayerCheckGround()) return;
         var step = retainStep;

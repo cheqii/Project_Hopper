@@ -140,9 +140,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5332491138702838723}
   - component: {fileID: 4051239637089361816}
-  - component: {fileID: 35541912851006961}
   - component: {fileID: 1008613121611420466}
   - component: {fileID: 4600207697784066625}
+  - component: {fileID: 35541912851006961}
+  - component: {fileID: 7879644293468667542}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -218,26 +219,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &35541912851006961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7839029507602420194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01502cdc13a3a5b42b9d91a7bb163b0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  health: 3
-  attackDamage: 1
-  jumpForce: 2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  facingObject: {fileID: 0}
 --- !u!50 &1008613121611420466
 Rigidbody2D:
   serializedVersion: 4
@@ -310,3 +291,77 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8319533, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &35541912851006961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7839029507602420194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01502cdc13a3a5b42b9d91a7bb163b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  health: 3
+  attackDamage: 1
+  jumpForce: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  isGuard: 0
+  facingObject: {fileID: 0}
+  jumpEvent: {fileID: 11400000, guid: 6c917d72c93560446baaba347535eab5, type: 2}
+--- !u!114 &7879644293468667542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7839029507602420194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 6c917d72c93560446baaba347535eab5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Lava, Assembly-CSharp
+        m_MethodName: DecreaseLava
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MoveGroundTile, Assembly-CSharp
+        m_MethodName: MoveTile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: LevelGenerator, Assembly-CSharp
+        m_MethodName: GeneratePlatformByStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
