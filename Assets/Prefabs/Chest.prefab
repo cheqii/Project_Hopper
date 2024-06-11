@@ -86,8 +86,7 @@ GameObject:
   - component: {fileID: 4656757942830312385}
   - component: {fileID: 8247244107324271926}
   - component: {fileID: 6541202583290580473}
-  - component: {fileID: 3450606940600929448}
-  - component: {fileID: -167427137614824927}
+  - component: {fileID: 5917965734617743894}
   m_Layer: 6
   m_Name: Chest
   m_TagString: InteractableObject
@@ -247,8 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f68bba0c13c984992e413bc79afa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anyObject: {fileID: 0}
---- !u!114 &3450606940600929448
+  interactable: {fileID: 5917965734617743894}
+--- !u!114 &5917965734617743894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,25 +256,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9047672543347342820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2206a121f19cea344bb1aeb71b42fc15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1
-  health: 1
-  attackDamage: 1
-  preAttackDelay: 0
-  cooldownAttack: 0
-  isStunned: 0
-  _monster: {fileID: -167427137614824927}
---- !u!114 &-167427137614824927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9047672543347342820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba0a7763da2e0124b88b2beb778aeb0d, type: 3}
+  m_Script: {fileID: 11500000, guid: d244ee266846a2541bf0468fdfd52e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

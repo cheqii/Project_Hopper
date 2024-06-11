@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using Interaction;
 using UnityEngine.Serialization;
 
 namespace Character
@@ -76,7 +77,7 @@ namespace Character
         {
             isGuard = false;
             if(facingObject == null) return;
-            // facingObject.InteractToObject(attackDamage);
+            facingObject.Interaction(attackDamage);
         }
 
         private void Guard(InputAction.CallbackContext callback = default)

@@ -38,8 +38,8 @@ namespace Character.Monster
         public override void TakeDamage(int damage)
         {
             base.TakeDamage(damage);
-            // if(health <= 0)
-            //     PoolManager.ReleaseObject(gameObject);
+            if(health <= 0)
+                PoolManager.ReleaseObject(gameObject);
         }
 
         public void InteractToObject(int damage)

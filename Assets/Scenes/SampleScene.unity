@@ -926,6 +926,7 @@ MonoBehaviour:
   currentHeight: 0
   allMonsters:
   - {fileID: 11400000, guid: d31a058ea63a35d4baaecddc7ff74f9a, type: 2}
+  - {fileID: 11400000, guid: 646779b604a5de546ae624637d7ce31c, type: 2}
   tempMonsterPos: {x: 0, y: 0, z: 0}
 --- !u!4 &893951789
 Transform:
