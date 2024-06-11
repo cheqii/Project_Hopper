@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: BrokenTile
   m_EditorClassIdentifier: 
   name: BrokenTile
-  type: 2
   prefab: {fileID: 9047672543347342820, guid: e868d0cf45b36c94c977d1c0c7047dd9, type: 3}
-  generateChance: 30
+  generateChance: 15

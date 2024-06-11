@@ -23,7 +23,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float currentHeight = 0f;
 
     [Header("Generate Monster")] 
-    [SerializeField] private List<Tiles> monsterTile;
+    [SerializeField] private List<MonsterData> allMonsters;
+    
     private void Start()
     {
         _player._Control.PlayerAction.Jump.performed += GeneratePlatformByStep;
@@ -70,9 +71,8 @@ public class LevelGenerator : MonoBehaviour
         if (newTile.transform.childCount > 0)
             Destroy(newTile.transform.GetChild(0).gameObject);
         
-        if(initialGenerate) return;
-        var monsterPos = new Vector3(position.x, position.y + 1);
-        var monster = Instantiate(GetRandomMonster(), RoundVector(monsterPos), Quaternion.identity, newTile.transform);
+        if(!initialGenerate)
+            GenerateMonsterOnTile(position, newTile);
     }
 
     private GameObject GetRandomTile()
@@ -98,17 +98,32 @@ public class LevelGenerator : MonoBehaviour
     }
 
     #endregion
+
+    private void GenerateMonsterOnTile(Vector3 position = default, GameObject tiles = null)
+    {
+        if (tiles != null)
+        {
+            var tileCheck = tiles.GetComponent<TilesBlock>();
+            var checkForGenerate = (!(Random.value > 0.5f));
+
+            if(tileCheck.Type != TilesType.Normal) return;
+            if(checkForGenerate) return;
+
+            var monsterPos = new Vector3(position.x, position.y + 1);
+            var monster = Instantiate(GetRandomMonster(), RoundVector(monsterPos), Quaternion.identity, tiles.transform);
+        }
+    }
     
     private GameObject GetRandomMonster()
     {
         var totalChance = 0;
-        foreach (var tiles in monsterTile)
+        foreach (var tiles in allMonsters)
         {
             totalChance += tiles.generateChance;
         }
 
         var rand = Random.Range(0, totalChance);
-        foreach (var tiles in monsterTile)
+        foreach (var tiles in allMonsters)
         {
             if (rand < tiles.generateChance)
             {
@@ -117,8 +132,8 @@ public class LevelGenerator : MonoBehaviour
 
             rand -= tiles.generateChance;
         }
-
-        return monsterTile[0].prefab;
+        
+        return allMonsters[0].prefab;
     }
 
     private Vector3 RoundVector(Vector3 vector)

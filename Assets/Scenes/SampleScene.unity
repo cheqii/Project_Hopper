@@ -924,9 +924,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
   tileMaxHeight: 0.2
   currentHeight: 0
-  monsterTile:
-  - {fileID: 11400000, guid: b1cd694fad9d96241ba12d6592423551, type: 2}
-  - {fileID: 11400000, guid: 92127a9b66fbe9f45a7e2ef1cd37aae4, type: 2}
+  allMonsters:
+  - {fileID: 11400000, guid: d31a058ea63a35d4baaecddc7ff74f9a, type: 2}
 --- !u!4 &893951789
 Transform:
   m_ObjectHideFlags: 0
@@ -1564,18 +1563,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: jumpForce
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: isGrounded
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -1616,21 +1603,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6788287460015539244, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6788287460015539244, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.1
-      objectReference: {fileID: 0}
     - target: {fileID: 7839029507602420194, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7839029507602420194, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
