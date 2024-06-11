@@ -15,7 +15,11 @@ namespace Character
 
         [SerializeField] private LayerMask groundLayer;
 
-        [SerializeField] private Interactable facingObject;
+        [SerializeField] private bool isGuard;
+        public bool IsGuard => isGuard;
+        
+        [Header("Facing Object")]
+        [SerializeField] private InteractableObject facingObject;
         
         private void Awake()
         {
@@ -39,6 +43,7 @@ namespace Character
             
             _control.PlayerAction.Jump.performed += Jump;
             _control.PlayerAction.Attack.performed += Attack;
+            _control.PlayerAction.Guard.performed += Guard;
         }
 
         #region **Player Action**
@@ -46,7 +51,8 @@ namespace Character
         private void Jump(InputAction.CallbackContext callback = default)
         {
             if (!PlayerCheckGround()) return;
-            
+
+            isGuard = false;
             var tempPos = transform.position;
             transform.DOJump(tempPos, jumpForce, 0, .5f);
             GameManager._instance.UpdatePlayerScore(1);
@@ -54,15 +60,15 @@ namespace Character
 
         private void Attack(InputAction.CallbackContext callback = default)
         {
+            isGuard = false;
             if(facingObject == null) return;
-            if (facingObject.Type == InteractableType.Monster)
-            {
-                facingObject.InteractToMonster(attackDamage);
-            }
-            else
-            {
-                facingObject.InteractToObject();
-            }
+            facingObject.InteractToObject(attackDamage);
+        }
+
+        private void Guard(InputAction.CallbackContext callback = default)
+        {
+            isGuard = true;
+            print("player is on guard");
         }
 
         #endregion
@@ -87,11 +93,11 @@ namespace Character
             Gizmos.DrawLine(startPos, endPos);
         }
 
-        private Interactable GetInteractableFacingObject(Collider2D other = null)
+        private InteractableObject GetInteractableFacingObject(Collider2D other = null)
         {
             if (other != null)
             {
-                var interactable = other.GetComponent<Interactable>();
+                var interactable = other.GetComponent<InteractableObject>();
                 return interactable;
             }
             return null;

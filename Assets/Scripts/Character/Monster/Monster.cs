@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Character.Monster
 {
-    public class Monster : Character
+    public class Monster : Character, IInteractable
     {
         [SerializeField] protected float preAttackDelay;
         [SerializeField] protected float cooldownAttack;
@@ -31,6 +31,11 @@ namespace Character.Monster
         protected virtual void Attack()
         {
             print("attack player");
+        }
+
+        public void InteractToObject(int damage)
+        {
+            TakeDamage(damage);
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
