@@ -1,12 +1,8 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InteractableObject : MonoBehaviour
 {
-    [SerializeField] private Interactable anyObject;
+    [SerializeField] private Interactable interactable;
     
-    public void InteractToObject(int damage = default)
-    {
-        // var obj = anyObject from IInteractable;
-        // obj.InteractToObject(damage);
-    }
 }

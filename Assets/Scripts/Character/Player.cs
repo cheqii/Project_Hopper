@@ -45,6 +45,20 @@ namespace Character
             _control.PlayerAction.Attack.performed += Attack;
             _control.PlayerAction.Guard.performed += Guard;
         }
+        
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("InteractableObject"))
+            {
+                facingObject = GetInteractableFacingObject(other);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("InteractableObject"))
+                facingObject = null;
+        }
 
         #region **Player Action**
 
@@ -62,7 +76,7 @@ namespace Character
         {
             isGuard = false;
             if(facingObject == null) return;
-            facingObject.InteractToObject(attackDamage);
+            // facingObject.InteractToObject(attackDamage);
         }
 
         private void Guard(InputAction.CallbackContext callback = default)
@@ -101,20 +115,6 @@ namespace Character
                 return interactable;
             }
             return null;
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("InteractableObject"))
-            {
-                facingObject = GetInteractableFacingObject(other);
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.CompareTag("InteractableObject"))
-                facingObject = null;
         }
     }
 }

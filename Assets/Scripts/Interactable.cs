@@ -1,9 +1,10 @@
+using Interface;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour, IInteraction
 {
-    public virtual void InteractToObject(int damage = default)
+    public void InteractWithObject(int damage = default)
     {
-                
+        
     }
 }

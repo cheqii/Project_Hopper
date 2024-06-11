@@ -1,18 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using Character.Monster;
 using UnityEngine;
 
-public class FlyMonster : MonoBehaviour
+public class FlyMonster : MonsterType
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Attack()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Fly Monster Attack");
     }
 }

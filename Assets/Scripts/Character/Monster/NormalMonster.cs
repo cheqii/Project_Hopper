@@ -5,23 +5,11 @@ using UnityEngine;
 
 namespace Character.Monster
 {
-    public class NormalMonster : Monster
+    public class NormalMonster : MonsterType
     {
-        // Start is called before the first frame update
-        void Start()
+        public override void Attack()
         {
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
-        protected override void Attack()
-        {
-            base.Attack();
+            Debug.Log("Normal Monster Attack");
         }
     }
 }
