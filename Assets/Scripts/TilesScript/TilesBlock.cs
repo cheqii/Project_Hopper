@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Character;
+using Character.Monster;
 using ObjectPool;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -39,6 +40,7 @@ namespace TilesScript
 
         [Header("Object layer")]
         [SerializeField] protected GameObject objectOnTile;
+        public GameObject ObjectOnTile => objectOnTile;
         [SerializeField] private LayerMask objectLayer;
         
         [Header("Player layer")]
@@ -56,8 +58,18 @@ namespace TilesScript
         {
             if (transform.position.x + 0.5f < camEdgeX)
             {
+                ReleaseMonsterOnTile();
                 PoolManager.ReleaseObject(gameObject);
                 _player._Control.RemoveAllBindingOverrides();
+            }
+        }
+
+        private void ReleaseMonsterOnTile()
+        {
+            if (objectOnTile != null)
+            {
+                var monster = objectOnTile.GetComponent<Monster>();
+                PoolManager.ReleaseObject(monster.gameObject);
             }
         }
 

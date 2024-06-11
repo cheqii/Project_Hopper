@@ -780,7 +780,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -926,6 +926,7 @@ MonoBehaviour:
   currentHeight: 0
   allMonsters:
   - {fileID: 11400000, guid: d31a058ea63a35d4baaecddc7ff74f9a, type: 2}
+  tempMonsterPos: {x: 0, y: 0, z: 0}
 --- !u!4 &893951789
 Transform:
   m_ObjectHideFlags: 0
@@ -1563,9 +1564,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: jumpEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: e2f8b9814682d2b45a83821920669f47, type: 2}
+    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: attackEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: e2f8b9814682d2b45a83821920669f47, type: 2}
+    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: attackDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.y

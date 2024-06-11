@@ -1,4 +1,5 @@
 using System;
+using ObjectPool;
 using TilesScript;
 using UnityEngine;
 
@@ -10,16 +11,21 @@ namespace Character.Monster
         [SerializeField] protected float cooldownAttack;
         [SerializeField] protected bool isStunned;
         
-        // Start is called before the first frame update
         void Start()
         {
-        
+            ResetMonsterStatus();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void ResetMonsterStatus()
         {
-        
+            health = maxHealth;
+        }
+
+        public override void TakeDamage(int damage)
+        {
+            base.TakeDamage(damage);
+            if(health <= 0)
+                PoolManager.ReleaseObject(gameObject);
         }
 
         protected virtual void Attack()
@@ -35,14 +41,7 @@ namespace Character.Monster
 
         protected void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.collider.CompareTag("Ground"))
-            {
-                var tile = other.gameObject.GetComponent<TilesBlock>();
-                if(tile.Type == TilesType.Normal) return;
-                gameObject.SetActive(false);
-                print("monster touch tiles");
-            }
-            // gameObject.transform.parent.gameObject.SetActive(true);
+            
         }
     }
 }

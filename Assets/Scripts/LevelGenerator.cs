@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Character;
+using Character.Monster;
 using ObjectPool;
 using ScriptableObjects;
 using TilesScript;
@@ -24,6 +25,8 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Generate Monster")] 
     [SerializeField] private List<MonsterData> allMonsters;
+
+    public Vector3 tempMonsterPos;
     
     private void Start()
     {
@@ -43,7 +46,7 @@ public class LevelGenerator : MonoBehaviour
         GenerateTile(++step);
     }
 
-    private void GenerateTile(int step = default , bool initialGenerate = false)
+    private void GenerateTile(int step , bool initialGenerate = false)
     {
         var tilePrefab = normalTilePrefab;
         if (!initialGenerate)
@@ -66,11 +69,9 @@ public class LevelGenerator : MonoBehaviour
         var position = new Vector3(step, currentHeight, 0f);
         var newTile = PoolManager.SpawnObject(tilePrefab, RoundVector(position), Quaternion.identity);
         var tile = newTile.GetComponent<TilesBlock>();
+        
         tile._Player = _player;
 
-        if (newTile.transform.childCount > 0)
-            Destroy(newTile.transform.GetChild(0).gameObject);
-        
         if(!initialGenerate)
             GenerateMonsterOnTile(position, newTile);
     }
@@ -99,21 +100,27 @@ public class LevelGenerator : MonoBehaviour
 
     #endregion
 
+    #region -Monster Generate On Tile Method-
+
     private void GenerateMonsterOnTile(Vector3 position = default, GameObject tiles = null)
     {
         if (tiles != null)
         {
             var tileCheck = tiles.GetComponent<TilesBlock>();
-            var checkForGenerate = (!(Random.value > 0.5f));
+            var checkForGenerate = (!(Random.value > 0.85f));
 
-            if(tileCheck.Type != TilesType.Normal) return;
+            if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
             if(checkForGenerate) return;
-
-            var monsterPos = new Vector3(position.x, position.y + 1);
-            var monster = Instantiate(GetRandomMonster(), RoundVector(monsterPos), Quaternion.identity, tiles.transform);
+            
+            var monsterPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
+            var newMonster = PoolManager.SpawnObject(GetRandomMonster(), RoundVector(monsterPos), Quaternion.identity);
+            newMonster.transform.SetParent(tiles.transform);
+            
+            var monster = newMonster.GetComponent<Monster>();
+            monster.ResetMonsterStatus();
         }
     }
-    
+
     private GameObject GetRandomMonster()
     {
         var totalChance = 0;
@@ -135,6 +142,8 @@ public class LevelGenerator : MonoBehaviour
         
         return allMonsters[0].prefab;
     }
+
+    #endregion
 
     private Vector3 RoundVector(Vector3 vector)
     {

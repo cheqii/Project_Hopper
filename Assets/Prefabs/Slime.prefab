@@ -215,9 +215,10 @@ GameObject:
   - component: {fileID: 589343040607673569}
   - component: {fileID: -1455586401182013408}
   - component: {fileID: 929046517190484064}
+  - component: {fileID: 3472903363102538062}
   m_Layer: 8
   m_Name: Slime
-  m_TagString: Monster
+  m_TagString: InteractableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,8 +366,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3beaa24a6726fa45accd14c759e9548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1
   health: 1
   attackDamage: 1
   preAttackDelay: 0.5
   cooldownAttack: 1
   isStunned: 0
+--- !u!114 &3472903363102538062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8392800452355147999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f68bba0c13c984992e413bc79afa36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
+  anyObject: {fileID: 929046517190484064}

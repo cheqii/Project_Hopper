@@ -2,36 +2,21 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 namespace Character
 {
     public class Player : Character
     {
-        [SerializeField] private int maxHealth;
         [SerializeField] private float jumpForce;
-        [SerializeField] private bool isGrounded;
-        public bool IsGrounded
-        {
-            get => isGrounded;
-            set => isGrounded = value;
-        }
-
-        [Space]
-        [SerializeField] private int stepCount;
-        public int StepCount
-        {
-            get => stepCount;
-            set => stepCount = value;
-        }
-
-        private Rigidbody2D rb;
-
         [Header("Input System")]
         private PlayerActionInput _control;
         public PlayerActionInput _Control => _control;
 
         [SerializeField] private LayerMask groundLayer;
 
+        [SerializeField] private Interactable facingObject;
+        
         private void Awake()
         {
             _control = new PlayerActionInput();
@@ -50,30 +35,44 @@ namespace Character
         // Start is called before the first frame update
         void Start()
         {
-            rb = GetComponent<Rigidbody2D>();
-            
             health = maxHealth;
             
             _control.PlayerAction.Jump.performed += Jump;
             _control.PlayerAction.Attack.performed += Attack;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
+        #region **Player Action**
 
-        private void Jump(InputAction.CallbackContext callback)
+        private void Jump(InputAction.CallbackContext callback = default)
         {
             if (!PlayerCheckGround()) return;
             
             var tempPos = transform.position;
             transform.DOJump(tempPos, jumpForce, 0, .5f);
-            stepCount++;
             GameManager._instance.UpdatePlayerScore(1);
         }
-        
+
+        private void Attack(InputAction.CallbackContext callback = default)
+        {
+            if(facingObject == null) return;
+            if (facingObject.Type == InteractableType.Monster)
+            {
+                facingObject.InteractToMonster(attackDamage);
+            }
+            else
+            {
+                facingObject.InteractToObject();
+            }
+        }
+
+        #endregion
+
+        public override void TakeDamage(int damage)
+        {
+            base.TakeDamage(damage);
+            GameManager._instance.UpdatePlayerHealth();
+        }
+
         public bool PlayerCheckGround()
         {
             var startPos = transform.position + new Vector3(-0.4f, -0.55f);
@@ -88,15 +87,28 @@ namespace Character
             Gizmos.DrawLine(startPos, endPos);
         }
 
-        private void Attack(InputAction.CallbackContext callback)
+        private Interactable GetInteractableFacingObject(Collider2D other = null)
         {
-            print("attack");
+            if (other != null)
+            {
+                var interactable = other.GetComponent<Interactable>();
+                return interactable;
+            }
+            return null;
         }
 
-        public override void TakeDamage(int damage)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            base.TakeDamage(damage);
-            GameManager._instance.UpdatePlayerHealth();
+            if (other.CompareTag("InteractableObject"))
+            {
+                facingObject = GetInteractableFacingObject(other);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("InteractableObject"))
+                facingObject = null;
         }
     }
 }
