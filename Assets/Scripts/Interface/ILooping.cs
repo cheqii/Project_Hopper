@@ -5,6 +5,6 @@ namespace Interface
 {
     public interface ILooping
     {
-        IEnumerator LoopBehavior();
+        public void LoopBehavior();
     }
 }

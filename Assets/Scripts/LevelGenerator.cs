@@ -111,10 +111,11 @@ public class LevelGenerator : MonoBehaviour
             
             var monsterPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
             var newMonster = PoolManager.SpawnObject(GetRandomMonster(), RoundVector(monsterPos), Quaternion.identity);
-            newMonster.transform.SetParent(tiles.transform);
-            
+
             var monster = newMonster.GetComponent<Monster>();
-            monster.SetToInitialMonster();
+
+            monster.SetToInitialMonster(monsterPos);
+            newMonster.transform.SetParent(tiles.transform);
         }
     }
 

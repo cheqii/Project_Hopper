@@ -33,7 +33,7 @@ namespace Character.Monster
             MonsterCooldown();
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
@@ -50,10 +50,11 @@ namespace Character.Monster
 
         #endregion
 
-        public void SetToInitialMonster()
+        public virtual void SetToInitialMonster(Vector3 startPos = default)
         {
             interactableObject.Interactable = this;
             health = maxHealth;
+            transform.position = startPos;
         }
 
         public virtual void Attack() // set this method in animation event
@@ -65,14 +66,11 @@ namespace Character.Monster
 
         public override void TakeDamage(int damage)
         {
-            if (health <= 0)
-            {
-                animator.SetTrigger("Dead");
-                return;
-            }
-
             animator.SetTrigger("Hurt");
             base.TakeDamage(damage);
+            
+            if (health <= 0)
+                animator.SetTrigger("Dead");
         }
 
         public void ReleaseMonster() // set in animation event to call after dead anim end
@@ -80,7 +78,7 @@ namespace Character.Monster
             PoolManager.ReleaseObject(gameObject);
         }
 
-        private Player GetPlayer(Component other = null)
+        protected Player GetPlayer(Component other = null)
         {
             if (other != null)
             {
@@ -105,7 +103,7 @@ namespace Character.Monster
             print("pre-attack");
         }
 
-        protected virtual void MonsterCooldown()
+        private void MonsterCooldown()
         {
             if(playerDetect == null) return;
             

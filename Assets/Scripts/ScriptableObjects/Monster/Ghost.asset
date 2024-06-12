@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Ghost
   prefab: {fileID: 8304493151722092373, guid: 1400aaa081727204588e7a45a630838d, type: 3}
-  generateChance: 30
+  generateChance: 15

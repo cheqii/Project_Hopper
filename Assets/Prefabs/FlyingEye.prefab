@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: -327935031546348578}
   - component: {fileID: 8050306219892039399}
   m_Layer: 8
-  m_Name: Capsule
+  m_Name: FlyingEye
   m_TagString: InteractableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,6 +261,8 @@ MonoBehaviour:
   interactableObject: {fileID: -327935031546348578}
   animator: {fileID: 8050306219892039399}
   isAttacking: 0
+  isWarning: 0
+  isFlying: 0
   minCooldown: 2
   maxCooldown: 4
   warningTime: 0.66
