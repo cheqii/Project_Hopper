@@ -5,11 +5,8 @@ using UnityEngine;
 
 namespace Character.Monster
 {
-    public class NormalMonster : MonsterType
+    public class NormalMonster : Monster
     {
-        public override void AttackBehavior()
-        {
-            Debug.Log("Normal Monster Attack");
-        }
+        
     }
 }

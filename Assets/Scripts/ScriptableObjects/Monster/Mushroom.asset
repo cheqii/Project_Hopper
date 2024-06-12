@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24e6f131db6f6264ca6d78885b0ebcd1, type: 3}
-  m_Name: Flying
+  m_Name: Mushroom
   m_EditorClassIdentifier: 
-  name: Slime
-  prefab: {fileID: 9047672543347342820, guid: e5beddac1da17a342b339db1282fdbf5, type: 3}
+  name: Mushroom
+  prefab: {fileID: 8392800452355147999, guid: 062e62070ed13724fb603d7cccac270c, type: 3}
   generateChance: 10

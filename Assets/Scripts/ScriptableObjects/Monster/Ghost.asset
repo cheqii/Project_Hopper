@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24e6f131db6f6264ca6d78885b0ebcd1, type: 3}
-  m_Name: Slime
+  m_Name: Ghost
   m_EditorClassIdentifier: 
-  name: Slime
-  prefab: {fileID: 8392800452355147999, guid: 062e62070ed13724fb603d7cccac270c, type: 3}
-  generateChance: 10
+  name: Ghost
+  prefab: {fileID: 8304493151722092373, guid: 1400aaa081727204588e7a45a630838d, type: 3}
+  generateChance: 30

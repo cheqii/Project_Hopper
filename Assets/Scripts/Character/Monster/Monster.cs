@@ -13,21 +13,18 @@ namespace Character.Monster
         [SerializeField] protected bool isStunned;
 
         [Header("Player")]
-        [SerializeField] private Player playerDetect;
-        
-        [Header("Monster Type")]
-        [SerializeField] private MonsterType monster;
+        [SerializeField] protected Player playerDetect;
         
         [Header("Interactable")]
         [SerializeField] private InteractableObject interactableObject;
 
         [Header("Animator")]
-        [SerializeField] private Animator animator;
+        [SerializeField] protected Animator animator;
 
         [Space]
-        [SerializeField] private bool isAttacking;
+        [SerializeField] protected bool isAttacking;
         
-        private float timer;
+        protected float timer;
 
         #region -Unity Event Methods-
 
@@ -40,6 +37,7 @@ namespace Character.Monster
         {
             if (other.CompareTag("Player"))
             {
+                print("found player");
                 playerDetect = GetPlayer(other);
             }
         }
@@ -58,21 +56,23 @@ namespace Character.Monster
             health = maxHealth;
         }
 
-        public void Attack() // set this method in animation event
+        public virtual void Attack() // set this method in animation event
         {
             if(playerDetect == null) return;
             
             playerDetect.TakeDamage(attackDamage);
-            monster.AttackBehavior();
         }
 
         public override void TakeDamage(int damage)
         {
+            if (health <= 0)
+            {
+                animator.SetTrigger("Dead");
+                return;
+            }
+
             animator.SetTrigger("Hurt");
             base.TakeDamage(damage);
-
-            if (health <= 0)
-                animator.SetTrigger("Dead");
         }
 
         public void ReleaseMonster() // set in animation event to call after dead anim end
@@ -98,19 +98,21 @@ namespace Character.Monster
 
         #region -Pre-Attack & Delay Calculate-
 
-        private void MonsterPreAttack()
+        protected void MonsterPreAttack()
         {
             isAttacking = true;
             timer = preAttackDelay;
             print("pre-attack");
         }
 
-        private void MonsterCooldown()
+        protected virtual void MonsterCooldown()
         {
+            if(playerDetect == null) return;
+            
             if (!isAttacking && timer <= 0)
                 MonsterPreAttack();
             
-            if (isAttacking && playerDetect != null)
+            if (isAttacking)
             {
                 timer -= Time.deltaTime;
                 if (timer <= 0f)

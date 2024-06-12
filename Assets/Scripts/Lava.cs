@@ -24,7 +24,7 @@ public class Lava : MonoBehaviour
 
     public void DecreaseLava()
     {
-        if(transform.position.y <= -10f) return;
+        if(transform.position.y <= -9f) return;
         StartCoroutine(SmoothDecrease());
     }
     
