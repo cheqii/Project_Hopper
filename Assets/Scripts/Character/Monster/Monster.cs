@@ -2,9 +2,7 @@ using System;
 using Interaction;
 using Interface;
 using ObjectPool;
-using TilesScript;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Character.Monster
 {
@@ -14,18 +12,28 @@ namespace Character.Monster
         [SerializeField] protected float cooldownAttack;
         [SerializeField] protected bool isStunned;
 
+        [Header("Player")]
         [SerializeField] private Player playerDetect;
         
+        [Header("Monster Type")]
         [SerializeField] private MonsterType monster;
-
+        
+        [Header("Interactable")]
         [SerializeField] private InteractableObject interactableObject;
 
         [Header("Animator")]
         [SerializeField] private Animator animator;
 
-        void Start()
+        [Space]
+        [SerializeField] private bool isAttacking;
+        
+        private float timer;
+
+        #region -Unity Event Methods-
+
+        private void Update()
         {
-            
+            MonsterCooldown();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -33,14 +41,7 @@ namespace Character.Monster
             if (other.CompareTag("Player"))
             {
                 playerDetect = GetPlayer(other);
-                animator.SetTrigger("Attack");
             }
-        }
-
-        private void OnTriggerStay2D(Collider2D other)
-        {
-            if(playerDetect != null)
-                animator.SetTrigger("Attack");
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -48,6 +49,8 @@ namespace Character.Monster
             if (other.CompareTag("Player"))
                 playerDetect = null;
         }
+
+        #endregion
 
         public void SetToInitialMonster()
         {
@@ -57,7 +60,7 @@ namespace Character.Monster
 
         public void Attack() // set this method in animation event
         {
-            if(playerDetect == null) return; 
+            if(playerDetect == null) return;
             
             playerDetect.TakeDamage(attackDamage);
             monster.AttackBehavior();
@@ -65,9 +68,9 @@ namespace Character.Monster
 
         public override void TakeDamage(int damage)
         {
-            base.TakeDamage(damage);
             animator.SetTrigger("Hurt");
-            
+            base.TakeDamage(damage);
+
             if (health <= 0)
                 animator.SetTrigger("Dead");
         }
@@ -91,6 +94,39 @@ namespace Character.Monster
         {
             print("attack monster");
             TakeDamage(damage);
+        }
+
+        private void MonsterPreAttack()
+        {
+            isAttacking = true;
+            timer = preAttackDelay;
+            print("pre-attack");
+        }
+
+        private void MonsterCooldown()
+        {
+            if (!isAttacking && timer <= 0)
+                MonsterPreAttack();
+            
+            if (isAttacking && playerDetect != null)
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0f)
+                {
+                    animator.SetTrigger("Attack");
+                    isAttacking = false;
+                    timer = cooldownAttack;
+                    print("attack and cooldown");
+                }
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0f)
+                {
+                    timer = 0f;
+                }
+            }
         }
     }
 }

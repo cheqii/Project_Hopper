@@ -60,6 +60,7 @@ namespace Character
         {
             if (other.CompareTag("InteractableObject"))
             {
+                print("player found object");
                 facingObject = GetInteractableFacingObject(other);
             }
         }

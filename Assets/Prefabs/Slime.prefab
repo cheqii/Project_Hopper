@@ -329,13 +329,14 @@ MonoBehaviour:
   maxHealth: 2
   health: 1
   attackDamage: 1
-  preAttackDelay: 0
-  cooldownAttack: 0
+  preAttackDelay: 0.5
+  cooldownAttack: 1
   isStunned: 0
   playerDetect: {fileID: 0}
   monster: {fileID: -3099817116021370139}
   interactableObject: {fileID: 3472903363102538062}
   animator: {fileID: 8687708763809998917}
+  isAttacking: 0
 --- !u!114 &-3099817116021370139
 MonoBehaviour:
   m_ObjectHideFlags: 0
