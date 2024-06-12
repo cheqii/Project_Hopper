@@ -1,10 +1,19 @@
+using System;
+using Character.Monster;
+using Interface;
 using UnityEngine;
 
 namespace Interaction
 {
     public class InteractableObject : MonoBehaviour
     {
-        [SerializeField] private Interactable interactable;
+        private IInteraction interactable;
+
+        public IInteraction Interactable
+        {
+            get => interactable;
+            set => interactable = value;
+        }
 
         public void Interaction(int value = default)
         {

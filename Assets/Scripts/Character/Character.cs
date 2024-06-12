@@ -15,7 +15,7 @@ namespace Character
         }
         
         [SerializeField] protected int attackDamage;
-
+        
         public virtual void TakeDamage(int damage)
         {
             if (health > 0)

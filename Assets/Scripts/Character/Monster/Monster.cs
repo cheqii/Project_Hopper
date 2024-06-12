@@ -1,4 +1,6 @@
 using System;
+using Interaction;
+using Interface;
 using ObjectPool;
 using TilesScript;
 using UnityEngine;
@@ -6,7 +8,7 @@ using UnityEngine.Serialization;
 
 namespace Character.Monster
 {
-    public class Monster : Character
+    public class Monster : Character, IInteraction
     {
         [SerializeField] protected float preAttackDelay;
         [SerializeField] protected float cooldownAttack;
@@ -16,12 +18,14 @@ namespace Character.Monster
         
         [SerializeField] private MonsterType monster;
 
+        [SerializeField] private InteractableObject interactableObject;
+
         [Header("Animator")]
         [SerializeField] private Animator animator;
 
         void Start()
         {
-            ResetMonsterStatus();
+            
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +34,6 @@ namespace Character.Monster
             {
                 playerDetect = GetPlayer(other);
                 animator.SetTrigger("Attack");
-                // Attack();
             }
         }
 
@@ -46,12 +49,13 @@ namespace Character.Monster
                 playerDetect = null;
         }
 
-        public void ResetMonsterStatus()
+        public void SetToInitialMonster()
         {
+            interactableObject.Interactable = this;
             health = maxHealth;
         }
 
-        private void Attack() // set this method in animation event
+        public void Attack() // set this method in animation event
         {
             if(playerDetect == null) return; 
             
@@ -73,11 +77,6 @@ namespace Character.Monster
             PoolManager.ReleaseObject(gameObject);
         }
 
-        public void InteractToObject(int damage)
-        {
-            TakeDamage(damage);
-        }
-
         private Player GetPlayer(Component other = null)
         {
             if (other != null)
@@ -85,8 +84,13 @@ namespace Character.Monster
                 var player = other.GetComponent<Player>();
                 return player;
             }
-
             return null;
+        }
+
+        public void InteractWithObject(int damage = default)
+        {
+            print("attack monster");
+            TakeDamage(damage);
         }
     }
 }

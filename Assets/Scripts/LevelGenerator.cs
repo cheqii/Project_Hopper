@@ -114,7 +114,7 @@ public class LevelGenerator : MonoBehaviour
             newMonster.transform.SetParent(tiles.transform);
             
             var monster = newMonster.GetComponent<Monster>();
-            monster.ResetMonsterStatus();
+            monster.SetToInitialMonster();
         }
     }
 

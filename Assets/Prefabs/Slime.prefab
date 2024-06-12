@@ -165,7 +165,6 @@ GameObject:
   - component: {fileID: 1719106319518783708}
   - component: {fileID: -3099817116021370139}
   - component: {fileID: 3472903363102538062}
-  - component: {fileID: 5203091779405701625}
   - component: {fileID: 8687708763809998917}
   m_Layer: 8
   m_Name: Slime
@@ -335,6 +334,7 @@ MonoBehaviour:
   isStunned: 0
   playerDetect: {fileID: 0}
   monster: {fileID: -3099817116021370139}
+  interactableObject: {fileID: 3472903363102538062}
   animator: {fileID: 8687708763809998917}
 --- !u!114 &-3099817116021370139
 MonoBehaviour:
@@ -360,20 +360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f68bba0c13c984992e413bc79afa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 5203091779405701625}
---- !u!114 &5203091779405701625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8392800452355147999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a064cb52c15d6264b9020341fb57fc48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 1719106319518783708}
 --- !u!95 &8687708763809998917
 Animator:
   serializedVersion: 5

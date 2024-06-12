@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Character.Monster
 {
-    public class MonsterType : MonoBehaviour, IMonster
+    public class MonsterType : MonoBehaviour
     {
         public virtual void AttackBehavior()
         {
