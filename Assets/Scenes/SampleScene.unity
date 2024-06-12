@@ -1244,7 +1244,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.9528302, g: 0.05842829, b: 0.05842829, a: 1}
   m_FlipX: 0
@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lavaIncreaseSpeed: 0.2
   decreaseLavaValue: 0.5
-  duration: 0
+  duration: 2
 --- !u!1 &1801266370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,6 +1853,10 @@ PrefabInstance:
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 893951788}
+    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DecreaseLava
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

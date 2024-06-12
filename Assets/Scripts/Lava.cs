@@ -19,13 +19,28 @@ public class Lava : MonoBehaviour
     private void IncreaseLavaByTime()
     {
         var endPos = transform.position += Vector3.up * (lavaIncreaseSpeed * Time.deltaTime);
-        transform.DOLocalMove(endPos, duration);
+        transform.DOLocalMove(endPos, 0);
     }
 
     public void DecreaseLava()
     {
         if(transform.position.y <= -10f) return;
-        var endPos = transform.position += Vector3.down * decreaseLavaValue;
-        transform.DOLocalMove(endPos, duration);
+        StartCoroutine(SmoothDecrease());
+    }
+    
+    private IEnumerator SmoothDecrease()
+    {
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos - Vector3.up * decreaseLavaValue;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPos;
     }
 }
