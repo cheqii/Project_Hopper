@@ -30,6 +30,8 @@ namespace Character
 
         [Header("Player Action Event")]
         [SerializeField] private Nf_GameEvent jumpEvent;
+
+        private Rigidbody2D rb;
         
         private void Awake()
         {
@@ -49,6 +51,7 @@ namespace Character
         // Start is called before the first frame update
         void Start()
         {
+            rb = GetComponent<Rigidbody2D>();
             health = maxHealth;
             
             _control.PlayerAction.Jump.performed += Jump;
@@ -56,13 +59,10 @@ namespace Character
             _control.PlayerAction.Guard.performed += Guard;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
             if (other.CompareTag("InteractableObject"))
-            {
-                print("player found object");
                 facingObject = GetInteractableFacingObject(other);
-            }
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -80,11 +80,13 @@ namespace Character
             jumpEvent.Raise();
             animator.SetTrigger("Jump");
             isGuard = false;
-            var tempPos = transform.position;
-            transform.DOJump(tempPos, jumpForce, 0, .5f);
+            
+            rb.velocity = Vector2.up * jumpForce;
             GameManager._instance.UpdatePlayerScore(1);
             
         }
+        
+        // void ToNex
 
         private void Attack(InputAction.CallbackContext callback = default)
         {

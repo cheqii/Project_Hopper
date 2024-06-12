@@ -96,6 +96,8 @@ namespace Character.Monster
             TakeDamage(damage);
         }
 
+        #region -Pre-Attack & Delay Calculate-
+
         private void MonsterPreAttack()
         {
             isAttacking = true;
@@ -128,5 +130,7 @@ namespace Character.Monster
                 }
             }
         }
+
+        #endregion
     }
 }
