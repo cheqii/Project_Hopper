@@ -1,7 +1,9 @@
+using Character;
+
 namespace Interface
 {
     public interface IMonster
     {
-        public void Attack();
+        public void AttackBehavior();
     }
 }

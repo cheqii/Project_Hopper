@@ -7,7 +7,7 @@ namespace Character.Monster
 {
     public class NormalMonster : MonsterType
     {
-        public override void Attack()
+        public override void AttackBehavior()
         {
             Debug.Log("Normal Monster Attack");
         }

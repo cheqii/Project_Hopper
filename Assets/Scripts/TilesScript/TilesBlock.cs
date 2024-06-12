@@ -58,7 +58,7 @@ namespace TilesScript
         {
             if (transform.position.x + 0.5f < camEdgeX)
             {
-                ReleaseMonsterOnTile();
+                // ReleaseMonsterOnTile();
                 PoolManager.ReleaseObject(gameObject);
                 _player._Control.RemoveAllBindingOverrides();
             }

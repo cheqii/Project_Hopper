@@ -26,8 +26,6 @@ public class LevelGenerator : MonoBehaviour
     [Header("Generate Monster")] 
     [SerializeField] private List<MonsterData> allMonsters;
 
-    public Vector3 tempMonsterPos;
-    
     private void Start()
     {
         for (int i = 0; i <= retainStep; i++)

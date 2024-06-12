@@ -18,6 +18,12 @@ namespace Character
 
         [SerializeField] private bool isGuard;
         public bool IsGuard => isGuard;
+
+        [Range(0, 1)]
+        [SerializeField] private float linePosY = 0.55f;
+
+        [Header("Animator")]
+        [SerializeField] private Animator animator;
         
         [Header("Facing Object")]
         [SerializeField] private InteractableObject facingObject;
@@ -49,7 +55,7 @@ namespace Character
             _control.PlayerAction.Attack.performed += Attack;
             _control.PlayerAction.Guard.performed += Guard;
         }
-        
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("InteractableObject"))
@@ -71,14 +77,17 @@ namespace Character
             if (!PlayerCheckGround()) return;
 
             jumpEvent.Raise();
+            animator.SetTrigger("Jump");
             isGuard = false;
             var tempPos = transform.position;
             transform.DOJump(tempPos, jumpForce, 0, .5f);
             GameManager._instance.UpdatePlayerScore(1);
+            
         }
 
         private void Attack(InputAction.CallbackContext callback = default)
         {
+            animator.SetTrigger("Attack");
             isGuard = false;
             if(facingObject == null) return;
             facingObject.Interaction(attackDamage);
@@ -95,24 +104,25 @@ namespace Character
         public override void TakeDamage(int damage)
         {
             base.TakeDamage(damage);
+            animator.SetTrigger("Hurt");
             GameManager._instance.UpdatePlayerHealth();
         }
 
         public bool PlayerCheckGround()
         {
-            var startPos = transform.position + new Vector3(-0.4f, -0.55f);
-            var endPos = transform.position + new Vector3(0.4f, -0.55f);
+            var startPos = transform.position + new Vector3(-0.4f, -linePosY);
+            var endPos = transform.position + new Vector3(0.4f, -linePosY);
             return Physics2D.Linecast(startPos, endPos, groundLayer);
         }
 
         private void OnDrawGizmos()
         {
-            var startPos = transform.position + new Vector3(-0.4f, -0.55f);
-            var endPos = transform.position + new Vector3(0.4f, -0.55f);
+            var startPos = transform.position + new Vector3(-0.4f, -linePosY);
+            var endPos = transform.position + new Vector3(0.4f, -linePosY);
             Gizmos.DrawLine(startPos, endPos);
         }
 
-        private InteractableObject GetInteractableFacingObject(Collider2D other = null)
+        private InteractableObject GetInteractableFacingObject(Component other = null)
         {
             if (other != null)
             {
