@@ -96,15 +96,17 @@ public class FlyMonster : Monster, ILooping
 
         if(!isWarning && timer <= 0)
             SetWarning();
-        
-            
+
         if (isWarning)
         {
             timer -= Time.deltaTime;
+            if(timer <= warningTime)
+                animator.SetTrigger("Warning");
+            
             if (timer <= 0f)
             {
-                animator.SetTrigger("Warning");
                 isWarning = false;
+                animator.ResetTrigger("Warning");
                 MonsterPreAttack();
                 FlyingToThePlayerAndBack(playerDetect.transform.position, 1f);
                 print("warning done");

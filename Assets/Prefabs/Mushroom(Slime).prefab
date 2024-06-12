@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3472903363102538062}
   - component: {fileID: 8687708763809998917}
   m_Layer: 8
-  m_Name: Slime
+  m_Name: Mushroom(Slime)
   m_TagString: InteractableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

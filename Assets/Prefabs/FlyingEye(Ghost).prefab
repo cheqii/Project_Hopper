@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: -327935031546348578}
   - component: {fileID: 8050306219892039399}
   m_Layer: 8
-  m_Name: FlyingEye
+  m_Name: FlyingEye(Ghost)
   m_TagString: InteractableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
