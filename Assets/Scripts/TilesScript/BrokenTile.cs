@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace TilesScript
 {
-    public class BrokenTiles : TilesBlock, IOnStep
+    public class BrokenTile : TilesBlock, IOnStep
     {
         protected override void CheckPlayerOnTile()
         {
@@ -24,7 +24,7 @@ namespace TilesScript
 
         public void OnStep()
         {
-            PoolManager.ReleaseObject(gameObject);
+            ReleaseTile();
         }
     }
 }

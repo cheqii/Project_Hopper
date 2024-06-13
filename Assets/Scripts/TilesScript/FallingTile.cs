@@ -29,18 +29,24 @@ namespace TilesScript
 
         protected override void OnCollisionEnter2D(Collision2D other)
         {
-            if(other.gameObject.CompareTag("Lava"))
-                print("fall into lava");
-            
             if (!other.gameObject.CompareTag("Player")) return;
             base.OnCollisionEnter2D(other);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Lava"))
+            {
+                print("falling in to lava");
+                PoolManager.ReleaseObject(gameObject);
+            }
         }
 
         public void OnStep()
         {
             animator.ResetTrigger("Flashing");
-            var endPos = new Vector3(transform.position.x, Vector3.down.y * 5);
-            transform.DOMove(endPos, 2f);
+            var endPos = new Vector3(transform.position.x, Vector3.down.y * 4.5f);
+            transform.DOMove(endPos, 1f);
             isFalling = true;
         }
     }

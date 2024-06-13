@@ -1,12 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using ObjectPool;
-using TilesScript;
-using Unity.VisualScripting;
-using UnityEngine.Serialization;
 
 public class Lava : MonoBehaviour
 {
@@ -24,15 +19,9 @@ public class Lava : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Melt"))
-        {
-            var tile = other.GetComponent<FallingTile>();
-            if (tile.IsFalling)
-            {
-                PoolManager.ReleaseObject(tile.gameObject);
-                tile.SetToInitialTile();
-            }
-        }
+        if(other.gameObject.CompareTag("Melt"))
+            PoolManager.ReleaseObject(other.gameObject);
+        
         if (other.gameObject.CompareTag("Player"))
             Destroy(other.gameObject);
     }

@@ -50,39 +50,12 @@ public class LevelGenerator : MonoBehaviour
         var tilePrefab = normalTilePrefab;
         if (!initialGenerate)
         {
-            if (currentHeight >= 0 || currentHeight < 0)
-            {
-                var check = (!(Random.value > 0.5f));
-                if (!check)
-                {
-                    currentHeight += 0;
-                }
-                else                                                                         
-                {
-                    var heightDifference = (Random.value > 0.5f) ? tileMaxHeight : -tileMaxHeight;
-                    // currentHeight += heightDifference;
-
-                    switch (currentHeight)
-                    {
-                        case >= 2.8f:
-                            currentHeight += -tileMaxHeight;
-                            break;
-                        case <= -2.8f:
-                            currentHeight += tileMaxHeight;
-                            break;
-                        default:
-                            currentHeight += heightDifference;
-                            break;
-                    }
-                    
-                    // if (currentHeight >= limitHeight)
-                    //     currentHeight += -tileMaxHeight;
-                    // else if (currentHeight <= limitHeight)
-                    //     currentHeight += tileMaxHeight;
-                    // else
-                    //     currentHeight += heightDifference;
-                }
-            }
+            var tileHeightPossibility = (!(Random.value > 0.5f));
+            
+            if (!tileHeightPossibility)
+                currentHeight += 0;
+            else                                                                         
+                CheckMaxAndMinHeight();
 
             tilePrefab = GetRandomTile();
         }
@@ -118,6 +91,23 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return normalTilePrefab;
+    }
+
+    private void CheckMaxAndMinHeight()
+    {
+        var heightDifference = (Random.value > 0.5f) ? tileMaxHeight : -tileMaxHeight;
+        switch (currentHeight)
+        {
+            case >= 2.8f:
+                currentHeight += -tileMaxHeight;
+                break;
+            case <= -2.8f:
+                currentHeight += tileMaxHeight;
+                break;
+            default:
+                currentHeight += heightDifference;
+                break;
+        }
     }
 
     #endregion

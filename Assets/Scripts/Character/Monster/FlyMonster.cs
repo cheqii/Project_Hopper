@@ -82,7 +82,9 @@ public class FlyMonster : Monster
 
     #endregion
 
-    private void SetWarning()
+    #region -Monster Behavior-
+
+    private void Clinging()
     {
         isWarning = true;
         timer = cooldownAttack;
@@ -97,6 +99,27 @@ public class FlyMonster : Monster
         print("set warning");
     }
 
+    private void WarningBehavior()
+    {
+        isWarning = false;
+        animator.ResetTrigger("Warning");
+        MonsterPreAttack();
+        FlyingToThePlayerAndBack(playerDetect.transform.position, 1f);
+        print("warning done");
+    }
+
+    private void AttackingBehavior()
+    {
+        animator.SetTrigger("Attack");
+        isAttacking = false;
+        timer = cooldownAttack;
+                
+        Invoke(nameof(FlyingToThePlayerAndBack), 1f); // after the monster attack then flying back
+        print("attack and cooldown");
+    }
+
+    #endregion
+
     protected override void MonsterBehaviorCooldown()
     {
         if(playerDetect == null) return;
@@ -104,43 +127,29 @@ public class FlyMonster : Monster
         cooldownAttack = Random.Range(minCooldown, maxCooldown);
 
         if(!isWarning && timer <= 0)
-            SetWarning();
+            Clinging();
 
         if (isWarning)
         {
             timer -= Time.deltaTime;
-            if(timer <= warningTime)
-                animator.SetTrigger("Warning");
+            if(timer > warningTime) return;
+            animator.SetTrigger("Warning");
             
-            if (timer <= 0f)
-            {
-                isWarning = false;
-                animator.ResetTrigger("Warning");
-                MonsterPreAttack();
-                FlyingToThePlayerAndBack(playerDetect.transform.position, 1f);
-                print("warning done");
-            }
+            if (timer > 0f) return;
+            WarningBehavior();
         }
         else if (isAttacking)
         {
             timer -= Time.deltaTime;
-            if (timer <= 0f)
-            {
-                animator.SetTrigger("Attack");
-                isAttacking = false;
-                timer = cooldownAttack;
-                
-                Invoke(nameof(FlyingToThePlayerAndBack), 1f); // after the monster attack then flying back
-                print("attack and cooldown");
-            }
+            
+            if (timer > 0f) return;
+            AttackingBehavior();
         }
         else
         {
             timer -= Time.deltaTime;
-            if (timer <= 0f)
-            {
+            if (timer <= 0f) 
                 timer = 0f;
-            }
         }
     }
 

@@ -9,6 +9,8 @@ TagManager:
   - InteractableObject
   - Lava
   - Melt
+  - Detector
+  - TNT
   layers:
   - Default
   - TransparentFX

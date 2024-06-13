@@ -59,11 +59,16 @@ namespace TilesScript
             transform.position = startPos;
         }
 
+        public void ReleaseTile()
+        {
+            PoolManager.ReleaseObject(gameObject);
+        }
+
         private void CheckObjectOutOfCameraLeftEdge(InputAction.CallbackContext callback = default)
         {
             if (transform.position.x + 0.5f < camEdgeX)
             {
-                PoolManager.ReleaseObject(gameObject);
+                ReleaseTile();
                 _player._Control.RemoveAllBindingOverrides();
             }
         }

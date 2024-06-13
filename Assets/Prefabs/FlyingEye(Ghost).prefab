@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7824697390127625813}
   m_Layer: 8
   m_Name: PlayerDetect
-  m_TagString: Untagged
+  m_TagString: Detector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

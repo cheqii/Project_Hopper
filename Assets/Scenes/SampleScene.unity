@@ -922,6 +922,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 303a86d2334f985479df50a9c64ed68a, type: 2}
   - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
   - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
+  - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
   tileMaxHeight: 0.2
   currentHeight: 0
   limitHeight: 2.8
@@ -1092,7 +1093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1207761351
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1268,8 +1269,8 @@ Transform:
   m_GameObject: {fileID: 1335388215}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -9, z: 0}
-  m_LocalScale: {x: 5.4306846, y: 9.5342, z: 1}
+  m_LocalPosition: {x: 2.1771, y: -9, z: 0}
+  m_LocalScale: {x: 10, y: 9.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1289,7 +1290,7 @@ MonoBehaviour:
   lavaIncreaseSpeed: 0.2
   decreaseLavaValue: 0.5
   duration: 2
-  activateLava: 0
+  activateLava: 1
 --- !u!1 &1801266370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,7 +1751,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: maxHealth
-      value: 50
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523039389208239970, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: m_TagString
+      value: Detector
       objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1791,6 +1796,10 @@ PrefabInstance:
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884153210556761062, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: m_TagString
+      value: Detector
       objectReference: {fileID: 0}
     - target: {fileID: 7839029507602420194, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_Name
