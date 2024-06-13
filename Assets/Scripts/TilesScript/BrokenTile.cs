@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace TilesScript
 {
-    public class BrokenTile : TilesBlock, IOnStep
+    public class BrokenTile : TilesBlock
     {
         protected override void CheckPlayerOnTile()
         {
@@ -18,7 +18,6 @@ namespace TilesScript
 
         protected override void OnCollisionEnter2D(Collision2D other)
         {
-            if (!other.gameObject.CompareTag("Player")) return;
             base.OnCollisionEnter2D(other);
         }
 

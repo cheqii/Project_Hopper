@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using ObjectPool;
+using TilesScript;
 
 public class Lava : MonoBehaviour
 {
@@ -19,8 +20,13 @@ public class Lava : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Melt"))
+        if (other.gameObject.CompareTag("Melt"))
+        {
+            var tile = other.GetComponent<FallingTile>();
+            
+            if(!tile.IsFalling) return;
             PoolManager.ReleaseObject(other.gameObject);
+        }
         
         if (other.gameObject.CompareTag("Player"))
             Destroy(other.gameObject);

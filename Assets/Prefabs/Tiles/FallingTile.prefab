@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8247244107324271926}
   - component: {fileID: 539732249403208582}
   - component: {fileID: 6978109145147358138}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FallingTile
   m_TagString: Melt
   m_Icon: {fileID: 0}
@@ -182,8 +182,9 @@ MonoBehaviour:
   playerOnTile: {fileID: 0}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   animator: {fileID: 6978109145147358138}
+  isFalling: 0
 --- !u!95 &6978109145147358138
 Animator:
   serializedVersion: 5

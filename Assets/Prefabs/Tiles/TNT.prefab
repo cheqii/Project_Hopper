@@ -300,9 +300,9 @@ GameObject:
   - component: {fileID: 8247244107324271926}
   - component: {fileID: 4395231981241040947}
   - component: {fileID: 6685226745581127721}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: TNT
-  m_TagString: TNT
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,12 +470,14 @@ MonoBehaviour:
   playerOnTile: {fileID: 0}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   animator: {fileID: 6685226745581127721}
   checkExplodeTile: 0
   foundToDestroy: []
-  borderRight: {fileID: 6820106408924126812}
-  borderLeft: {fileID: 7680142049862517664}
+  col: {fileID: 8247244107324271926}
+  explodedLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!95 &6685226745581127721
 Animator:
   serializedVersion: 5

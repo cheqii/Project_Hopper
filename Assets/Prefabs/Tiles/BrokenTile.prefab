@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4656757942830312385}
   - component: {fileID: 8247244107324271926}
   - component: {fileID: 4323345519940030486}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BrokenTile
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -181,4 +181,4 @@ MonoBehaviour:
   playerOnTile: {fileID: 0}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192

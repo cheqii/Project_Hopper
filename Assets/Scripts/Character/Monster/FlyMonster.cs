@@ -21,11 +21,6 @@ public class FlyMonster : Monster
 
     private Vector3 flyingPos;
 
-    private void Update()
-    {
-        MonsterBehaviorCooldown();
-    }
-
     private void SetNullParent()
     {
         transform.SetParent(null);
@@ -34,15 +29,13 @@ public class FlyMonster : Monster
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
-        if(other.CompareTag("Player"))
-            Invoke(nameof(SetNullParent), 0.5f); // to un-parent with tile and make the flying monster always follow in camera
     }
 
-    // have to call this function because after flying monster attack and fly back player = null
-    private void OnTriggerStay2D(Collider2D other)
+    protected override void TriggerAction()
     {
-        if (other.CompareTag("Player"))
-            playerDetect = GetPlayer(other);
+        base.TriggerAction();
+        Invoke(nameof(SetNullParent), 0.5f); // to un-parent with tile and make the flying monster always follow in camera
+        StartCoroutine(LoopBehavior());
     }
 
     public override void SetToInitialMonster(Vector3 startPos = default)
@@ -86,9 +79,6 @@ public class FlyMonster : Monster
 
     private void Clinging()
     {
-        isWarning = true;
-        timer = cooldownAttack;
-
         if (!isFlying)
         {
             flyingPos = new Vector3(3, transform.position.y + 1.5f);
@@ -96,61 +86,56 @@ public class FlyMonster : Monster
 
             isFlying = true;
         }
-        print("set warning");
+        
+        isWarning = true;
+        // print("Clinging");
     }
 
     private void WarningBehavior()
     {
         isWarning = false;
         animator.ResetTrigger("Warning");
-        MonsterPreAttack();
         FlyingToThePlayerAndBack(playerDetect.transform.position, 1f);
-        print("warning done");
+        MonsterPreAttack();
+        print("Warning");
     }
 
     private void AttackingBehavior()
     {
         animator.SetTrigger("Attack");
         isAttacking = false;
-        timer = cooldownAttack;
-                
+
         Invoke(nameof(FlyingToThePlayerAndBack), 1f); // after the monster attack then flying back
-        print("attack and cooldown");
+        // print("Attack Behavior");
     }
 
     #endregion
 
-    protected override void MonsterBehaviorCooldown()
+    private IEnumerator LoopBehavior()
     {
-        if(playerDetect == null) return;
-        
-        cooldownAttack = Random.Range(minCooldown, maxCooldown);
+        while (!isWarning)
+        {
+            cooldownAttack = Random.Range(minCooldown, maxCooldown);
 
-        if(!isWarning && timer <= 0)
+            // if(!isAttacking)
             Clinging();
-
-        if (isWarning)
-        {
-            timer -= Time.deltaTime;
-            if(timer > warningTime) return;
+            
+            //after isWarning is true wait for cooldownTime and call warning function
+            yield return new WaitForSeconds(cooldownAttack);
+                
             animator.SetTrigger("Warning");
+            yield return new WaitForSeconds(warningTime); // warning for 0.66 secs
             
-            if (timer > 0f) return;
             WarningBehavior();
-        }
-        else if (isAttacking)
-        {
-            timer -= Time.deltaTime;
+
+            // attack player behavior after warning function have call
+            if (!isAttacking) continue;
+            yield return new WaitForSeconds(preAttackDelay);
             
-            if (timer > 0f) return;
+            // after the monster attack then flying back
             AttackingBehavior();
-        }
-        else
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0f) 
-                timer = 0f;
+
         }
     }
-
+    
 }

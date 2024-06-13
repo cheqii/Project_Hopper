@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 35541912851006961}
   - component: {fileID: 7879644293468667542}
   - component: {fileID: 3581700246065045610}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ MonoBehaviour:
   jumpForce: 2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 640
   isGuard: 0
   linePosY: 0.8
   animator: {fileID: 3581700246065045610}

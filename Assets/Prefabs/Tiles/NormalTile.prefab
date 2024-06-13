@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4656757942830312385}
   - component: {fileID: 8247244107324271926}
   - component: {fileID: 4639773211059950559}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: NormalTile
   m_TagString: Ground
   m_Icon: {fileID: 0}

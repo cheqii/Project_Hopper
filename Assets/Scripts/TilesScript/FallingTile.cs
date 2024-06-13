@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TilesScript
 {
-    public class FallingTile : TilesBlock, IOnStep
+    public class FallingTile : TilesBlock
     {
         [Header("Animator")]
         [SerializeField] private Animator animator;
@@ -29,7 +29,6 @@ namespace TilesScript
 
         protected override void OnCollisionEnter2D(Collision2D other)
         {
-            if (!other.gameObject.CompareTag("Player")) return;
             base.OnCollisionEnter2D(other);
         }
 

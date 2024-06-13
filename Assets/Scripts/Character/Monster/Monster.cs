@@ -37,15 +37,9 @@ namespace Character.Monster
         {
             if (other.CompareTag("Player"))
             {
-                print("found player");
                 playerDetect = GetPlayer(other);
+                TriggerAction();
             }
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.CompareTag("Player"))
-                playerDetect = null;
         }
 
         #endregion
@@ -76,6 +70,7 @@ namespace Character.Monster
         public void ReleaseMonster() // set in animation event to call after dead anim end
         {
             PoolManager.ReleaseObject(gameObject);
+            playerDetect = null;
         }
 
         protected Player GetPlayer(Component other = null)
@@ -91,6 +86,11 @@ namespace Character.Monster
         public void InteractWithObject(int damage = default)
         {
             TakeDamage(damage);
+        }
+
+        protected virtual void TriggerAction()
+        {
+            
         }
 
         #region -Pre-Attack & Delay Calculate-
