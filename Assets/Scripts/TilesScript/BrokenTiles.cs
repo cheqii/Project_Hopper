@@ -1,18 +1,19 @@
 using System;
 using System.Collections;
 using Character;
+using Interface;
 using ObjectPool;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace TilesScript
 {
-    public class BrokenTiles : TilesBlock
+    public class BrokenTiles : TilesBlock, IOnStep
     {
         protected override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
-            Invoke(nameof(BrokeTile), delay);
+            Invoke(nameof(OnStep), delay);
         }
 
         protected override void OnCollisionEnter2D(Collision2D other)
@@ -21,10 +22,9 @@ namespace TilesScript
             base.OnCollisionEnter2D(other);
         }
 
-        void BrokeTile()
+        public void OnStep()
         {
             PoolManager.ReleaseObject(gameObject);
-            print("broken Tile");
         }
     }
 }

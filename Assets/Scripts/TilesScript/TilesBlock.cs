@@ -54,22 +54,17 @@ namespace TilesScript
             _player._Control.PlayerAction.Jump.performed += CheckObjectOutOfCameraLeftEdge;
         }
 
+        public virtual void SetToInitialTile(Vector3 startPos = default)
+        {
+            transform.position = startPos;
+        }
+
         private void CheckObjectOutOfCameraLeftEdge(InputAction.CallbackContext callback = default)
         {
             if (transform.position.x + 0.5f < camEdgeX)
             {
-                // ReleaseMonsterOnTile();
                 PoolManager.ReleaseObject(gameObject);
                 _player._Control.RemoveAllBindingOverrides();
-            }
-        }
-
-        private void ReleaseMonsterOnTile()
-        {
-            if (objectOnTile != null)
-            {
-                var monster = objectOnTile.GetComponent<Monster>();
-                PoolManager.ReleaseObject(monster.gameObject);
             }
         }
 

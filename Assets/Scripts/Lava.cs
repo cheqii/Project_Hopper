@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using ObjectPool;
+using TilesScript;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
 public class Lava : MonoBehaviour
@@ -10,14 +14,32 @@ public class Lava : MonoBehaviour
     [SerializeField] private float decreaseLavaValue;
 
     [SerializeField] private float duration;
+
+    [SerializeField] private bool activateLava;
     
     void Update()
     {
         IncreaseLavaByTime();
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Melt"))
+        {
+            var tile = other.GetComponent<FallingTile>();
+            if (tile.IsFalling)
+            {
+                PoolManager.ReleaseObject(tile.gameObject);
+                tile.SetToInitialTile();
+            }
+        }
+        if (other.gameObject.CompareTag("Player"))
+            Destroy(other.gameObject);
+    }
+
     private void IncreaseLavaByTime()
     {
+        if(!activateLava) return;
         var endPos = transform.position += Vector3.up * (lavaIncreaseSpeed * Time.deltaTime);
         transform.DOLocalMove(endPos, 0);
     }

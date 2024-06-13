@@ -7,7 +7,7 @@ using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class FlyMonster : Monster, ILooping
+public class FlyMonster : Monster
 {
     [SerializeField] private bool isWarning;
     [SerializeField] private bool isFlying;
@@ -19,12 +19,11 @@ public class FlyMonster : Monster, ILooping
     [Space]
     [SerializeField] private float warningTime = 0.66f;
 
-
     private Vector3 flyingPos;
 
     private void Update()
     {
-        LoopBehavior();
+        MonsterBehaviorCooldown();
     }
 
     private void SetNullParent()
@@ -40,7 +39,6 @@ public class FlyMonster : Monster, ILooping
     }
 
     // have to call this function because after flying monster attack and fly back player = null
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -50,12 +48,23 @@ public class FlyMonster : Monster, ILooping
     public override void SetToInitialMonster(Vector3 startPos = default)
     {
         base.SetToInitialMonster(startPos);
+        isAttacking = false;
+        isWarning = false;
         isFlying = false;
     }
 
     public override void Attack()
     {
         base.Attack();
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        animator.ResetTrigger("Attack");
+        base.TakeDamage(damage);
+        timer = 0;
+        isAttacking = false;
+        FlyingToThePlayerAndBack(flyingPos, 2f);
     }
 
     #region -Flying Method-
@@ -88,7 +97,7 @@ public class FlyMonster : Monster, ILooping
         print("set warning");
     }
 
-    public void LoopBehavior()
+    protected override void MonsterBehaviorCooldown()
     {
         if(playerDetect == null) return;
         
@@ -134,5 +143,5 @@ public class FlyMonster : Monster, ILooping
             }
         }
     }
-    
+
 }

@@ -23,6 +23,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float tileMaxHeight = 0.2f;
     [SerializeField] private float currentHeight = 0f;
 
+    [SerializeField] private float limitHeight = 2.8f;
+
     [Header("Generate Monster")] 
     [SerializeField] private List<MonsterData> allMonsters;
 
@@ -52,11 +54,33 @@ public class LevelGenerator : MonoBehaviour
             {
                 var check = (!(Random.value > 0.5f));
                 if (!check)
+                {
                     currentHeight += 0;
+                }
                 else                                                                         
                 {
                     var heightDifference = (Random.value > 0.5f) ? tileMaxHeight : -tileMaxHeight;
-                    currentHeight += heightDifference;
+                    // currentHeight += heightDifference;
+
+                    switch (currentHeight)
+                    {
+                        case >= 2.8f:
+                            currentHeight += -tileMaxHeight;
+                            break;
+                        case <= -2.8f:
+                            currentHeight += tileMaxHeight;
+                            break;
+                        default:
+                            currentHeight += heightDifference;
+                            break;
+                    }
+                    
+                    // if (currentHeight >= limitHeight)
+                    //     currentHeight += -tileMaxHeight;
+                    // else if (currentHeight <= limitHeight)
+                    //     currentHeight += tileMaxHeight;
+                    // else
+                    //     currentHeight += heightDifference;
                 }
             }
 
@@ -66,8 +90,9 @@ public class LevelGenerator : MonoBehaviour
         var position = new Vector3(step, currentHeight, 0f);
         var newTile = PoolManager.SpawnObject(tilePrefab, RoundVector(position), Quaternion.identity);
         var tile = newTile.GetComponent<TilesBlock>();
-        
+
         tile._Player = _player;
+        tile.SetToInitialTile(position);
 
         if(!initialGenerate)
             GenerateMonsterOnTile(position, newTile);

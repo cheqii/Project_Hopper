@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 3364157627842728293}
   - component: {fileID: 4656757942830312385}
   - component: {fileID: 8247244107324271926}
-  - component: {fileID: 4639773211059950559}
+  - component: {fileID: 539732249403208582}
+  - component: {fileID: 6978109145147358138}
   m_Layer: 6
   m_Name: FallingTile
-  m_TagString: Ground
+  m_TagString: Melt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +96,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9047672543347342820}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -113,7 +114,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!61 &8247244107324271926
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -159,7 +160,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
---- !u!114 &4639773211059950559
+--- !u!114 &539732249403208582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,8 +169,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 9047672543347342820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1218549fce93d54ba2dce544bed0da6, type: 3}
+  m_Script: {fileID: 11500000, guid: fa79d1b6a4b98d142b34e155be0c7c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pLayer: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-  delay: 1.5
+  _player: {fileID: 0}
+  type: 1
+  delay: 0.66
+  objectOnTile: {fileID: 0}
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerOnTile: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  animator: {fileID: 6978109145147358138}
+--- !u!95 &6978109145147358138
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047672543347342820}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77b03fd055e0d2b4b9d5ef640938db9c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

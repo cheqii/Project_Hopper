@@ -30,7 +30,7 @@ namespace Character.Monster
 
         private void Update()
         {
-            MonsterCooldown();
+            MonsterBehaviorCooldown();
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -90,7 +90,6 @@ namespace Character.Monster
 
         public void InteractWithObject(int damage = default)
         {
-            print("attack monster");
             TakeDamage(damage);
         }
 
@@ -100,10 +99,9 @@ namespace Character.Monster
         {
             isAttacking = true;
             timer = preAttackDelay;
-            print("pre-attack");
         }
 
-        private void MonsterCooldown()
+        protected virtual void MonsterBehaviorCooldown()
         {
             if(playerDetect == null) return;
             
@@ -118,7 +116,6 @@ namespace Character.Monster
                     animator.SetTrigger("Attack");
                     isAttacking = false;
                     timer = cooldownAttack;
-                    print("attack and cooldown");
                 }
             }
             else

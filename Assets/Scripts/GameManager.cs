@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerHealthText.text = player.Health.ToString();
+        playerHealthText.text = player.MaxHealth.ToString(); 
     }
 
     // Update is called once per frame
