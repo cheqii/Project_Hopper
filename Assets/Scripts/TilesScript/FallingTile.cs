@@ -33,15 +33,6 @@ namespace TilesScript
             base.OnCollisionEnter2D(other);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("Lava"))
-            {
-                print("falling in to lava");
-                PoolManager.ReleaseObject(gameObject);
-            }
-        }
-
         public void OnStep()
         {
             animator.ResetTrigger("Flashing");
