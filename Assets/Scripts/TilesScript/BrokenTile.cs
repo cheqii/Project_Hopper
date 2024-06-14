@@ -23,7 +23,6 @@ namespace TilesScript
 
         private void OnStep()
         {
-            if(playerOnTile == null) return;
             ReleaseTile();
         }
     }

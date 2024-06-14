@@ -29,7 +29,6 @@ namespace TilesScript
         {
             base.CheckPlayerOnTile();
             if(checkExplodeTile) return;
-            if(playerOnTile == null) return;
             animator.SetTrigger("Flashing");
             Invoke(nameof(OnStep), delay);
         }
@@ -39,29 +38,23 @@ namespace TilesScript
             base.OnCollisionEnter2D(other);
         }
 
-        private void OnTriggerEnter2D(Collider2D other) // to check the nearest tile +- 1 tile block
-        {
-            if(!checkExplodeTile) return;
-            if ((explodedLayer.value & (1 << other.gameObject.layer)) != 0)
-            {
-                foundToDestroy.Add(other.gameObject);
-                Invoke(nameof(ReleaseObjectExploded), delay);
-            }
-        }
-
         private void ReleaseObjectExploded()
         {
-            foreach (var obj in foundToDestroy)
-            {
-                if(obj == null) continue;
-                PoolManager.ReleaseObject(obj);
-            }
+            var leftTile = PoolManager.GetInstanceByXPosition(transform.position.x - 1);
+            var rightTile = PoolManager.GetInstanceByXPosition(transform.position.x + 1);
+
+            if (leftTile != null)
+                PoolManager.ReleaseObject(leftTile);
+
+            if (rightTile != null)
+                PoolManager.ReleaseObject(rightTile);
         }
 
         private void OnStep()
         {
             animator.SetTrigger("Explode");
             checkExplodeTile = true;
+            Invoke(nameof(ReleaseObjectExploded), delay);
         }
     }
 }

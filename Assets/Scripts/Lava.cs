@@ -21,7 +21,7 @@ public class Lava : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
     }
 
     private void IncreaseLavaByTime()

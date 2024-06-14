@@ -79,6 +79,19 @@ namespace ObjectPool
 				Debug.LogWarning("No pool contains the object: " + clone.name);
 			}
 		}
+		
+		public GameObject getInstanceByXPosition(float xPosition)
+		{
+			foreach (var instance in instanceLookup.Keys)
+			{
+				if (Mathf.Approximately(instance.transform.position.x, xPosition))
+				{
+					return instance;
+				}
+			}
+			Debug.LogWarning("No instance found at the given x position: " + xPosition);
+			return null;
+		}
 
 
 		private GameObject InstantiatePrefab(GameObject prefab)
@@ -116,6 +129,11 @@ namespace ObjectPool
 		public static void ReleaseObject(GameObject clone)
 		{
 			Instance.releaseObject(clone);
+		}
+		
+		public static GameObject GetInstanceByXPosition(float xPosition)
+		{
+			return Instance.getInstanceByXPosition(xPosition);
 		}
 
 		#endregion
