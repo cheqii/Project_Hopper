@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using Interaction;
 using Interface;
 using ObjectPool;
@@ -24,14 +24,7 @@ namespace Character.Monster
         [Space]
         [SerializeField] protected bool isAttacking;
         
-        protected float timer;
-
         #region -Unity Event Methods-
-
-        private void Update()
-        {
-            MonsterBehaviorCooldown();
-        }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
@@ -90,41 +83,27 @@ namespace Character.Monster
 
         protected virtual void TriggerAction()
         {
-            
+            StartCoroutine(LoopBehavior());
         }
 
-        #region -Pre-Attack & Delay Calculate-
+        #region -Attack Behavior Coroutine-
 
-        protected void MonsterPreAttack()
+        protected virtual void AttackingBehavior()
         {
-            isAttacking = true;
-            timer = preAttackDelay;
+            animator.SetTrigger("Attack");
+            isAttacking = false;
         }
 
-        protected virtual void MonsterBehaviorCooldown()
+        protected virtual IEnumerator LoopBehavior()
         {
-            if(playerDetect == null) return;
-            
-            if (!isAttacking && timer <= 0)
-                MonsterPreAttack();
-            
-            if (isAttacking)
+            while (!isAttacking)
             {
-                timer -= Time.deltaTime;
-                if (timer <= 0f)
-                {
-                    animator.SetTrigger("Attack");
-                    isAttacking = false;
-                    timer = cooldownAttack;
-                }
-            }
-            else
-            {
-                timer -= Time.deltaTime;
-                if (timer <= 0f)
-                {
-                    timer = 0f;
-                }
+                isAttacking = true;
+
+                yield return new WaitForSeconds(preAttackDelay);
+                AttackingBehavior();
+
+                yield return new WaitForSeconds(cooldownAttack);
             }
         }
 

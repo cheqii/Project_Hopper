@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using Character;
 using Character.Monster;
-using Interface;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -35,7 +32,6 @@ public class FlyMonster : Monster
     {
         base.TriggerAction();
         Invoke(nameof(SetNullParent), 0.5f); // to un-parent with tile and make the flying monster always follow in camera
-        StartCoroutine(LoopBehavior());
     }
 
     public override void SetToInitialMonster(Vector3 startPos = default)
@@ -55,7 +51,6 @@ public class FlyMonster : Monster
     {
         animator.ResetTrigger("Attack");
         base.TakeDamage(damage);
-        timer = 0;
         isAttacking = false;
         FlyingToThePlayerAndBack(flyingPos, 2f);
     }
@@ -88,7 +83,6 @@ public class FlyMonster : Monster
         }
         
         isWarning = true;
-        // print("Clinging");
     }
 
     private void WarningBehavior()
@@ -96,28 +90,25 @@ public class FlyMonster : Monster
         isWarning = false;
         animator.ResetTrigger("Warning");
         FlyingToThePlayerAndBack(playerDetect.transform.position, 1f);
-        MonsterPreAttack();
-        print("Warning");
+        
+        isAttacking = true;
     }
 
-    private void AttackingBehavior()
+    protected override void AttackingBehavior()
     {
-        animator.SetTrigger("Attack");
-        isAttacking = false;
+        base.AttackingBehavior();
 
         Invoke(nameof(FlyingToThePlayerAndBack), 1f); // after the monster attack then flying back
-        // print("Attack Behavior");
     }
 
     #endregion
 
-    private IEnumerator LoopBehavior()
+    protected override IEnumerator LoopBehavior()
     {
         while (!isWarning)
         {
             cooldownAttack = Random.Range(minCooldown, maxCooldown);
 
-            // if(!isAttacking)
             Clinging();
             
             //after isWarning is true wait for cooldownTime and call warning function
@@ -134,7 +125,6 @@ public class FlyMonster : Monster
             
             // after the monster attack then flying back
             AttackingBehavior();
-
         }
     }
     
