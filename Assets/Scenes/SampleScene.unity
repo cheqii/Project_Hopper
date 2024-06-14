@@ -984,6 +984,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
   - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
   - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
+  - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
   tileMaxHeight: 0.2
   currentHeight: 0
   limitHeight: 2.8
@@ -1351,7 +1352,7 @@ MonoBehaviour:
   lavaIncreaseSpeed: 0.2
   decreaseLavaValue: 0.5
   duration: 2
-  activateLava: 1
+  activateLava: 0
 --- !u!1001 &1631533810
 PrefabInstance:
   m_ObjectHideFlags: 0

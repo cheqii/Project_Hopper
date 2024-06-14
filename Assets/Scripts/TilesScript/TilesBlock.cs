@@ -44,10 +44,11 @@ namespace TilesScript
         [SerializeField] private LayerMask playerLayer;
 
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
             camEdgeX = Camera.main.ScreenToViewportPoint(Vector3.zero).x;
             _player._Control.PlayerAction.Jump.performed += CheckObjectOutOfCameraLeftEdge;
+            StartAction();
         }
 
         public virtual void SetToInitialTile(Vector3 startPos = default)
@@ -60,6 +61,11 @@ namespace TilesScript
             PoolManager.ReleaseObject(gameObject);
         }
 
+        protected virtual void StartAction()
+        {
+            
+        }
+        
         private void CheckObjectOutOfCameraLeftEdge(InputAction.CallbackContext callback = default)
         {
             if (transform.position.x + 0.5f < camEdgeX)

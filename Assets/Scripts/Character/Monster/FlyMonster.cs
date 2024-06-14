@@ -17,7 +17,15 @@ public class FlyMonster : Monster
     [SerializeField] private float warningTime = 0.66f;
 
     private Vector3 flyingPos;
-
+    
+    private WaitForSeconds _warning;
+    
+    private void Start()
+    {
+        _preAttack = new WaitForSeconds(preAttackDelay);
+        _warning = new WaitForSeconds(warningTime);
+    }
+    
     private void SetNullParent()
     {
         transform.SetParent(null);
@@ -108,20 +116,21 @@ public class FlyMonster : Monster
         while (!isWarning)
         {
             cooldownAttack = Random.Range(minCooldown, maxCooldown);
-
+            _cooldownAttack = new WaitForSeconds(cooldownAttack);
+            
             Clinging();
             
             //after isWarning is true wait for cooldownTime and call warning function
-            yield return new WaitForSeconds(cooldownAttack);
+            yield return _cooldownAttack;
                 
             animator.SetTrigger("Warning");
-            yield return new WaitForSeconds(warningTime); // warning for 0.66 secs
+            yield return _warning; // warning for 0.66 secs
             
             WarningBehavior();
 
             // attack player behavior after warning function have call
             if (!isAttacking) continue;
-            yield return new WaitForSeconds(preAttackDelay);
+            yield return _preAttack;
             
             // after the monster attack then flying back
             AttackingBehavior();

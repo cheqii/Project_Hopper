@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Interaction;
 using Interface;
@@ -23,8 +24,17 @@ namespace Character.Monster
 
         [Space]
         [SerializeField] protected bool isAttacking;
+
+        protected WaitForSeconds _preAttack;
+        protected WaitForSeconds _cooldownAttack;
         
         #region -Unity Event Methods-
+
+        private void Start()
+        {
+            _preAttack = new WaitForSeconds(preAttackDelay);
+            _cooldownAttack = new WaitForSeconds(cooldownAttack);
+        }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
@@ -100,10 +110,10 @@ namespace Character.Monster
             {
                 isAttacking = true;
 
-                yield return new WaitForSeconds(preAttackDelay);
+                yield return _preAttack;
                 AttackingBehavior();
 
-                yield return new WaitForSeconds(cooldownAttack);
+                yield return _cooldownAttack;
             }
         }
 
