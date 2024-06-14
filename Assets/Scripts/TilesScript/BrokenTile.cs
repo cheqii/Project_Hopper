@@ -21,8 +21,9 @@ namespace TilesScript
             base.OnCollisionEnter2D(other);
         }
 
-        public void OnStep()
+        private void OnStep()
         {
+            if(playerOnTile == null) return;
             ReleaseTile();
         }
     }

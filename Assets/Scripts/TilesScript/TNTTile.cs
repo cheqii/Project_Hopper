@@ -29,6 +29,7 @@ namespace TilesScript
         {
             base.CheckPlayerOnTile();
             if(checkExplodeTile) return;
+            if(playerOnTile == null) return;
             animator.SetTrigger("Flashing");
             Invoke(nameof(OnStep), delay);
         }
@@ -57,7 +58,7 @@ namespace TilesScript
             }
         }
 
-        public void OnStep()
+        private void OnStep()
         {
             animator.SetTrigger("Explode");
             checkExplodeTile = true;

@@ -185,6 +185,10 @@ MonoBehaviour:
     m_Bits: 192
   animator: {fileID: 6978109145147358138}
   isFalling: 0
+  col: {fileID: 8247244107324271926}
+  lavaLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!95 &6978109145147358138
 Animator:
   serializedVersion: 5
