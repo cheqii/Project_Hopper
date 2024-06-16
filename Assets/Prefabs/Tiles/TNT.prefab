@@ -474,10 +474,6 @@ MonoBehaviour:
   animator: {fileID: 6685226745581127721}
   checkExplodeTile: 0
   foundToDestroy: []
-  col: {fileID: 8247244107324271926}
-  explodedLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!95 &6685226745581127721
 Animator:
   serializedVersion: 5

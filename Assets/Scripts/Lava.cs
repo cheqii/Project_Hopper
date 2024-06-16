@@ -20,6 +20,12 @@ public class Lava : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Melt"))
+        {
+            var tile = other.GetComponent<FallingTile>();
+            if(tile.IsFalling)
+                tile.ReleaseTile();
+        }
         if (other.gameObject.CompareTag("Player"))
             other.gameObject.SetActive(false);
     }

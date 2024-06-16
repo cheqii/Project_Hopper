@@ -56,7 +56,7 @@ namespace TilesScript
             transform.position = startPos;
         }
 
-        public void ReleaseTile()
+        public virtual void ReleaseTile()
         {
             PoolManager.ReleaseObject(gameObject);
         }

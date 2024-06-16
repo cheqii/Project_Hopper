@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace TilesScript
 {
     public class LoopingTile : TilesBlock
     {
-        [SerializeField] private Animator animator;
+        [SerializeField] protected Animator animator;
         
         [SerializeField] private float flashWarningTime;
         [SerializeField] private float holdAttackTime;
@@ -13,9 +14,14 @@ namespace TilesScript
         [SerializeField] private bool isWarning;
         [SerializeField] private bool isAttacking;
         
-        protected WaitForSeconds _waiting;
-        protected WaitForSeconds _flashWarning;
-        protected WaitForSeconds _holdAttack;
+        private WaitForSeconds _waiting;
+        private WaitForSeconds _flashWarning;
+        private WaitForSeconds _holdAttack;
+
+        private void OnEnable()
+        {
+            StartCoroutine(LoopBehavior());
+        }
 
         protected override void Start()
         {
@@ -35,21 +41,18 @@ namespace TilesScript
             _waiting = new WaitForSeconds(delay);
             _flashWarning = new WaitForSeconds(flashWarningTime);
             _holdAttack = new WaitForSeconds(holdAttackTime);
-
-            StartCoroutine(LoopBehavior());
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void SpearAttack()
         {
-            if (other.CompareTag("Player") && !isAttacking)
-                _Player.TakeDamage(1);
+            if (playerOnTile == null) return;
+            _Player.TakeDamage(1);
         }
 
         #region -Loop Behavior Methods-
 
         private void OnHold()
         {
-            animator.SetTrigger("Default");
             isWarning = true;
         }
 

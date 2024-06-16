@@ -13,6 +13,7 @@ namespace TilesScript
         protected override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
+            if(playerOnTile == null) return;
             Invoke(nameof(OnStep), delay);
         }
 

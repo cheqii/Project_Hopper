@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Interface;
 using ObjectPool;
-using DG.Tweening;
 using UnityEngine;
 
 namespace TilesScript
@@ -15,9 +12,6 @@ namespace TilesScript
         
         [SerializeField] private List<GameObject> foundToDestroy;
 
-        [SerializeField] private Collider2D col;
-        [SerializeField] private LayerMask explodedLayer;
-
         public override void SetToInitialTile(Vector3 startPos = default)
         {
             base.SetToInitialTile(startPos);
@@ -28,6 +22,8 @@ namespace TilesScript
         protected override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
+            
+            if(playerOnTile == null) return;
             if(checkExplodeTile) return;
             animator.SetTrigger("Flashing");
             Invoke(nameof(OnStep), delay);
