@@ -30,15 +30,10 @@ namespace Character.Monster
         
         #region -Unity Event Methods-
 
-        protected virtual void OnEnable()
-        {
-            // print("Hello player");
-            // StartCoroutine(LoopBehavior());
-        }
-
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             playerDetect = null;
+            isAttacking = false;
         }
 
         private void Start()

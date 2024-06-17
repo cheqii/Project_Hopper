@@ -25,9 +25,10 @@ public class FlyMonster : Monster
     
     private WaitForSeconds _warning;
 
-    protected override void OnEnable()
+    protected override void OnDisable()
     {
-        base.OnEnable();
+        base.OnDisable();
+        isWarning = false;
     }
 
     private void Start()

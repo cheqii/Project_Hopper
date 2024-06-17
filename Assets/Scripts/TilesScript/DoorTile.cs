@@ -3,6 +3,7 @@ using Interaction;
 using Interface;
 using ObjectPool;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TilesScript
 {
@@ -23,8 +24,8 @@ namespace TilesScript
         
         [Header("Door")]
         [SerializeField] private Door door;
-        [SerializeField] private bool enterTheDoor;
-
+        [SerializeField] private bool alreadyEnter;
+        
         [SerializeField] private bool isGenerateDone;
         
         protected override void Start()
@@ -36,7 +37,7 @@ namespace TilesScript
         {
             base.SetToInitialTile(startPos);
             isGenerateDone = false;
-            enterTheDoor = false;
+            alreadyEnter = false;
             door.IsOpen = false;
             door.DoorSprite.color = Color.black;
         }
@@ -53,8 +54,7 @@ namespace TilesScript
             base.CheckPlayerOnTile();
             
             if(playerOnTile == null) return;
-            if(!door.IsOpen) return;
-            if(enterTheDoor) return;
+            if(alreadyEnter) return;
             
             if(doorType == DoorType.EnterDoor)
                 EnterSecretRoom();
@@ -69,14 +69,14 @@ namespace TilesScript
 
         private void EnterSecretRoom()
         {
-            enterTheDoor = true;
+            alreadyEnter = true;
             _Player.PlayerInSecretRoom = true;
 
             secretRoomParent.gameObject.SetActive(true);
             normalLevelParent.gameObject.SetActive(false);
 
             if(isGenerateDone) return;
-            LevelGenerator.Instance.GenerateTileSecretRoom(transform.position.y, transform.position, this.gameObject);
+            LevelGenerator.Instance.GenerateTileSecretRoom(transform.position.y, transform.position, gameObject);
             isGenerateDone = true;
         }
 
@@ -86,18 +86,17 @@ namespace TilesScript
             normalLevelParent.gameObject.SetActive(true);
             secretRoomParent.gameObject.SetActive(false);
             
-            ReleaseParent(secretRoomParent);
+            ReleaseSecretRoom();
 
             _Player.transform.position = new Vector3(_Player.transform.position.x, transform.position.y + 2);
         }
 
-        private void ReleaseParent(Transform parent)
+        private void ReleaseSecretRoom()
         {
-            foreach (Transform child in parent)
+            foreach (Transform child in secretRoomParent)
             {
                 PoolManager.ReleaseObject(child.gameObject);
             }
         }
-        
     }
 }
