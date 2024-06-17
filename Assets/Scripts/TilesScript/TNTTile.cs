@@ -19,7 +19,7 @@ namespace TilesScript
             foundToDestroy.Clear();
         }
 
-        protected override void CheckPlayerOnTile()
+        public override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
             

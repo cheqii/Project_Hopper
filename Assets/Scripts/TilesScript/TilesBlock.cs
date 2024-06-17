@@ -1,6 +1,7 @@
 using System;
 using Character;
 using ObjectPool;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Vector3 = UnityEngine.Vector3;
@@ -42,8 +43,10 @@ namespace TilesScript
         
         [Header("Player layer")]
         [SerializeField] protected GameObject playerOnTile;
+        public GameObject PlayerOnTile => playerOnTile;
+        
         [SerializeField] private LayerMask playerLayer;
-
+        
         // Start is called before the first frame update
         protected virtual void Start()
         {
@@ -76,7 +79,7 @@ namespace TilesScript
             }
         }
 
-        protected virtual void CheckPlayerOnTile()
+        public virtual void CheckPlayerOnTile()
         {
             var startPos = transform.position + new Vector3(-0.5f, 0.55f);
             var endPos = transform.position + new Vector3(0.5f, 0.55f);
@@ -88,7 +91,7 @@ namespace TilesScript
                 playerOnTile = null;
         }
 
-        protected virtual void CheckObjectOnTile()
+        public virtual void CheckObjectOnTile()
         {
             var startPos = transform.position + new Vector3(-0.5f, 0.55f);
             var endPos = transform.position + new Vector3(0.5f, 0.55f);

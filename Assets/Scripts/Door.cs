@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 
 public class Door : ObjectInGame, IInteraction
 {
+    [SerializeField] private DoorTile doorTile;
     [SerializeField] private bool isOpen;
 
     public bool IsOpen
@@ -30,6 +31,7 @@ public class Door : ObjectInGame, IInteraction
     // Start is called before the first frame update
     void Start()
     {
+        doorTile = GetComponentInParent<DoorTile>();
         interactableObject.Interactable = this;
     }
 
@@ -42,5 +44,7 @@ public class Door : ObjectInGame, IInteraction
     public void InteractWithObject(int damage = default)
     {
         OpenTheDoor();
+        if(doorTile.PlayerOnTile != null)
+            doorTile.CheckPlayerOnTile();
     }
 }

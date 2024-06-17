@@ -20,7 +20,7 @@ namespace TilesScript
             isFalling = false;
         }
 
-        protected override void CheckPlayerOnTile()
+        public override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
             if(playerOnTile == null) return;
@@ -35,6 +35,7 @@ namespace TilesScript
 
         private void OnStep()
         {
+            print("drop the tile");
             animator.ResetTrigger("Flashing");
             isFalling = true;
             var endPos = new Vector3(transform.position.x, Vector3.down.y * 4.5f);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Character.Monster;
 using DG.Tweening;
@@ -23,7 +24,12 @@ public class FlyMonster : Monster
     private Vector3 flyingPos;
     
     private WaitForSeconds _warning;
-    
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
+
     private void Start()
     {
         _preAttack = new WaitForSeconds(preAttackDelay);

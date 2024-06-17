@@ -10,7 +10,7 @@ namespace TilesScript
 {
     public class BrokenTile : TilesBlock
     {
-        protected override void CheckPlayerOnTile()
+        public override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
             if(playerOnTile == null) return;

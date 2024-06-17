@@ -30,6 +30,17 @@ namespace Character.Monster
         
         #region -Unity Event Methods-
 
+        protected virtual void OnEnable()
+        {
+            // print("Hello player");
+            // StartCoroutine(LoopBehavior());
+        }
+
+        private void OnDisable()
+        {
+            playerDetect = null;
+        }
+
         private void Start()
         {
             _preAttack = new WaitForSeconds(preAttackDelay);
@@ -44,7 +55,7 @@ namespace Character.Monster
                 TriggerAction();
             }
         }
-
+        
         #endregion
 
         public virtual void SetToInitialMonster(Vector3 startPos = default)

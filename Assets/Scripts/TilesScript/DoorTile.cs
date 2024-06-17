@@ -17,7 +17,7 @@ namespace TilesScript
         [Header("Door Type")]
         [SerializeField] private DoorType doorType;
 
-        [Header("Door Destination")]
+        [Header("Door Destination")] 
         [SerializeField] private Transform normalLevelParent;
         [SerializeField] private Transform secretRoomParent;
         
@@ -48,7 +48,7 @@ namespace TilesScript
             secretRoomParent = PoolManager.Instance.secretRoom;
         }
 
-        protected override void CheckPlayerOnTile()
+        public override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();
             
@@ -74,7 +74,7 @@ namespace TilesScript
 
             secretRoomParent.gameObject.SetActive(true);
             normalLevelParent.gameObject.SetActive(false);
-            
+
             if(isGenerateDone) return;
             LevelGenerator.Instance.GenerateTileSecretRoom(transform.position.y, transform.position, this.gameObject);
             isGenerateDone = true;
@@ -85,8 +85,19 @@ namespace TilesScript
             _Player.PlayerInSecretRoom = false;
             normalLevelParent.gameObject.SetActive(true);
             secretRoomParent.gameObject.SetActive(false);
+            
+            ReleaseParent(secretRoomParent);
 
             _Player.transform.position = new Vector3(_Player.transform.position.x, transform.position.y + 2);
         }
+
+        private void ReleaseParent(Transform parent)
+        {
+            foreach (Transform child in parent)
+            {
+                PoolManager.ReleaseObject(child.gameObject);
+            }
+        }
+        
     }
 }
