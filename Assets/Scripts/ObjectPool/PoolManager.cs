@@ -8,6 +8,7 @@ namespace ObjectPool
 	{
 		public bool logStatus;
 		public Transform root;
+		public Transform secretRoom;
 
 		private Dictionary<GameObject, ObjectPool<GameObject>> prefabLookup;
 		private Dictionary<GameObject, ObjectPool<GameObject>> instanceLookup; 

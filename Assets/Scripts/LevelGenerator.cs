@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
-public class LevelGenerator : MonoBehaviour
+public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>  
 {
     [SerializeField] private Player _player;
 
@@ -24,6 +24,11 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float currentHeight = 0f;
 
     [SerializeField] private float limitHeight = 2.8f;
+
+    [Header("Secret Room Generate Tile")]
+    [SerializeField] private GameObject fallingTile;
+    [SerializeField] private GameObject exitDoor;
+    [SerializeField] private Transform secretRoomParent;
 
     [Header("Generate Monster")] 
     [SerializeField] private List<MonsterData> allMonsters;
@@ -41,6 +46,7 @@ public class LevelGenerator : MonoBehaviour
     public void GeneratePlatformByStep()
     {
         if(!_player.PlayerCheckGround()) return;
+        if(_player.PlayerInSecretRoom) return;
         var step = retainStep;
         GenerateTile(++step);
     }
@@ -55,7 +61,7 @@ public class LevelGenerator : MonoBehaviour
             if (!tileHeightPossibility)
                 currentHeight += 0;
             else                                                                         
-                CheckMaxAndMinHeight();
+                currentHeight = CheckMaxAndMinHeight(currentHeight);
 
             tilePrefab = GetRandomTile();
         }
@@ -93,21 +99,57 @@ public class LevelGenerator : MonoBehaviour
         return normalTilePrefab;
     }
 
-    private void CheckMaxAndMinHeight()
+    private float CheckMaxAndMinHeight(float tileHeight)
     {
         var heightDifference = (Random.value > 0.5f) ? tileMaxHeight : -tileMaxHeight;
-        switch (currentHeight)
+        switch (tileHeight)
         {
             case >= 2.8f:
-                currentHeight += -tileMaxHeight;
+                tileHeight += -tileMaxHeight;
                 break;
             case <= -2.8f:
-                currentHeight += tileMaxHeight;
+                tileHeight += tileMaxHeight;
                 break;
             default:
-                currentHeight += heightDifference;
+                tileHeight += heightDifference;
                 break;
         }
+
+        return tileHeight;
+    }
+
+    public void GenerateTileSecretRoom(float doorYPos = default, Vector3 doorCurrentTransform = default, GameObject startDoorTileGameObject = default)
+    {
+        if(!_player.PlayerInSecretRoom) return;
+        var randomTile = Random.Range(2, retainStep);
+
+        var enterRoomTile = PoolManager.SpawnObject(startDoorTileGameObject, RoundVector(doorCurrentTransform), Quaternion.identity);
+        enterRoomTile.transform.SetParent(secretRoomParent);
+        
+        var enterDoorTile = enterRoomTile.GetComponent<TilesBlock>();
+        enterDoorTile._Player = _player;
+        
+        for (int i = 2; i <= randomTile; i++)
+        {
+            var tileHeightPossibility = (!(Random.value > 0.5f));
+            
+            if (!tileHeightPossibility)
+                doorYPos += 0;
+            else                                                                         
+                doorYPos = CheckMaxAndMinHeight(doorYPos);
+
+            var newTile = PoolManager.SpawnObject(fallingTile, RoundVector(new Vector3(i, doorYPos, 0f)), Quaternion.identity);
+            newTile.transform.SetParent(secretRoomParent);
+            
+            var tile = newTile.GetComponent<TilesBlock>();
+            tile._Player = _player;
+        }
+
+        var exitRoomTile = PoolManager.SpawnObject(exitDoor, RoundVector(new Vector3(randomTile + 1, doorYPos, 0f)), Quaternion.identity);
+        exitRoomTile.transform.SetParent(secretRoomParent);
+        
+        var doorTile = exitRoomTile.GetComponent<TilesBlock>();
+        doorTile._Player = _player;
     }
 
     #endregion

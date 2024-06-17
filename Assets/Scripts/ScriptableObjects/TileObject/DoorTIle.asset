@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c03accdb34f46343a4cdca241d394e7, type: 3}
-  m_Name: TNT
+  m_Name: DoorTIle
   m_EditorClassIdentifier: 
-  name: TNTTile
-  prefab: {fileID: 9047672543347342820, guid: d7295a1f9b18f414da2ca09c1882dd47, type: 3}
-  generateChance: 3
+  name: DoorTIle
+  prefab: {fileID: 9047672543347342820, guid: 855dfbb610df37c40a6297d7eefece82, type: 3}
+  generateChance: 50

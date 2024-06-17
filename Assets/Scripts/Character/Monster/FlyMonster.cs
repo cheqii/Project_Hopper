@@ -1,6 +1,7 @@
 using System.Collections;
 using Character.Monster;
 using DG.Tweening;
+using ObjectPool;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,6 +17,9 @@ public class FlyMonster : Monster
     [Space]
     [SerializeField] private float warningTime = 0.66f;
 
+    [Header("Parent to set")]
+    [SerializeField] private Transform parent;
+    
     private Vector3 flyingPos;
     
     private WaitForSeconds _warning;
@@ -28,7 +32,7 @@ public class FlyMonster : Monster
     
     private void SetNullParent()
     {
-        transform.SetParent(null);
+        transform.SetParent(PoolManager.Instance.root.parent);
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)

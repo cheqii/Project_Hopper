@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6162261676497855119}
   m_Layer: 7
   m_Name: Collide
-  m_TagString: Untagged
+  m_TagString: Detector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 168514812008439126}
   m_Layer: 0
   m_Name: AttackRange
-  m_TagString: Untagged
+  m_TagString: Detector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -381,14 +381,15 @@ MonoBehaviour:
   maxHealth: 3
   health: 3
   attackDamage: 1
-  jumpForce: 2
+  jumpForce: 5
   groundLayer:
     serializedVersion: 2
     m_Bits: 640
   isGuard: 0
-  linePosY: 0.8
+  linePosY: 0.75
   animator: {fileID: 3581700246065045610}
   facingObject: {fileID: 0}
+  playerInSecretRoom: 0
   jumpEvent: {fileID: 11400000, guid: 6c917d72c93560446baaba347535eab5, type: 2}
 --- !u!114 &7879644293468667542
 MonoBehaviour:
@@ -433,6 +434,18 @@ MonoBehaviour:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LevelGenerator, Assembly-CSharp
         m_MethodName: GeneratePlatformByStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MoveGroundTile, Assembly-CSharp
+        m_MethodName: MoveSecretRoomTile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

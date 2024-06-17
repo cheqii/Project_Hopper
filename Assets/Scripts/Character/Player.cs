@@ -28,6 +28,14 @@ namespace Character
         [Header("Facing Object")]
         [SerializeField] private InteractableObject facingObject;
 
+        [SerializeField] private bool playerInSecretRoom;
+
+        public bool PlayerInSecretRoom
+        {
+            get => playerInSecretRoom;
+            set => playerInSecretRoom = value;
+        }
+
         [Header("Player Action Event")]
         [SerializeField] private Nf_GameEvent jumpEvent;
 
@@ -83,12 +91,12 @@ namespace Character
             isGuard = false;
             
             rb.velocity = Vector2.up * jumpForce;
+            
+            if(playerInSecretRoom) return;
             GameManager._instance.UpdatePlayerScore(1);
             
         }
         
-        // void ToNex
-
         private void Attack(InputAction.CallbackContext callback = default)
         {
             isGuard = false;
