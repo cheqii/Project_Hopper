@@ -36,9 +36,9 @@ namespace TilesScript
         private void OnStep()
         {
             animator.ResetTrigger("Flashing");
+            isFalling = true;
             var endPos = new Vector3(transform.position.x, Vector3.down.y * 4.5f);
             transform.DOMove(endPos, 1f);
-            isFalling = true;
         }
     }
 }

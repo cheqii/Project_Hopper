@@ -63,9 +63,9 @@ namespace TilesScript
             isAttacking = true;
         }
 
-        private void SetAttack()
+        private void SetAction()
         {
-            animator.SetTrigger("Attack");
+            animator.SetTrigger("DoAction");
             isAttacking = false;
         }
 
@@ -83,7 +83,7 @@ namespace TilesScript
                 yield return _flashWarning;
             
                 if(!isAttacking) continue;
-                SetAttack();
+                SetAction();
                 yield return _holdAttack;
             }
         }

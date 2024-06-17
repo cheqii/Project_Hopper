@@ -89,7 +89,7 @@ namespace ObjectPool
 					return instance;
 				}
 			}
-			Debug.LogWarning("No instance found at the given x position: " + xPosition);
+			Debug.LogWarning("instance object not found");
 			return null;
 		}
 

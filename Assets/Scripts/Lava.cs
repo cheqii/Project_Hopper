@@ -27,7 +27,7 @@ public class Lava : MonoBehaviour
                 tile.ReleaseTile();
         }
         if (other.gameObject.CompareTag("Player"))
-            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
     }
 
     private void IncreaseLavaByTime()

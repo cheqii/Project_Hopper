@@ -76,7 +76,8 @@ namespace Character
         private void Jump(InputAction.CallbackContext callback = default)
         {
             if (!PlayerCheckGround()) return;
-
+            
+            isGuard = false;
             jumpEvent.Raise();
             animator.SetTrigger("Jump");
             isGuard = false;
@@ -90,6 +91,7 @@ namespace Character
 
         private void Attack(InputAction.CallbackContext callback = default)
         {
+            isGuard = false;
             animator.SetTrigger("Attack");
             isGuard = false;
             if(facingObject == null) return;
@@ -98,6 +100,7 @@ namespace Character
 
         private void Guard(InputAction.CallbackContext callback = default)
         {
+            animator.SetTrigger("IsGuard");
             isGuard = true;
             print("player is on guard");
         }
@@ -106,6 +109,7 @@ namespace Character
 
         public override void TakeDamage(int damage)
         {
+            if(isGuard) return;
             base.TakeDamage(damage);
             animator.SetTrigger("Hurt");
             GameManager._instance.UpdatePlayerHealth();
