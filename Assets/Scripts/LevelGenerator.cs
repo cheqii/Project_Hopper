@@ -48,7 +48,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         if(!_player.PlayerCheckGround()) return;
         if(_player.PlayerInSecretRoom) return;
         var step = retainStep;
-        GenerateTile(++step);
+        GenerateTile(8);
     }
 
     private void GenerateTile(int step , bool initialGenerate = false)
@@ -68,6 +68,8 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
         var position = new Vector3(step, currentHeight, 0f);
         var newTile = PoolManager.SpawnObject(tilePrefab, RoundVector(position), Quaternion.identity);
+        newTile.transform.SetParent(PoolManager.Instance.root);
+        
         var tile = newTile.GetComponent<TilesBlock>();
 
         tile._Player = _player;
@@ -121,11 +123,11 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     public void GenerateTileSecretRoom(float doorYPos = default, Vector3 doorCurrentTransform = default, GameObject startDoorTileGameObject = default)
     {
         if(!_player.PlayerInSecretRoom) return;
-        var randomTile = Random.Range(2, retainStep);
+        var randomTile = Random.Range(3, retainStep);
 
         var enterRoomTile = PoolManager.SpawnObject(startDoorTileGameObject, RoundVector(doorCurrentTransform), Quaternion.identity);
         enterRoomTile.transform.SetParent(secretRoomParent);
-        
+
         var enterDoorTile = enterRoomTile.GetComponent<TilesBlock>();
         enterDoorTile._Player = _player;
         

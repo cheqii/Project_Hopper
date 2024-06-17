@@ -1082,16 +1082,14 @@ MonoBehaviour:
   allTiles:
   - {fileID: 11400000, guid: 303a86d2334f985479df50a9c64ed68a, type: 2}
   - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
-  - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
   - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
   - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
-  - {fileID: 11400000, guid: 8c6b5cafebdd08742ad69a551ee305e7, type: 2}
   - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
+  - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
   tileMaxHeight: 0.2
   currentHeight: 0
   limitHeight: 2.8
   fallingTile: {fileID: 9047672543347342820, guid: a5ddef7dd036ba144a68db5b7a94f46d, type: 3}
-  enterDoor: {fileID: 9047672543347342820, guid: 855dfbb610df37c40a6297d7eefece82, type: 3}
   exitDoor: {fileID: 9047672543347342820, guid: da1e58e3f146ee34cac3515038bf244b, type: 3}
   secretRoomParent: {fileID: 966204200}
   allMonsters:
@@ -2210,6 +2208,14 @@ PrefabInstance:
     - target: {fileID: 168514812008439126, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_Offset.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600207697784066625, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: m_Size.x
+      value: 0.61175513
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600207697784066625, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.018411756
       objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x
