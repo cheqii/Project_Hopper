@@ -68,13 +68,12 @@ public class MovingRock : ObjectInGame
     {
         while (true)
         {
-            yield return _movingInterval;
             MoveRockDown();
-
             yield return _movingInterval;
             
             if(!atBottom) continue;
             MoveRockUp();
+            yield return _movingInterval;
         }
     }
 }
