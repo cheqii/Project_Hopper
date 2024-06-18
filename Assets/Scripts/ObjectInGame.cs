@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ObjectInGame : MonoBehaviour
 {
+    [SerializeField] protected Player _player;
     [SerializeField] protected int damage;
 
     protected virtual void OnTriggerEnter2D(Collider2D other)

@@ -15,7 +15,7 @@ namespace TilesScript
         public override void SetToInitialTile(Vector3 startPos = default)
         {
             base.SetToInitialTile(startPos);
-            _movingRock.AtTop = false;
+            _movingRock.AtTop = true;
             _movingRock.AtBottom = false;
         }
     }

@@ -248,8 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69b731bdff196146be65697fd0157dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
   damage: 1
-  interval: 1
+  interval: 2
   yTopPosition: 5.5
   yBottomPosition: 1.5
   atTop: 1

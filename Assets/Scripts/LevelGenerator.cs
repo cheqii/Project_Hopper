@@ -202,6 +202,15 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     #endregion
 
+    #region -Generate Objects-
+
+    private void GenerateObjectOnTile()
+    {
+        
+    }
+
+    #endregion
+
     private Vector3 RoundVector(Vector3 vector)
     {
         return new Vector3(
