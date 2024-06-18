@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9178448411642552488}
   - component: {fileID: 2512219322203582600}
   - component: {fileID: 3854103264492000984}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +195,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  boxSize: {x: 0.5, y: 0.5}
+  castDistance: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7643118009276475714
 GameObject:
   m_ObjectHideFlags: 0

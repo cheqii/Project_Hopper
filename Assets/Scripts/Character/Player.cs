@@ -123,13 +123,9 @@ namespace Character
             GameManager._instance.UpdatePlayerHealthUI(false);
         }
         
-        public void IncreasePlayerHealth(int value)
+        public void FullHeal()
         {
-            if (health < maxHealth)
-                health += value;
-            else
-                health = maxHealth;
-            
+            health = maxHealth;
             GameManager._instance.UpdatePlayerHealthUI(true);
         }
         

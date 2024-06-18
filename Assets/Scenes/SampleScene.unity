@@ -1158,7 +1158,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
   tileMaxHeight: 0.2
   currentHeight: 0
-  limitHeight: 2.8
   fallingTile: {fileID: 9047672543347342820, guid: a5ddef7dd036ba144a68db5b7a94f46d, type: 3}
   exitDoor: {fileID: 9047672543347342820, guid: da1e58e3f146ee34cac3515038bf244b, type: 3}
   secretRoomParent: {fileID: 966204200}
@@ -1167,6 +1166,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 646779b604a5de546ae624637d7ce31c, type: 2}
   allObject:
   - {fileID: 11400000, guid: 8bb8c85fef59b234292d82e69b06ca52, type: 2}
+  - {fileID: 11400000, guid: 1c4601e8e7c45544e831c0c5f244bd5f, type: 2}
+  movingCoin: {fileID: 5023694764882526484, guid: 52a62bc6eb5e78e40bd097bc15ee4a4f, type: 3}
 --- !u!4 &893951789
 Transform:
   m_ObjectHideFlags: 0
@@ -2205,6 +2206,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: facingObject.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 168514812008439126, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_Size.y
       value: 1

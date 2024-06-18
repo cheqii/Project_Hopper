@@ -23,8 +23,6 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     [SerializeField] private float tileMaxHeight = 0.2f;
     [SerializeField] private float currentHeight = 0f;
 
-    [SerializeField] private float limitHeight = 2.8f;
-
     [Header("Secret Room Generate Tile")]
     [SerializeField] private GameObject fallingTile;
     [SerializeField] private GameObject exitDoor;
@@ -33,7 +31,11 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     [Header("Generate Monster")] 
     [SerializeField] private List<MonsterData> allMonsters;
 
+    [Header("Generate Object")]
     [SerializeField] private List<ObjectData> allObject;
+
+    [Header("Generate Moving Coin")]
+    [SerializeField] private GameObject movingCoin;
 
     private void Start()
     {
@@ -78,8 +80,9 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         tile.SetToInitialTile(position);
 
         if(initialGenerate) return;
+        GenerateMovingCoin(position, newTile);
+        GenerateObject(position, newTile);
         GenerateMonsterOnTile(position, newTile);
-        GenerateObject(position, newTile);    
     }
 
     private GameObject GetRandomTile()
@@ -163,22 +166,20 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     private void GenerateMonsterOnTile(Vector3 position = default, GameObject tiles = null)
     {
-        if (tiles != null)
-        {
-            var tileCheck = tiles.GetComponent<TilesBlock>();
-            var checkForGenerate = (!(Random.value > 0.85f));
+        if (tiles == null) return;
+        var tileCheck = tiles.GetComponent<TilesBlock>();
+        var checkForGenerate = (!(Random.value > 0.85f));
 
-            if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
-            if(checkForGenerate) return;
+        if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
+        if(checkForGenerate) return;
             
-            var monsterPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
-            var newMonster = PoolManager.SpawnObject(GetRandomMonster(), RoundVector(monsterPos), Quaternion.identity);
+        var monsterPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
+        var newMonster = PoolManager.SpawnObject(GetRandomMonster(), RoundVector(monsterPos), Quaternion.identity);
 
-            var monster = newMonster.GetComponent<Monster>();
+        var monster = newMonster.GetComponent<Monster>();
 
-            monster.SetToInitialMonster(monsterPos);
-            newMonster.transform.SetParent(tiles.transform);
-        }
+        monster.SetToInitialMonster(monsterPos);
+        newMonster.transform.SetParent(tiles.transform);
     }
 
     private GameObject GetRandomMonster()
@@ -209,23 +210,20 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     private void GenerateObject(Vector3 position = default, GameObject tiles = null)
     {
-        if (tiles != null)
-        {
-            var tileCheck = tiles.GetComponent<TilesBlock>();
-            var checkForGenerate = (!(Random.value > 0.85f));
+        if (tiles == null) return;
+        var tileCheck = tiles.GetComponent<TilesBlock>();
+        var checkForGenerate = (!(Random.value > 0.85f));
 
-            if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
-            if(checkForGenerate) return;
+        if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
+        if(checkForGenerate) return;
             
-            var objectPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
-            var newObject = PoolManager.SpawnObject(GetRandomObject(), RoundVector(objectPos), Quaternion.identity);
+        var objectPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
+        var newObject = PoolManager.SpawnObject(GetRandomObject(), RoundVector(objectPos), Quaternion.identity);
+        newObject.transform.SetParent(tiles.transform);
 
-            var _object = newObject.GetComponent<ObjectInGame>();
-            _object._Player = _player;
-            
-            _object.SetToInitialObject(objectPos);
-            _object.transform.SetParent(tiles.transform);
-        }
+        var _object = newObject.GetComponent<ObjectInGame>();
+        _object._Player = _player;
+        _object.SetToInitialObject(objectPos);
     }
 
     private GameObject GetRandomObject()
@@ -251,6 +249,21 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     }
 
     #endregion
+
+    private void GenerateMovingCoin(Vector3 position = default, GameObject tiles = null)
+    {
+        if(tiles == null) return;
+        
+        var tileCheck = tiles.GetComponent<TilesBlock>();
+        var checkForGenerate = (!(Random.value > 0.7f));
+
+        if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
+        if(checkForGenerate) return;
+            
+        var coinPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
+        var newMovingCoin = Instantiate(movingCoin, RoundVector(coinPos), Quaternion.identity);
+        newMovingCoin.transform.SetParent(tiles.transform);
+    }
 
     private Vector3 RoundVector(Vector3 vector)
     {

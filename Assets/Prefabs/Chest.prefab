@@ -266,6 +266,11 @@ MonoBehaviour:
   coinPrefab: {fileID: 7003202193948620681, guid: 6ef82e0c284c67f46889cb128af0399c, type: 3}
   potionPrefab: {fileID: 1014288792167189243, guid: fdeb025b1ae3f784293ef85f29d9dbce, type: 3}
   interactableObject: {fileID: 6541202583290580473}
+  linePosY: 0.55
+  tileLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  tile: {fileID: 0}
   isOpen: 0
   animator: {fileID: 8337100321499126541}
 --- !u!95 &8337100321499126541

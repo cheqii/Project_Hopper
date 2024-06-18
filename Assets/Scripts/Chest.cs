@@ -3,6 +3,7 @@ using Character;
 using Interaction;
 using Interface;
 using ObjectPool;
+using TilesScript;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,12 +19,21 @@ public class Chest : ObjectInGame, IInteraction
     
     [Header("Interactable Object")]
     [SerializeField] private InteractableObject interactableObject;
-
-    [SerializeField] private bool isOpen;
-    [SerializeField] private bool standOnChest;
     
+    [Space]
+    [Range(0, 1)]
+    [SerializeField] private float linePosY = 0.55f;
+
+    [Space]
+    [SerializeField] private bool isOpen;
+
     [Header("Animator")]
     [SerializeField] private Animator animator;
+
+    private void OnEnable()
+    {
+        SetToInitialObject();
+    }
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
@@ -33,21 +43,21 @@ public class Chest : ObjectInGame, IInteraction
     protected override void TriggerAction(Player player)
     {
         base.TriggerAction(player);
-        standOnChest = true;
     }
 
     public override void SetToInitialObject(Vector3 startPos = default)
     {
         base.SetToInitialObject(startPos);
+        print($"Set {gameObject.name} to init");
+        isOpen = false;
+        print($"{gameObject.name} is open = {isOpen}");
         interactableObject.Interactable = this;
         animator.SetTrigger("Default");
-        isOpen = false;
     }
     
     public void InteractWithObject(int damage = default)
     {
         if(isOpen) return;
-        // if (!standOnChest) return;
         isOpen = true;
         animator.SetTrigger("Interact");
         SpawnItem();
@@ -55,12 +65,12 @@ public class Chest : ObjectInGame, IInteraction
 
     private void SpawnCoin()
     {
-        var randomCoin = Random.Range(minCoinSpawn, maxCoinSpawn);
+        // var randomCoin = Random.Range(minCoinSpawn, maxCoinSpawn);
+        var randomCoin = 1;
         print($"spawn {randomCoin} coin");
         for (int i = 0; i < randomCoin; i++)
         { 
-            var coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
-            coin.transform.SetParent(transform);
+            var coin = Instantiate(coinPrefab, transform.position + Vector3.up, Quaternion.identity, transform);
         }
     }
 
@@ -74,8 +84,7 @@ public class Chest : ObjectInGame, IInteraction
             if (randomChance <= 33)
             {
                 print("Yay! this chest drop a potion");
-                var potion = Instantiate(potionPrefab, transform.position, Quaternion.identity);
-                potion.transform.SetParent(transform);
+                var potion = Instantiate(potionPrefab, transform.position + Vector3.up, Quaternion.identity, transform);
             }
             else
                 SpawnCoin();
