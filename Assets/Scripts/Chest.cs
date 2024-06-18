@@ -19,12 +19,10 @@ public class Chest : ObjectInGame, IInteraction
     [Header("Interactable Object")]
     [SerializeField] private InteractableObject interactableObject;
 
+    [SerializeField] private bool isOpen;
+
     [Header("Animator")]
     [SerializeField] private Animator animator;
-    private void Start()
-    {
-        InitialObject();
-    }
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
@@ -36,16 +34,30 @@ public class Chest : ObjectInGame, IInteraction
         base.TriggerAction(player);
     }
 
-    private void InitialObject()
+    public override void SetToInitialObject(Vector3 startPos = default)
     {
+        base.SetToInitialObject(startPos);
         interactableObject.Interactable = this;
         animator.SetTrigger("Default");
     }
+    
     public void InteractWithObject(int damage = default)
     {
+        if(isOpen) return;
+        isOpen = true;
         animator.SetTrigger("Interact");
-        
         SpawnItem();
+    }
+
+    private void SpawnCoin()
+    {
+        var randomCoin = Random.Range(minCoinSpawn, maxCoinSpawn);
+        print($"spawn {randomCoin} coin");
+        for (int i = 0; i <= randomCoin; i++)
+        { 
+            var coin = Instantiate(coinPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+            coin.transform.SetParent(transform);
+        }
     }
 
     private void SpawnItem()
@@ -58,17 +70,13 @@ public class Chest : ObjectInGame, IInteraction
             if (randomChance <= 0.33f)
             {
                 print("Yay! this chest drop a potion");
-                Instantiate(potionPrefab, transform.position += Vector3.up * 2, Quaternion.identity);
+                var potion = Instantiate(potionPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+                potion.transform.SetParent(transform);
             }
+            else
+                SpawnCoin();
         }
         else
-        {
-            // spawn coins
-            var randomCoin = Random.Range(minCoinSpawn, maxCoinSpawn);
-            for (int i = 0; i <= randomCoin; i++)
-            { 
-                Instantiate(coinPrefab, transform.position += Vector3.up * 2, Quaternion.identity);
-            }
-        }
+            SpawnCoin();
     }
 }

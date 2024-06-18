@@ -33,6 +33,8 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     [Header("Generate Monster")] 
     [SerializeField] private List<MonsterData> allMonsters;
 
+    [SerializeField] private List<ObjectData> allObject;
+
     private void Start()
     {
         for (int i = 0; i <= retainStep; i++)
@@ -75,8 +77,9 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         tile._Player = _player;
         tile.SetToInitialTile(position);
 
-        if(!initialGenerate)
-            GenerateMonsterOnTile(position, newTile);
+        if(initialGenerate) return;
+        GenerateMonsterOnTile(position, newTile);
+        GenerateObject(position, newTile);    
     }
 
     private GameObject GetRandomTile()
@@ -181,20 +184,20 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     private GameObject GetRandomMonster()
     {
         var totalChance = 0;
-        foreach (var tiles in allMonsters)
+        foreach (var monster in allMonsters)
         {
-            totalChance += tiles.generateChance;
+            totalChance += monster.generateChance;
         }
 
         var rand = Random.Range(0, totalChance);
-        foreach (var tiles in allMonsters)
+        foreach (var monster in allMonsters)
         {
-            if (rand < tiles.generateChance)
+            if (rand < monster.generateChance)
             {
-                return tiles.prefab;
+                return monster.prefab;
             }
 
-            rand -= tiles.generateChance;
+            rand -= monster.generateChance;
         }
         
         return allMonsters[0].prefab;
@@ -204,9 +207,47 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     #region -Generate Objects-
 
-    private void GenerateObjectOnTile()
+    private void GenerateObject(Vector3 position = default, GameObject tiles = null)
     {
+        if (tiles != null)
+        {
+            var tileCheck = tiles.GetComponent<TilesBlock>();
+            var checkForGenerate = (!(Random.value > 0.85f));
+
+            if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
+            if(checkForGenerate) return;
+            
+            var objectPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
+            var newObject = PoolManager.SpawnObject(GetRandomObject(), RoundVector(objectPos), Quaternion.identity);
+
+            var _object = newObject.GetComponent<ObjectInGame>();
+            _object._Player = _player;
+            
+            _object.SetToInitialObject(objectPos);
+            _object.transform.SetParent(tiles.transform);
+        }
+    }
+
+    private GameObject GetRandomObject()
+    {
+        var totalChance = 0;
+        foreach (var objectData in allObject)
+        {
+            totalChance += objectData.generateChance;
+        }
+
+        var rand = Random.Range(0, totalChance);
+        foreach (var objectData in allObject)
+        {
+            if (rand < objectData.generateChance)
+            {
+                return objectData.prefab;
+            }
+
+            rand -= objectData.generateChance;
+        }
         
+        return allObject[0].prefab;
     }
 
     #endregion
