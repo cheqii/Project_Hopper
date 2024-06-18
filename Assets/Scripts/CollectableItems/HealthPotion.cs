@@ -14,7 +14,6 @@ namespace CollectableItems
 
         protected override void TriggerAction(Player player)
         {
-            if(!GetPlayer()) return;
             print("get health");
             base.TriggerAction(player);
             player.FullHeal();

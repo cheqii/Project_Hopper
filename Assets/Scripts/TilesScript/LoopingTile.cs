@@ -13,6 +13,8 @@ namespace TilesScript
 
         [SerializeField] private bool isWarning;
         [SerializeField] private bool isAttacking;
+
+        [SerializeField] private bool spearAttack;
         
         private WaitForSeconds _waiting;
         private WaitForSeconds _flashWarning;
@@ -28,11 +30,19 @@ namespace TilesScript
             base.Start();
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if(Type == TilesType.Cloud) return;
+            if(spearAttack)
+                SpearAttack();
+        }
+
         public override void SetToInitialTile(Vector3 startPos = default)
         {
             base.SetToInitialTile(startPos);
             isWarning = false;
             isAttacking = false;
+            spearAttack = false;
         }
 
         protected override void StartAction()
@@ -47,6 +57,7 @@ namespace TilesScript
         {
             if (playerOnTile == null) return;
             _Player.TakeDamage(1);
+            print("player take damage from spear tiles");
         }
 
         #region -Loop Behavior Methods-
@@ -54,6 +65,7 @@ namespace TilesScript
         private void OnHold()
         {
             isWarning = true;
+            spearAttack = false;
         }
 
         private void SetWarning()
@@ -67,6 +79,7 @@ namespace TilesScript
         {
             animator.SetTrigger("DoAction");
             isAttacking = false;
+            spearAttack = true;
         }
 
         #endregion

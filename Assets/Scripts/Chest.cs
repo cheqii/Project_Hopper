@@ -5,6 +5,7 @@ using Interface;
 using ObjectPool;
 using TilesScript;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Chest : ObjectInGame, IInteraction
@@ -13,22 +14,20 @@ public class Chest : ObjectInGame, IInteraction
     [SerializeField] private int minCoinSpawn;
     [SerializeField] private int maxCoinSpawn;
 
-    [Header("Item Prefab to Spawn")]
-    [SerializeField] private GameObject coinPrefab;
-    [SerializeField] private GameObject potionPrefab;
+    [Header("Item Particle to Spawn")]
+    [SerializeField] private ParticleSystem coinParticle;
+    [SerializeField] private ParticleSystem potionParticle;
     
     [Header("Interactable Object")]
     [SerializeField] private InteractableObject interactableObject;
-    
-    [Space]
-    [Range(0, 1)]
-    [SerializeField] private float linePosY = 0.55f;
 
     [Space]
     [SerializeField] private bool isOpen;
 
     [Header("Animator")]
     [SerializeField] private Animator animator;
+
+    private int amountCoin = 0;
 
     private void OnEnable()
     {
@@ -63,13 +62,8 @@ public class Chest : ObjectInGame, IInteraction
 
     private void SpawnCoin()
     {
-        // var randomCoin = Random.Range(minCoinSpawn, maxCoinSpawn);
-        var randomCoin = 1;
-        print($"spawn {randomCoin} coin");
-        for (int i = 0; i < randomCoin; i++)
-        { 
-            var coin = Instantiate(coinPrefab, transform.position + Vector3.up, Quaternion.identity, transform);
-        }
+        var randomCoin = Random.Range(minCoinSpawn, maxCoinSpawn);
+        coinParticle.Emit(randomCoin);
     }
 
     private void SpawnItem()
@@ -82,7 +76,7 @@ public class Chest : ObjectInGame, IInteraction
             if (randomChance <= 33)
             {
                 print("Yay! this chest drop a potion");
-                var potion = Instantiate(potionPrefab, transform.position + Vector3.up, Quaternion.identity, transform);
+                potionParticle.Emit(1);
             }
             else
                 SpawnCoin();
