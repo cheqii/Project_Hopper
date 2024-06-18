@@ -146,11 +146,14 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
             else                                                                         
                 doorYPos = CheckMaxAndMinHeight(doorYPos);
 
-            var newTile = PoolManager.SpawnObject(fallingTile, RoundVector(new Vector3(i, doorYPos, 0f)), Quaternion.identity);
+            var tilePos = new Vector3(i, doorYPos, 0f);
+            var newTile = PoolManager.SpawnObject(fallingTile, RoundVector(tilePos), Quaternion.identity);
             newTile.transform.SetParent(secretRoomParent);
             
             var tile = newTile.GetComponent<TilesBlock>();
             tile._Player = _player;
+            
+            GenerateMovingCoin(tilePos, newTile, true);
         }
 
         var exitRoomTile = PoolManager.SpawnObject(exitDoor, RoundVector(new Vector3(randomTile + 1, doorYPos, 0f)), Quaternion.identity);
@@ -250,16 +253,19 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     #endregion
 
-    private void GenerateMovingCoin(Vector3 position = default, GameObject tiles = null)
+    private void GenerateMovingCoin(Vector3 position = default, GameObject tiles = null, bool secretRoom = false)
     {
         if(tiles == null) return;
-        
-        var tileCheck = tiles.GetComponent<TilesBlock>();
-        var checkForGenerate = (!(Random.value > 0.7f));
 
-        if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
-        if(checkForGenerate) return;
+        if (!secretRoom)
+        {
+            var tileCheck = tiles.GetComponent<TilesBlock>();
+            if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
             
+            var checkForGenerate = (!(Random.value > 0.7f));
+            if(checkForGenerate) return;
+        }
+
         var coinPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
         var newMovingCoin = Instantiate(movingCoin, RoundVector(coinPos), Quaternion.identity);
         newMovingCoin.transform.SetParent(tiles.transform);

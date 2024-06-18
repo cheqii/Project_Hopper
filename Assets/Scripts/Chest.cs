@@ -48,9 +48,7 @@ public class Chest : ObjectInGame, IInteraction
     public override void SetToInitialObject(Vector3 startPos = default)
     {
         base.SetToInitialObject(startPos);
-        print($"Set {gameObject.name} to init");
         isOpen = false;
-        print($"{gameObject.name} is open = {isOpen}");
         interactableObject.Interactable = this;
         animator.SetTrigger("Default");
     }
