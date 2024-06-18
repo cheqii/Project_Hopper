@@ -54,6 +54,7 @@ namespace TilesScript
             base.CheckPlayerOnTile();
             
             if(playerOnTile == null) return;
+            if(!door.IsOpen) return;
             if(alreadyEnter) return;
             
             if(doorType == DoorType.EnterDoor)

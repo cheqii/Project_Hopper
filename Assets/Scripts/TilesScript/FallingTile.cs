@@ -20,6 +20,12 @@ namespace TilesScript
             isFalling = false;
         }
 
+        public override void ReleaseTile()
+        {
+            if(isFalling)
+                base.ReleaseTile();
+        }
+
         public override void CheckPlayerOnTile()
         {
             base.CheckPlayerOnTile();

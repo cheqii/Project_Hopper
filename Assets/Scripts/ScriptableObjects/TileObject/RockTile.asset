@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c03accdb34f46343a4cdca241d394e7, type: 3}
-  m_Name: DoorTIle
+  m_Name: RockTile
   m_EditorClassIdentifier: 
-  name: DoorTIle
-  prefab: {fileID: 9047672543347342820, guid: 855dfbb610df37c40a6297d7eefece82, type: 3}
-  generateChance: 10
+  name: RockTile
+  prefab: {fileID: 9047672543347342820, guid: d6d0343f1c50bdb4f95cf4389be96507, type: 3}
+  generateChance: 50

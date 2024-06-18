@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using Character;
-using Interface;
-using ObjectPool;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace TilesScript
 {

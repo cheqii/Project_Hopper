@@ -181,4 +181,4 @@ MonoBehaviour:
   playerOnTile: {fileID: 0}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64

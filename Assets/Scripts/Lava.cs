@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
@@ -22,9 +23,8 @@ public class Lava : MonoBehaviour
     {
         if (other.CompareTag("Melt"))
         {
-            var tile = other.GetComponent<FallingTile>();
-            if(tile.IsFalling)
-                tile.ReleaseTile();
+            var tile = other.GetComponent<TilesBlock>();
+            tile.ReleaseTile();
         }
         if (other.gameObject.CompareTag("Player"))
             Destroy(other.gameObject);
