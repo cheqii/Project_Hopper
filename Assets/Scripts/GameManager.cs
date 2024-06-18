@@ -58,10 +58,10 @@ public class GameManager : MonoBehaviour
 
     #region *Health*
 
-    public void UpdatePlayerHealth()
+    public void UpdatePlayerHealthUI(bool increaseHp)
     {
         playerHealthText.text = player.Health.ToString();
-        HealthObjects[player.Health].SetActive(false);
+        // HealthObjects[player.Health].SetActive(increaseHp);
     }
 
     #endregion

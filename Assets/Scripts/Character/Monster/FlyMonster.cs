@@ -18,9 +18,6 @@ public class FlyMonster : Monster
     [Space]
     [SerializeField] private float warningTime = 0.66f;
 
-    [Header("Parent to set")]
-    [SerializeField] private Transform parent;
-    
     private Vector3 flyingPos;
     
     private WaitForSeconds _warning;

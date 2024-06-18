@@ -120,8 +120,19 @@ namespace Character
             if(isGuard) return;
             base.TakeDamage(damage);
             animator.SetTrigger("Hurt");
-            GameManager._instance.UpdatePlayerHealth();
+            GameManager._instance.UpdatePlayerHealthUI(false);
         }
+        
+        public void IncreasePlayerHealth(int value)
+        {
+            if (health < maxHealth)
+                health += value;
+            else
+                health = maxHealth;
+            
+            GameManager._instance.UpdatePlayerHealthUI(true);
+        }
+        
 
         public bool PlayerCheckGround()
         {

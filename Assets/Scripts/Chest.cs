@@ -20,7 +20,8 @@ public class Chest : ObjectInGame, IInteraction
     [SerializeField] private InteractableObject interactableObject;
 
     [SerializeField] private bool isOpen;
-
+    [SerializeField] private bool standOnChest;
+    
     [Header("Animator")]
     [SerializeField] private Animator animator;
 
@@ -32,6 +33,7 @@ public class Chest : ObjectInGame, IInteraction
     protected override void TriggerAction(Player player)
     {
         base.TriggerAction(player);
+        standOnChest = true;
     }
 
     public override void SetToInitialObject(Vector3 startPos = default)
@@ -39,11 +41,13 @@ public class Chest : ObjectInGame, IInteraction
         base.SetToInitialObject(startPos);
         interactableObject.Interactable = this;
         animator.SetTrigger("Default");
+        isOpen = false;
     }
     
     public void InteractWithObject(int damage = default)
     {
         if(isOpen) return;
+        // if (!standOnChest) return;
         isOpen = true;
         animator.SetTrigger("Interact");
         SpawnItem();
@@ -53,9 +57,9 @@ public class Chest : ObjectInGame, IInteraction
     {
         var randomCoin = Random.Range(minCoinSpawn, maxCoinSpawn);
         print($"spawn {randomCoin} coin");
-        for (int i = 0; i <= randomCoin; i++)
+        for (int i = 0; i < randomCoin; i++)
         { 
-            var coin = Instantiate(coinPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+            var coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
             coin.transform.SetParent(transform);
         }
     }
@@ -65,12 +69,12 @@ public class Chest : ObjectInGame, IInteraction
         if (_player.Health != _player.MaxHealth)
         {
             // find 33% to spawn a health potion
-            var randomChance = Random.Range(0, 1);
+            var randomChance = Random.Range(0, 100);
             
-            if (randomChance <= 0.33f)
+            if (randomChance <= 33)
             {
                 print("Yay! this chest drop a potion");
-                var potion = Instantiate(potionPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+                var potion = Instantiate(potionPrefab, transform.position, Quaternion.identity);
                 potion.transform.SetParent(transform);
             }
             else
