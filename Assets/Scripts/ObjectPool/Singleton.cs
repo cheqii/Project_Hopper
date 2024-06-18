@@ -10,7 +10,7 @@ namespace ObjectPool
 			{
 				if (instance == null)
 				{
-					T[] managers = ObjectInGame.FindObjectsOfType(typeof(T)) as T[];
+					T[] managers = FindObjectsOfType(typeof(T)) as T[];
 					if (managers.Length != 0)
 					{
 						if (managers.Length == 1)

@@ -224,7 +224,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         var newObject = PoolManager.SpawnObject(GetRandomObject(), RoundVector(objectPos), Quaternion.identity);
         newObject.transform.SetParent(tiles.transform);
 
-        var _object = newObject.GetComponent<ObjectInGame>();
+        var _object = newObject.GetComponent<ObjectInGame.ObjectInGame>();
         _object._Player = _player;
         _object.SetToInitialObject(objectPos);
     }

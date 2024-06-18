@@ -12,7 +12,6 @@ namespace CollectableItems
 
         protected override void TriggerAction(Player player)
         {
-            print("get coin");
             base.TriggerAction(player);
             GameManager._instance.UpdatePlayerScore(value);
             Destroy(gameObject);

@@ -19,7 +19,7 @@ public class Nf_GameEvent : ScriptableObject
     }
     
     //use this method if you want to raise event and use some sender variable.
-    public void Raise(Component sender, Object data)
+    public void Raise(Component sender, object data)
     {
         foreach (var item in Listeners)
         {

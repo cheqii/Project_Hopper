@@ -14,7 +14,6 @@ namespace CollectableItems
 
         protected override void TriggerAction(Player player)
         {
-            print("get health");
             base.TriggerAction(player);
             player.FullHeal();
             GameManager._instance.UpdatePlayerHealthUI(true);

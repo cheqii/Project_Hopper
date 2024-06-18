@@ -1,6 +1,7 @@
 using System;
 using Interaction;
 using Interface;
+using ObjectInGame;
 using ObjectPool;
 using UnityEngine;
 using UnityEngine.Serialization;

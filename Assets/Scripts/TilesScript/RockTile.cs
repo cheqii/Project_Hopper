@@ -1,3 +1,4 @@
+using ObjectInGame;
 using UnityEngine;
 
 namespace TilesScript
