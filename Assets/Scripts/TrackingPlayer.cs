@@ -8,10 +8,15 @@ public class TrackingPlayer : MonoBehaviour
 {
     [SerializeField] private Player _player;
 
+    [SerializeField] private ObjectInGame.ObjectInGame fireball;
+    
     private Vector3 trackingPos;
+    public Vector3 TrackingPos => trackingPos;
+    
     // Start is called before the first frame update
     void Start()
     {
+        _player = fireball._Player;
         trackingPos = new Vector3(transform.position.x, _player.transform.position.y);
     }
 
