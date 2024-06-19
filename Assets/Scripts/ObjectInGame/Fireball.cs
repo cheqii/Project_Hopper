@@ -10,6 +10,7 @@ namespace ObjectInGame
 {
     public class Fireball : ObjectInGame
     {
+        [SerializeField] private Vector3 startPos;
         [SerializeField] private float warningTime;
         private WaitForSeconds _warning;
 
@@ -19,11 +20,12 @@ namespace ObjectInGame
         [SerializeField] private GameObject warningSign;
         [SerializeField] private Animator warningSignAnimator;
 
-        private float camEdgeX;
+        public float camEdgeX;
 
         private void OnEnable()
         {
-            StartCoroutine(PlayerTracking());
+            startPos.x = 5.25f;
+            SetToInitialObject(startPos);
         }
 
         // Start is called before the first frame update
@@ -31,16 +33,16 @@ namespace ObjectInGame
         {
             _warning = new WaitForSeconds(warningTime);
             camEdgeX = Camera.main.ScreenToViewportPoint(Vector3.zero).x;
-            _player._Control.PlayerAction.Jump.performed += CheckObjectOutOfCameraLeftEdge;
         }
 
         private void LateUpdate()
         {
             if (isWarning)
             {
-                // fire to player with smooth transition
                 var moveXPos = transform.position + (Vector3.left * 2);
                 transform.DOLocalMoveX(moveXPos.x, 2);
+                
+                CheckObjectOutOfCameraLeftEdge();
             }
         }
 
@@ -55,13 +57,21 @@ namespace ObjectInGame
             player.TakeDamage(damage);
         }
         
-        private void CheckObjectOutOfCameraLeftEdge(InputAction.CallbackContext callback = default)
+        private void CheckObjectOutOfCameraLeftEdge()
         {
             if (transform.position.x + 0.5f < camEdgeX)
             {
-                PoolManager.ReleaseObject(gameObject);
-                _player._Control.RemoveAllBindingOverrides();
+                Destroy(gameObject);
             }
+        }
+
+        public override void SetToInitialObject(Vector3 startPos = default)
+        {
+            base.SetToInitialObject(startPos);
+            isWarning = false;
+            warningSign.SetActive(true);
+            transform.SetParent(PoolManager.Instance.root.parent);
+            StartCoroutine(PlayerTracking());
         }
 
         private void FireballToPlayer()
@@ -80,7 +90,6 @@ namespace ObjectInGame
 
         private IEnumerator PlayerTracking()
         {
-            // warningSign.SetActive(true);
             while (true)
             {
                 yield return _warning;

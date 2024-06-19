@@ -3,6 +3,14 @@ using UnityEngine;
 
 namespace ObjectInGame
 {
+    public enum ObjectType
+    {
+        Door,
+        Chest,
+        MovingRock,
+        AxeStand,
+        Fireball
+    }
     public class ObjectInGame : MonoBehaviour
     {
         [SerializeField] protected Player _player;

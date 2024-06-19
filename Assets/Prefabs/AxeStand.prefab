@@ -468,6 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5213e7f057eff51469b3618f93c82755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 3
   _player: {fileID: 0}
   damage: 1
   interactableObject: {fileID: -154903919372488105}

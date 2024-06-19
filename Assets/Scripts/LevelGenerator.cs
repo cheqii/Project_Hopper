@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Character;
 using Character.Monster;
+using ObjectInGame;
 using ObjectPool;
 using ScriptableObjects;
 using TilesScript;
@@ -36,6 +37,9 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     [Header("Generate Moving Coin")]
     [SerializeField] private GameObject movingCoin;
+
+    [Header("Generate Fire Ball")]
+    [SerializeField] private GameObject fireballPrefab;
 
     private void Start()
     {
@@ -83,6 +87,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         GenerateMovingCoin(position, newTile);
         GenerateObject(position, newTile);
         GenerateMonsterOnTile(position, newTile);
+        GenerateFireball();
     }
 
     private GameObject GetRandomTile()
@@ -222,9 +227,9 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
             
         var objectPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
         var newObject = PoolManager.SpawnObject(GetRandomObject(), RoundVector(objectPos), Quaternion.identity);
-        newObject.transform.SetParent(tiles.transform);
-
         var _object = newObject.GetComponent<ObjectInGame.ObjectInGame>();
+        
+        newObject.transform.SetParent(tiles.transform);
         _object._Player = _player;
         _object.SetToInitialObject(objectPos);
     }
@@ -269,6 +274,17 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         var coinPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
         var newMovingCoin = Instantiate(movingCoin, RoundVector(coinPos), Quaternion.identity);
         newMovingCoin.transform.SetParent(tiles.transform);
+    }
+
+    private void GenerateFireball()
+    {
+        var checkForGenerate = (!(Random.value > 0.85f));
+        if(checkForGenerate) return;
+
+        var newFireball = Instantiate(fireballPrefab);
+        var fireball = newFireball.GetComponent<ObjectInGame.ObjectInGame>();
+
+        fireball._Player = _player;
     }
 
     private Vector3 RoundVector(Vector3 vector)

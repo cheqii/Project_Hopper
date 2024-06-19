@@ -261,17 +261,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380009e8b64b4ee0b933547a3ddb697c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
   _player: {fileID: 0}
   damage: 0
   minCoinSpawn: 3
   maxCoinSpawn: 6
-  coinPrefab: {fileID: 7003202193948620681, guid: 6ef82e0c284c67f46889cb128af0399c, type: 3}
-  potionPrefab: {fileID: 1014288792167189243, guid: fdeb025b1ae3f784293ef85f29d9dbce, type: 3}
+  coinParticle: {fileID: 1451115105121034163}
+  potionParticle: {fileID: 6554527110404963382}
   interactableObject: {fileID: 6541202583290580473}
   isOpen: 0
   animator: {fileID: 8337100321499126541}
-  coinParticle: {fileID: 1451115105121034163}
-  potionParticle: {fileID: 6554527110404963382}
 --- !u!95 &8337100321499126541
 Animator:
   serializedVersion: 5
