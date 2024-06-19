@@ -25,6 +25,8 @@ namespace Character.Monster
         [Space]
         [SerializeField] protected bool isAttacking;
 
+        [SerializeField] protected MonsterHpBar _monsterHpBar;
+
         protected WaitForSeconds _preAttack;
         protected WaitForSeconds _cooldownAttack;
         
@@ -69,11 +71,20 @@ namespace Character.Monster
 
         public override void TakeDamage(int damage)
         {
+            animator.ResetTrigger("Attack");
             animator.SetTrigger("Hurt");
+            
             base.TakeDamage(damage);
+
+            TakeDamageAction();
             
             if (health <= 0)
                 animator.SetTrigger("Dead");
+        }
+        
+        protected virtual void TakeDamageAction()
+        {
+            _monsterHpBar.UpdateMonsterHealth();
         }
 
         public void ReleaseMonster() // set in animation event to call after dead anim end

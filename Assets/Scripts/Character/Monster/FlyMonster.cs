@@ -65,8 +65,12 @@ public class FlyMonster : Monster
 
     public override void TakeDamage(int damage)
     {
-        animator.ResetTrigger("Attack");
         base.TakeDamage(damage);
+    }
+
+    protected override void TakeDamageAction()
+    {
+        base.TakeDamageAction();
         isAttacking = false;
         FlyingToThePlayerAndBack(flyingPos, 2f);
     }

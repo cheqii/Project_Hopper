@@ -63,6 +63,7 @@ namespace TilesScript
         {
             PoolManager.ReleaseObject(gameObject);
             
+            if(objectOnTile == null) return;
             if(objectOnTile.GetComponent<ObjectInGame.ObjectInGame>())
                 PoolManager.ReleaseObject(objectOnTile);
         }
