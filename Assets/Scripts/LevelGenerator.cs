@@ -43,6 +43,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     private void Start()
     {
+        _player = FindObjectOfType<Player>();
         for (int i = 0; i <= retainStep; i++)
         {
             GenerateTile(i, true);

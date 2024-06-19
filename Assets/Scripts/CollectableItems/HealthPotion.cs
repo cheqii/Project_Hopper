@@ -15,7 +15,7 @@ namespace CollectableItems
         protected override void TriggerAction(Player player)
         {
             base.TriggerAction(player);
-            player.FullHeal();
+            player.FullHeal(1);
             GameManager._instance.UpdatePlayerHealthUI(true);
             Destroy(gameObject);
         }

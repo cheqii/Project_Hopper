@@ -38,6 +38,7 @@ namespace Character
 
         [Header("Player Action Event")]
         [SerializeField] private Nf_GameEvent jumpEvent;
+        [SerializeField] private Nf_GameEvent gameOverEvent;
 
         private Rigidbody2D rb;
         
@@ -94,7 +95,6 @@ namespace Character
             
             if(playerInSecretRoom) return;
             GameManager._instance.UpdatePlayerScore(1);
-            
         }
         
         private void Attack(InputAction.CallbackContext callback = default)
@@ -121,11 +121,16 @@ namespace Character
             base.TakeDamage(damage);
             animator.SetTrigger("Hurt");
             GameManager._instance.UpdatePlayerHealthUI(false);
+
+            if (health > 0) return;
+            Destroy(gameObject);
+            gameOverEvent.Raise();
         }
         
-        public void FullHeal()
+        public void FullHeal(int value)
         {
-            health = maxHealth;
+            if(health >= maxHealth) return;
+            health += value;
             GameManager._instance.UpdatePlayerHealthUI(true);
         }
         

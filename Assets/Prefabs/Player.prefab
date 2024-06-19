@@ -353,7 +353,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0049425364, y: -0.0975979}
+  m_Offset: {x: 0.018411756, y: -0.0975979}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -364,7 +364,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8319533, y: 1.1951958}
+  m_Size: {x: 0.61175513, y: 1.1951958}
   m_EdgeRadius: 0
 --- !u!114 &35541912851006961
 MonoBehaviour:
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  health: 3
+  health: 0
   attackDamage: 1
   jumpForce: 5
   groundLayer:
@@ -391,6 +391,7 @@ MonoBehaviour:
   facingObject: {fileID: 0}
   playerInSecretRoom: 0
   jumpEvent: {fileID: 11400000, guid: 6c917d72c93560446baaba347535eab5, type: 2}
+  gameOverEvent: {fileID: 11400000, guid: b74923e500930ca49b48c35780880c1e, type: 2}
 --- !u!114 &7879644293468667542
 MonoBehaviour:
   m_ObjectHideFlags: 0

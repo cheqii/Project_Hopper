@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using ObjectPool;
 using TilesScript;
+using UnityEngine.Serialization;
 
 public class Lava : MonoBehaviour
 {
@@ -13,9 +14,12 @@ public class Lava : MonoBehaviour
     [SerializeField] private float duration;
 
     [SerializeField] private bool activateLava;
+
+    [SerializeField] private Nf_GameEvent gameOverEvent;
     
     void Update()
     {
+        if(GameManager._instance.player == null) return;
         IncreaseLavaByTime();
     }
 
@@ -26,15 +30,18 @@ public class Lava : MonoBehaviour
             var tile = other.GetComponent<TilesBlock>();
             tile.ReleaseTile();
         }
+
         if (other.gameObject.CompareTag("Player"))
+        {
+            gameOverEvent.Raise();
             Destroy(other.gameObject);
+        }
     }
 
     private void IncreaseLavaByTime()
     {
         if(!activateLava) return;
-        var endPos = transform.position += Vector3.up * (lavaIncreaseSpeed * Time.deltaTime);
-        transform.DOLocalMove(endPos, 0);
+        transform.position += Vector3.up * (lavaIncreaseSpeed * Time.deltaTime);
     }
 
     public void DecreaseLava()

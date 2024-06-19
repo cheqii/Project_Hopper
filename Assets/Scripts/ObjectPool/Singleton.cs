@@ -30,7 +30,7 @@ namespace ObjectPool
 					}
 					var go = new GameObject(typeof(T).Name, typeof(T));
 					instance = go.GetComponent<T>();
-					DontDestroyOnLoad(go);
+					// DontDestroyOnLoad(go);
 				}
 				return instance;
 			}

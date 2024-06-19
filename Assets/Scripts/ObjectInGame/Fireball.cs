@@ -55,6 +55,7 @@ namespace ObjectInGame
         {
             base.TriggerAction(player);
             player.TakeDamage(damage);
+            Destroy(gameObject);
         }
         
         private void CheckObjectOutOfCameraLeftEdge()

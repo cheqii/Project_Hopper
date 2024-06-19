@@ -30,6 +30,7 @@ namespace TilesScript
         {
             base.CheckPlayerOnTile();
             if(playerOnTile == null) return;
+            isFalling = true;
             animator.SetTrigger("Flashing");
             Invoke(nameof(OnStep), delay);
         }
@@ -41,7 +42,6 @@ namespace TilesScript
 
         private void OnStep()
         {
-            isFalling = true;
             animator.ResetTrigger("Flashing");
             var endPos = new Vector3(transform.position.x, Vector3.down.y * 4.5f);
             transform.DOMove(endPos, 1f);

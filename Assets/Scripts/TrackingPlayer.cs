@@ -39,6 +39,7 @@ public class TrackingPlayer : MonoBehaviour
 
     public void WarningTracking()
     {
+        if(_player == null) return;
         transform.position = Tracking(_player.transform.position.y);
     }
 }

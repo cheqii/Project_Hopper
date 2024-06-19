@@ -46,7 +46,6 @@ namespace TilesScript
         public GameObject PlayerOnTile => playerOnTile;
         
         [SerializeField] private LayerMask playerLayer;
-        
         // Start is called before the first frame update
         protected virtual void Start()
         {
@@ -63,6 +62,9 @@ namespace TilesScript
         public virtual void ReleaseTile()
         {
             PoolManager.ReleaseObject(gameObject);
+            
+            if(objectOnTile.GetComponent<ObjectInGame.ObjectInGame>())
+                PoolManager.ReleaseObject(objectOnTile);
         }
 
         protected virtual void StartAction()
