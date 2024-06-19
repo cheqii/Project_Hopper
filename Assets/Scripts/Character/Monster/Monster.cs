@@ -73,11 +73,11 @@ namespace Character.Monster
         {
             animator.ResetTrigger("Attack");
             animator.SetTrigger("Hurt");
-            
+
             base.TakeDamage(damage);
 
             TakeDamageAction();
-            
+
             if (health <= 0)
                 animator.SetTrigger("Dead");
         }

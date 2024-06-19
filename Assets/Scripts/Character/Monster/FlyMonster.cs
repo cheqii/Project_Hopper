@@ -56,6 +56,9 @@ public class FlyMonster : Monster
         isAttacking = false;
         isWarning = false;
         isFlying = false;
+        
+        var randomMaxHealth = Random.Range(2, 4);
+        maxHealth = randomMaxHealth;
     }
 
     public override void Attack()
