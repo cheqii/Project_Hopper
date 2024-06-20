@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  damage: 1
+  value: 1
   startPos: {x: 0, y: 0, z: 0}
   warningTime: 2
   isWarning: 0
@@ -212,7 +212,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7303099709315318922}
   - component: {fileID: 2801130188573763400}
-  - component: {fileID: 7524969065127157037}
   - component: {fileID: 3627695913651224210}
   m_Layer: 0
   m_Name: WarningSign
@@ -288,20 +287,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7524969065127157037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3701172715402529608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b54eead42e8c54cbe958b830f77da6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  fireball: {fileID: 8888150026176023498}
 --- !u!95 &3627695913651224210
 Animator:
   serializedVersion: 5

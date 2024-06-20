@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c80f1e6d3666a49b529953fa38feb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monster: {fileID: 2069113725506175596}
   heartPrefab: {fileID: 8405340872779647908, guid: 4a4a26713fe66364a917391015c05e51, type: 3}
   heartContainer: {fileID: 5043235291101571484}
   heartImage: []

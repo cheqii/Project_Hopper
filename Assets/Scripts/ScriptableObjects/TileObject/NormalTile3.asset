@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c03accdb34f46343a4cdca241d394e7, type: 3}
-  m_Name: CloudTile
+  m_Name: NormalTile3
   m_EditorClassIdentifier: 
-  name: CloudTile
-  prefab: {fileID: 9047672543347342820, guid: ccab80bc235bcd949abe273f67d00dfd, type: 3}
-  state: 2
-  generateChance: 5
+  name: NormalTile
+  prefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
+  state: 0
+  generateChance: 60

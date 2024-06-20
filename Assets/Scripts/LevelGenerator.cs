@@ -40,6 +40,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     [Header("Generate Fire Ball")]
     [SerializeField] private GameObject fireballPrefab;
+    private int _checkForGenerateFireball = 33;
 
     private void Start()
     {
@@ -100,6 +101,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         }
 
         var rand = Random.Range(0, totalChance);
+        
         foreach (var tiles in allTiles)
         {
             if (rand < tiles.generateChance)
@@ -132,7 +134,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         return tileHeight;
     }
 
-    public void GenerateTileSecretRoom(float doorYPos = default, Vector3 doorCurrentTransform = default, GameObject startDoorTileGameObject = default)
+    public void GenerateTileSecretRoom(float doorYPos, Vector3 doorCurrentTransform, GameObject startDoorTileGameObject)
     {
         if(!_player.PlayerInSecretRoom) return;
         var randomTile = Random.Range(3, retainStep);
@@ -279,10 +281,13 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     private void GenerateFireball()
     {
-        var checkForGenerate = (!(Random.value > 0.85f));
+        var checkForGenerate = (!(Random.value > 0.9f));
         if(checkForGenerate) return;
-
-        var newFireball = Instantiate(fireballPrefab);
+        
+        // var startPos = new Vector3(5.25f, 0f, 0f);
+        var newFireball = PoolManager.SpawnObject(fireballPrefab);
+        newFireball.transform.SetParent(PoolManager.Instance.root.parent);
+        
         var fireball = newFireball.GetComponent<ObjectInGame.ObjectInGame>();
 
         fireball._Player = _player;

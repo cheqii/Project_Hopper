@@ -25,8 +25,6 @@ namespace ObjectInGame
         [Header("Animator")]
         [SerializeField] private Animator animator;
 
-        private int amountCoin = 0;
-
         private void OnEnable()
         {
             SetToInitialObject();

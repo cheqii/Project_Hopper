@@ -1,16 +1,10 @@
 using Character;
+using ObjectPool;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ObjectInGame
 {
-    public enum ObjectType
-    {
-        Door,
-        Chest,
-        MovingRock,
-        AxeStand,
-        Fireball
-    }
     public class ObjectInGame : MonoBehaviour
     {
         [SerializeField] protected Player _player;
@@ -20,7 +14,8 @@ namespace ObjectInGame
             set => _player = value;
         }
     
-        [SerializeField] protected int damage;
+        [SerializeField] protected int value;
+        public int Value => value;
 
         public virtual void SetToInitialObject(Vector3 startPos = default)
         {
@@ -31,8 +26,7 @@ namespace ObjectInGame
         {
             if (other.CompareTag("Player"))
             {
-                var player = other.gameObject.GetComponent<Player>();
-                TriggerAction(player);
+                TriggerAction(_player);
             }
         }
 

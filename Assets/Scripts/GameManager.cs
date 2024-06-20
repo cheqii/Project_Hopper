@@ -9,6 +9,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+public enum GameState
+{
+    Level1,
+    Level2,
+    Level3
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance;
@@ -30,6 +37,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
 
     public GameObject gameOverPanel;
+
+    [Header("Game State")]
+    public GameState currentGameState = GameState.Level1;
 
     private void Awake()
     {
@@ -62,12 +72,34 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void ChangeState(GameState newState)
+    {
+        currentGameState = newState;
+    }
+
+    public void CheckChangeStateByScore()
+    {
+        switch (currentPlayerScore)
+        {
+            case >= 100 and < 200:
+                ChangeState(GameState.Level2);
+                break;
+            case >= 200:
+                ChangeState(GameState.Level3);
+                break;
+            default:
+                ChangeState(GameState.Level1);
+                break;
+        }
+    }
+
     #region *Score*
 
     public void UpdatePlayerScore(int value)
     {
         currentPlayerScore += value;
         currentScoreText.text = currentPlayerScore.ToString();
+        CheckChangeStateByScore();
     }
 
     public void UpdateHighScore()

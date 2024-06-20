@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c03accdb34f46343a4cdca241d394e7, type: 3}
-  m_Name: CloudTile
+  m_Script: {fileID: 11500000, guid: 24e6f131db6f6264ca6d78885b0ebcd1, type: 3}
+  m_Name: Dummy1
   m_EditorClassIdentifier: 
-  name: CloudTile
-  prefab: {fileID: 9047672543347342820, guid: ccab80bc235bcd949abe273f67d00dfd, type: 3}
-  state: 2
-  generateChance: 5
+  name: Mushroom
+  prefab: {fileID: 8392800452355147999, guid: 31c3f2538797e824db372d56093b2012, type: 3}
+  state: 0
+  generateChance: 10

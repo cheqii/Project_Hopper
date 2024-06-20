@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7137941050346111801}
   - component: {fileID: 5951440890143629925}
   - component: {fileID: 8881511513791944913}
+  - component: {fileID: 5489782860568910282}
   m_Layer: 7
   m_Name: MovingRock
   m_TagString: Untagged
@@ -248,14 +249,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69b731bdff196146be65697fd0157dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  _player: {fileID: 0}
-  damage: 1
   interval: 1.25
   yTopPosition: 5.5
   yBottomPosition: 1.5
   atTop: 1
   atBottom: 0
+--- !u!114 &5489782860568910282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7638421667165946497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552688a8e0a1fb24e942830af36eff51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  value: 1
+  _tilesBlock: {fileID: 1850146157431727245}
 --- !u!1 &9047672543347342820
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,4 +452,4 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  _movingRock: {fileID: 8881511513791944913}
+  movingObject: {fileID: 8881511513791944913}

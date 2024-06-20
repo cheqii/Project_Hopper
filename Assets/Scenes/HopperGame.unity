@@ -178,6 +178,7 @@ MonoBehaviour:
   currentScoreText: {fileID: 1554302123}
   highScoreText: {fileID: 1900918981}
   gameOverPanel: {fileID: 380873764}
+  currentGameState: 0
 --- !u!114 &45086116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,6 +1085,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 646779b604a5de546ae624637d7ce31c, type: 2}
   - {fileID: 11400000, guid: d31a058ea63a35d4baaecddc7ff74f9a, type: 2}
   - {fileID: 11400000, guid: 00edbc252bd961849b4d6800e9ee71f3, type: 2}
+  - {fileID: 11400000, guid: 26cb32ef4f6131449b26fee7a0d36686, type: 2}
+  - {fileID: 11400000, guid: 7a654de66afe7854ba003f92fb3a6fef, type: 2}
   allObject:
   - {fileID: 11400000, guid: 8bb8c85fef59b234292d82e69b06ca52, type: 2}
   - {fileID: 11400000, guid: 1c4601e8e7c45544e831c0c5f244bd5f, type: 2}

@@ -1,4 +1,5 @@
 using Character;
+using ObjectPool;
 using UnityEngine;
 
 namespace CollectableItems
@@ -14,7 +15,7 @@ namespace CollectableItems
         {
             base.TriggerAction(player);
             GameManager._instance.UpdatePlayerScore(value);
-            Destroy(gameObject);
+            PoolManager.ReleaseObject(gameObject);
         }
     }
 }

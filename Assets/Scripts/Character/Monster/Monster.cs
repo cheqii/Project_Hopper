@@ -59,6 +59,7 @@ namespace Character.Monster
         {
             interactableObject.Interactable = this;
             health = maxHealth;
+            _monsterHpBar.UpdateMonsterHealth(true);
             transform.position = startPos;
         }
 
@@ -84,7 +85,7 @@ namespace Character.Monster
         
         protected virtual void TakeDamageAction()
         {
-            _monsterHpBar.UpdateMonsterHealth();
+            _monsterHpBar.UpdateMonsterHealth(false);
         }
 
         public void ReleaseMonster() // set in animation event to call after dead anim end

@@ -10,7 +10,6 @@ namespace ObjectInGame
 {
     public class Fireball : ObjectInGame
     {
-        [SerializeField] private Vector3 startPos;
         [SerializeField] private float warningTime;
         private WaitForSeconds _warning;
 
@@ -19,13 +18,14 @@ namespace ObjectInGame
         [Header("Warning Sign")]
         [SerializeField] private GameObject warningSign;
         [SerializeField] private Animator warningSignAnimator;
-
-        public float camEdgeX;
+        
+        private Vector3 trackingPos;
+        private float camEdgeX;
 
         private void OnEnable()
         {
-            startPos.x = 5.25f;
-            SetToInitialObject(startPos);
+            trackingPos.x = 5.25f;
+            SetToInitialObject(trackingPos);
         }
 
         // Start is called before the first frame update
@@ -37,13 +37,11 @@ namespace ObjectInGame
 
         private void LateUpdate()
         {
-            if (isWarning)
-            {
-                var moveXPos = transform.position + (Vector3.left * 2);
-                transform.DOLocalMoveX(moveXPos.x, 2);
+            WarningTracking();
+            
+            FireballToPlayer();
                 
-                CheckObjectOutOfCameraLeftEdge();
-            }
+            CheckObjectOutOfCameraLeftEdge();
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
@@ -54,15 +52,15 @@ namespace ObjectInGame
         protected override void TriggerAction(Player player)
         {
             base.TriggerAction(player);
-            player.TakeDamage(damage);
-            Destroy(gameObject);
+            player.TakeDamage(value);
+            PoolManager.ReleaseObject(gameObject);
         }
         
         private void CheckObjectOutOfCameraLeftEdge()
         {
             if (transform.position.x + 0.5f < camEdgeX)
             {
-                Destroy(gameObject);
+                PoolManager.ReleaseObject(gameObject);
             }
         }
 
@@ -74,19 +72,33 @@ namespace ObjectInGame
             transform.SetParent(PoolManager.Instance.root.parent);
             StartCoroutine(PlayerTracking());
         }
+        
+        private Vector3 Tracking(float playerYPosition)
+        {
+            trackingPos.y = playerYPosition;
+            return trackingPos;
+        }
+
+        private void WarningTracking()
+        {
+            if(_player == null) return;
+            if(isWarning) return;
+            transform.position = Tracking(_player.transform.position.y);
+        }
+
+        private void WarningEnd()
+        {
+            if (!isWarning)
+                warningSign.SetActive(false);
+            
+            isWarning = true;
+        }
 
         private void FireballToPlayer()
         {
-            if (!isWarning)
-            {
-                var lastPlayerPos = warningSign.transform.position.y;
-                transform.DOLocalMoveY(lastPlayerPos, 0f);
-                warningSign.SetActive(false);
-            }
-
-            // var moveXPos = transform.position + (Vector3.left * 2);
-            // transform.DOLocalMoveX(moveXPos.x, fireballMoveTime);
-            isWarning = true;
+            if (!isWarning) return;
+            var moveXPos = transform.position + (Vector3.left * 2);
+            transform.DOLocalMoveX(moveXPos.x, 2);
         }
 
         private IEnumerator PlayerTracking()
@@ -97,7 +109,7 @@ namespace ObjectInGame
                 warningSignAnimator.SetTrigger("Flashing");
 
                 yield return _warning;
-                FireballToPlayer();
+                WarningEnd();
             }
         }
     }

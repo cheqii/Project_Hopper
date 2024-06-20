@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: RockTile
   prefab: {fileID: 9047672543347342820, guid: d6d0343f1c50bdb4f95cf4389be96507, type: 3}
-  generateChance: 10
+  state: 0
+  generateChance: 5

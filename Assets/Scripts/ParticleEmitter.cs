@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ObjectPool;
 using UnityEngine;
 
 public class ParticleEmitter : MonoBehaviour
@@ -22,8 +23,9 @@ public class ParticleEmitter : MonoBehaviour
         _particle.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, ExitPfx);
         foreach (var particle in ExitPfx)
         {
-            var spawnObject = Instantiate(prefab, parentToSet, true);
+            var spawnObject = PoolManager.SpawnObject(prefab);
             spawnObject.transform.position = transform.TransformPoint(particle.position);
+            spawnObject.transform.SetParent(parentToSet);
         }
     }
 }

@@ -1,12 +1,14 @@
+using System;
 using ObjectInGame;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TilesScript
 {
     public class RockTile : TilesBlock
     {
         [Header("Moving Rock")]
-        [SerializeField] private MovingRock _movingRock;
+        [SerializeField] private MovingObject movingObject;
 
         protected override void Start()
         {
@@ -16,8 +18,8 @@ namespace TilesScript
         public override void SetToInitialTile(Vector3 startPos = default)
         {
             base.SetToInitialTile(startPos);
-            _movingRock.AtTop = true;
-            _movingRock.AtBottom = false;
+            movingObject.AtTop = true;
+            movingObject.AtBottom = false;
         }
     }
 }

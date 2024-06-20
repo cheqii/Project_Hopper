@@ -45,7 +45,7 @@ namespace ObjectInGame
         protected override void TriggerAction(Player player)
         {
             base.TriggerAction(player);
-            player.TakeDamage(damage);
+            player.TakeDamage(value);
         }
 
         public void InteractWithObject(int damage = default)

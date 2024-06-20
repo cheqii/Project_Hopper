@@ -112,6 +112,8 @@ public class FlyMonster : Monster
     {
         isWarning = false;
         animator.ResetTrigger("Warning");
+        
+        if(playerDetect == null) return;
         FlyingToThePlayerAndBack(playerDetect.transform.position, 1f);
         
         isAttacking = true;

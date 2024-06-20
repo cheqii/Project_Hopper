@@ -261,7 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380009e8b64b4ee0b933547a3ddb697c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   _player: {fileID: 0}
   damage: 0
   minCoinSpawn: 3
