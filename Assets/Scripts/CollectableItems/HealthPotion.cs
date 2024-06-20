@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CollectableItems
 {
-    public class HealthPotion : CollectableItem
+    public class HealthPotion : ObjectInGame.ObjectInGame
     {
         protected override void OnTriggerEnter2D(Collider2D other)
         {

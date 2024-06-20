@@ -26,7 +26,8 @@ namespace ObjectInGame
         {
             if (other.CompareTag("Player"))
             {
-                TriggerAction(_player);
+                var player = other.GetComponent<Player>();
+                TriggerAction(player);
             }
         }
 

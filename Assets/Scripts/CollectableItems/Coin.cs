@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CollectableItems
 {
-    public class Coin : CollectableItem
+    public class Coin : ObjectInGame.ObjectInGame
     {
         protected override void OnTriggerEnter2D(Collider2D other)
         {
