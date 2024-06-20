@@ -10,21 +10,22 @@ namespace ObjectInGame
 {
     public class Fireball : ObjectInGame
     {
+        [SerializeField] private Vector3 trackingPos;
         [SerializeField] private float warningTime;
         private WaitForSeconds _warning;
 
         [SerializeField] private bool isWarning;
 
+
         [Header("Warning Sign")]
         [SerializeField] private GameObject warningSign;
+
         [SerializeField] private Animator warningSignAnimator;
-        
-        private Vector3 trackingPos;
+
         private float camEdgeX;
 
         private void OnEnable()
         {
-            trackingPos.x = 5.25f;
             SetToInitialObject(trackingPos);
         }
 

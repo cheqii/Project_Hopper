@@ -7,7 +7,7 @@ namespace ObjectInGame
 {
     public class Door : ObjectInGame, IInteraction
     {
-        [SerializeField] private DoorTile doorTile;
+        [SerializeField] protected DoorTile doorTile;
         [SerializeField] private bool isOpen;
         public bool IsOpen
         {
@@ -43,6 +43,11 @@ namespace ObjectInGame
             OpenTheDoor();
             if(doorTile.PlayerOnTile != null)
                 doorTile.CheckPlayerOnTile();
+        }
+
+        public virtual void EnterTheDoor()
+        {
+            
         }
     }
 }

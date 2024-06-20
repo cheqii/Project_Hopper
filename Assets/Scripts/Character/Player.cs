@@ -28,12 +28,12 @@ namespace Character
         [Header("Facing Object")]
         [SerializeField] private InteractableObject facingObject;
 
-        [SerializeField] private bool playerInSecretRoom;
+        [SerializeField] private RoomState currentRoom = RoomState.NormalRoom;
 
-        public bool PlayerInSecretRoom
+        public RoomState CurrentRoom
         {
-            get => playerInSecretRoom;
-            set => playerInSecretRoom = value;
+            get => currentRoom;
+            set => currentRoom = value;
         }
 
         [Header("Player Action Event")]
@@ -93,7 +93,7 @@ namespace Character
             
             rb.velocity = Vector2.up * jumpForce;
             
-            if(playerInSecretRoom) return;
+            if(currentRoom == RoomState.SecretRoom) return;
             GameManager._instance.UpdatePlayerScore(1);
         }
         
@@ -159,4 +159,10 @@ namespace Character
             return null;
         }
     }
+}
+
+public enum RoomState
+{
+    NormalRoom,
+    SecretRoom
 }

@@ -35,12 +35,8 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     [Header("Generate Object")]
     [SerializeField] private List<ObjectData> allObject;
 
-    [Header("Generate Moving Coin")]
+    [Header("Moving Coin")]
     [SerializeField] private GameObject movingCoin;
-
-    [Header("Generate Fire Ball")]
-    [SerializeField] private GameObject fireballPrefab;
-    private int _checkForGenerateFireball = 33;
 
     private void Start()
     {
@@ -56,7 +52,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     public void GeneratePlatformByStep()
     {
         if(!_player.PlayerCheckGround()) return;
-        if(_player.PlayerInSecretRoom) return;
+        if(_player.CurrentRoom == RoomState.SecretRoom) return;
         var step = retainStep;
         GenerateTile(8);
     }
@@ -86,10 +82,8 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
         tile.SetToInitialTile(position);
 
         if(initialGenerate) return;
-        GenerateMovingCoin(position, newTile);
-        GenerateObject(position, newTile);
+        GenerateObject(position, newTile, false);
         GenerateMonsterOnTile(position, newTile);
-        GenerateFireball();
     }
 
     private GameObject GetRandomTile()
@@ -136,7 +130,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     public void GenerateTileSecretRoom(float doorYPos, Vector3 doorCurrentTransform, GameObject startDoorTileGameObject)
     {
-        if(!_player.PlayerInSecretRoom) return;
+        if(_player.CurrentRoom == RoomState.NormalRoom) return;
         var randomTile = Random.Range(3, retainStep);
 
         var enterRoomTile = PoolManager.SpawnObject(startDoorTileGameObject, RoundVector(doorCurrentTransform), Quaternion.identity);
@@ -161,7 +155,7 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
             var tile = newTile.GetComponent<TilesBlock>();
             tile._Player = _player;
             
-            GenerateMovingCoin(tilePos, newTile, true);
+            GenerateObject(tilePos, newTile, true);
         }
 
         var exitRoomTile = PoolManager.SpawnObject(exitDoor, RoundVector(new Vector3(randomTile + 1, doorYPos, 0f)), Quaternion.identity);
@@ -219,22 +213,34 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
 
     #region -Generate Objects-
 
-    private void GenerateObject(Vector3 position = default, GameObject tiles = null)
+    private void GenerateObject(Vector3 position, GameObject tiles, bool secretRoom)
     {
         if (tiles == null) return;
-        var tileCheck = tiles.GetComponent<TilesBlock>();
-        var checkForGenerate = (!(Random.value > 0.85f));
 
-        if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
-        if(checkForGenerate) return;
-            
         var objectPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
-        var newObject = PoolManager.SpawnObject(GetRandomObject(), RoundVector(objectPos), Quaternion.identity);
-        var _object = newObject.GetComponent<ObjectInGame.ObjectInGame>();
         
-        newObject.transform.SetParent(tiles.transform);
-        _object._Player = _player;
-        _object.SetToInitialObject(objectPos);
+        if (!secretRoom)
+        {
+            var tileCheck = tiles.GetComponent<TilesBlock>();
+            var checkForGenerate = (!(Random.value > 0.85f));
+
+            if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
+            if(checkForGenerate) return;
+
+            var newObject = PoolManager.SpawnObject(GetRandomObject(), RoundVector(objectPos), Quaternion.identity);
+            var _object = newObject.GetComponent<ObjectInGame.ObjectInGame>();
+        
+            newObject.transform.SetParent(tiles.transform);
+            _object._Player = _player;
+            _object.SetToInitialObject(objectPos);
+            
+            print($"Generate object name: {newObject.name}");
+        }
+        else
+        {
+            var newMovingCoin = PoolManager.SpawnObject(movingCoin, RoundVector(objectPos), Quaternion.identity);
+            newMovingCoin.transform.SetParent(tiles.transform);
+        }
     }
 
     private GameObject GetRandomObject()
@@ -260,37 +266,14 @@ public class LevelGenerator : ObjectPool.Singleton<LevelGenerator>
     }
 
     #endregion
-
-    private void GenerateMovingCoin(Vector3 position = default, GameObject tiles = null, bool secretRoom = false)
+    
+    public void ReleaseSecretRoom()
     {
-        if(tiles == null) return;
-
-        if (!secretRoom)
+        if(_player.CurrentRoom == RoomState.SecretRoom) return;
+        foreach (Transform child in secretRoomParent)
         {
-            var tileCheck = tiles.GetComponent<TilesBlock>();
-            if(tileCheck.Type != TilesType.Normal || tileCheck.ObjectOnTile != null) return;
-            
-            var checkForGenerate = (!(Random.value > 0.7f));
-            if(checkForGenerate) return;
+            PoolManager.ReleaseObject(child.gameObject);
         }
-
-        var coinPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
-        var newMovingCoin = Instantiate(movingCoin, RoundVector(coinPos), Quaternion.identity);
-        newMovingCoin.transform.SetParent(tiles.transform);
-    }
-
-    private void GenerateFireball()
-    {
-        var checkForGenerate = (!(Random.value > 0.9f));
-        if(checkForGenerate) return;
-        
-        // var startPos = new Vector3(5.25f, 0f, 0f);
-        var newFireball = PoolManager.SpawnObject(fireballPrefab);
-        newFireball.transform.SetParent(PoolManager.Instance.root.parent);
-        
-        var fireball = newFireball.GetComponent<ObjectInGame.ObjectInGame>();
-
-        fireball._Player = _player;
     }
 
     private Vector3 RoundVector(Vector3 vector)
