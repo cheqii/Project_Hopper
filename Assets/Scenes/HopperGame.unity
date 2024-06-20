@@ -268,6 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 644898870}
   moveDuration: 0.5
+  tileInRoom: 0
 --- !u!1 &178558483
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,7 +962,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
   m_PrefabInstance: {fileID: 2931928129090105148}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1743554729}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01502cdc13a3a5b42b9d91a7bb163b0e, type: 3}
@@ -1090,8 +1091,9 @@ MonoBehaviour:
   allObject:
   - {fileID: 11400000, guid: 8bb8c85fef59b234292d82e69b06ca52, type: 2}
   - {fileID: 11400000, guid: 1c4601e8e7c45544e831c0c5f244bd5f, type: 2}
+  - {fileID: 11400000, guid: f9547f6206101e742aa7a29f2808a7e4, type: 2}
+  - {fileID: 11400000, guid: 4a451d40d448c8741bf9303b900e183c, type: 2}
   movingCoin: {fileID: 5023694764882526484, guid: 52a62bc6eb5e78e40bd097bc15ee4a4f, type: 3}
-  fireballPrefab: {fileID: 1829579126869280232, guid: 20fbc76c224d4814590d3a0ce3d88f32, type: 3}
 --- !u!4 &893951789
 Transform:
   m_ObjectHideFlags: 0
@@ -1287,6 +1289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 644898870}
   moveDuration: 0.5
+  tileInRoom: 1
 --- !u!1 &1317987268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1734,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554302121}
   m_CullTransparentMesh: 1
+--- !u!1 &1743554729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7839029507602420194, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+  m_PrefabInstance: {fileID: 2931928129090105148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1743554736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743554729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: bf3b5e22d3a443b47be7a2418263491e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 893951788}
+        m_TargetAssemblyTypeName: LevelGenerator, Assembly-CSharp
+        m_MethodName: ReleaseSecretRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1900918979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,6 +2058,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1335388220}
@@ -2037,10 +2077,21 @@ PrefabInstance:
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 966204201}
+    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: MoveTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: MoveGroundTile, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7839029507602420194, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1743554736}
   m_SourcePrefab: {fileID: 100100000, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
 --- !u!1001 &7510493422984527680
 PrefabInstance:

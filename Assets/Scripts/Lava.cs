@@ -27,8 +27,7 @@ public class Lava : MonoBehaviour
     {
         if (other.CompareTag("Melt"))
         {
-            var tile = other.GetComponent<TilesBlock>();
-            tile.ReleaseTile();
+            PoolManager.ReleaseObject(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Player"))

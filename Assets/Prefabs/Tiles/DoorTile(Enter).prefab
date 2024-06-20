@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7249306936920174812}
   - component: {fileID: 7550721502169764394}
   - component: {fileID: 4420396164403251039}
-  - component: {fileID: 2427449012931889134}
   - component: {fileID: 1756644177153451192}
+  - component: {fileID: 3190309125225051604}
   m_Layer: 0
   m_Name: Door
   m_TagString: InteractableObject
@@ -132,23 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2427449012931889134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7477282867568643838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25c552c1ff4dbb6459c31b96b5dd3905, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  type: 0
-  isOpen: 0
-  doorSprite: {fileID: 7550721502169764394}
-  interactableObject: {fileID: 1756644177153451192}
 --- !u!114 &1756644177153451192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +144,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f68bba0c13c984992e413bc79afa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3190309125225051604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7477282867568643838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc4d0d79ac7c2f47ab3aa909149195d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  value: 0
+  doorTile: {fileID: 4102959040905363660}
+  isOpen: 0
+  doorSprite: {fileID: 7550721502169764394}
+  interactableObject: {fileID: 1756644177153451192}
 --- !u!1 &9047672543347342820
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +175,6 @@ GameObject:
   - component: {fileID: 6500886351523996410}
   - component: {fileID: 4656757942830312385}
   - component: {fileID: 4102959040905363660}
-  - component: {fileID: 2667711151732978644}
   m_Layer: 7
   m_Name: DoorTile(Enter)
   m_TagString: Untagged
@@ -348,19 +348,6 @@ MonoBehaviour:
   doorType: 0
   normalLevelParent: {fileID: 0}
   secretRoomParent: {fileID: 0}
-  door: {fileID: 2427449012931889134}
-  doorSprite: {fileID: 7550721502169764394}
-  currentHeight: 0
+  door: {fileID: 3190309125225051604}
+  alreadyEnter: 0
   isGenerateDone: 0
---- !u!114 &2667711151732978644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9047672543347342820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f68bba0c13c984992e413bc79afa36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -151,12 +151,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   value: 1
-  startPos: {x: 0, y: 0, z: 0}
+  trackingPos: {x: 5.25, y: 0, z: 0}
   warningTime: 2
   isWarning: 0
   warningSign: {fileID: 3701172715402529608}
   warningSignAnimator: {fileID: 3627695913651224210}
-  camEdgeX: 0
 --- !u!61 &7430786589396715476
 BoxCollider2D:
   m_ObjectHideFlags: 0
