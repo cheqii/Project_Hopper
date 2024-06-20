@@ -8,17 +8,8 @@ using UnityEngine.Serialization;
 
 namespace TilesScript
 {
-    public enum DoorType
-    {
-        EnterDoor,
-        ExitDoor
-    }
-    
     public class DoorTile : TilesBlock
     {
-        [Header("Door Type")]
-        [SerializeField] private DoorType doorType;
-
         [Header("Door Destination")] 
         [SerializeField] private Transform normalLevelParent;
         public Transform NormalLevelParent
@@ -81,16 +72,11 @@ namespace TilesScript
             if(alreadyEnter) return;
             
             door.EnterTheDoor();
-            // door.open
-            //     EnterSecretRoom();
-            // if (doorType == DoorType.ExitDoor)
-            //     ExitSecretRoom();
         }
 
         protected override void OnCollisionEnter2D(Collision2D other)
         {
             base.OnCollisionEnter2D(other);
         }
-
     }
 }

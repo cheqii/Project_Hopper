@@ -13,9 +13,8 @@ namespace ObjectInGame
         [SerializeField] private Vector3 trackingPos;
         [SerializeField] private float warningTime;
         private WaitForSeconds _warning;
-
+        
         [SerializeField] private bool isWarning;
-
 
         [Header("Warning Sign")]
         [SerializeField] private GameObject warningSign;
