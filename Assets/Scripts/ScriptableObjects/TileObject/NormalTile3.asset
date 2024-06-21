@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: NormalTile3
   m_EditorClassIdentifier: 
   name: NormalTile
-  prefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
-  state: 0
+  prefab: {fileID: 9047672543347342820, guid: e5a38414db23bcd4c87259a94d4c9fa3, type: 3}
   generateChance: 60

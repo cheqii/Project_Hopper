@@ -179,6 +179,8 @@ MonoBehaviour:
   highScoreText: {fileID: 1900918981}
   gameOverPanel: {fileID: 380873764}
   currentGameState: 0
+  normalGenerate: {fileID: 893951788}
+  secretRoomGenerate: {fileID: 893951788}
 --- !u!114 &45086116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,15 +1070,31 @@ MonoBehaviour:
   _player: {fileID: 644898870}
   retainStep: 7
   normalTilePrefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
-  allTiles:
+  tileLevel1:
   - {fileID: 11400000, guid: 303a86d2334f985479df50a9c64ed68a, type: 2}
   - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
-  - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
+  - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
+  - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
   - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
+  - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
+  - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
+  tileLevel2:
+  - {fileID: 11400000, guid: 88ff03b2cb7d78f4896c82f0d8f8d704, type: 2}
+  - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
+  - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
+  - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
+  - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
+  - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
+  - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
+  tileLevel3:
+  - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
+  - {fileID: 11400000, guid: 8c6b5cafebdd08742ad69a551ee305e7, type: 2}
   - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
   - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
-  - {fileID: 11400000, guid: 8c6b5cafebdd08742ad69a551ee305e7, type: 2}
+  - {fileID: 11400000, guid: 92218feb0297df34fa7d465bd23ba983, type: 2}
   - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
+  - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
+  - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
   tileMaxHeight: 0.2
   currentHeight: 0
   fallingTile: {fileID: 9047672543347342820, guid: a5ddef7dd036ba144a68db5b7a94f46d, type: 3}
@@ -2013,6 +2031,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: jumpForce
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1

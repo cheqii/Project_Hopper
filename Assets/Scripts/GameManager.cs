@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Character;
 using DG.Tweening;
+using LevelGenerate;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,6 +42,9 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public GameState currentGameState = GameState.Level1;
 
+    public LevelGenerator normalGenerate;
+    public LevelGenerator secretRoomGenerate;
+
     private void Awake()
     {
         if (_instance == null) _instance = this;
@@ -72,7 +76,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void ChangeState(GameState newState)
+    private void ChangeState(GameState newState)
     {
         currentGameState = newState;
     }

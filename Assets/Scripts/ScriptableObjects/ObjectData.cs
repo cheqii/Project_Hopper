@@ -7,8 +7,7 @@ namespace ScriptableObjects
     {
         public string name;
         public GameObject prefab;
-
-        public GameState state;
+        
         [Range(0, 100)] 
         public int generateChance;
     }
