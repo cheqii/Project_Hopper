@@ -71,6 +71,11 @@ public class GameManager : MonoBehaviour
         DOTween.KillAll();
     }
 
+    public void RestartGame()
+    {
+        
+    }
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -106,7 +111,7 @@ public class GameManager : MonoBehaviour
         CheckChangeStateByScore();
     }
 
-    public void UpdateHighScore()
+    private void UpdateHighScore()
     {
         highScoreText.text = $"Best Run: {LoadHighScore()}";
     }

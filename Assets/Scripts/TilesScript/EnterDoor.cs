@@ -16,7 +16,7 @@ namespace TilesScript
             doorTile.NormalLevelParent.gameObject.SetActive(false);
 
             if(doorTile.IsGenerateDone) return;
-            LevelGenerator.Instance.GenerateTileSecretRoom(doorTile.transform.position.y, doorTile.transform.position, doorTile.gameObject);
+            // LevelGenerator.Instance.GenerateTileSecretRoom(doorTile.transform.position.y, doorTile.transform.position, doorTile.gameObject);
             doorTile.IsGenerateDone = true;
         }
     }
