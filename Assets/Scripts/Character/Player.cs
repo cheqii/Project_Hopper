@@ -9,7 +9,12 @@ namespace Character
 {
     public class Player : Character
     {
+        [Header("Start Position")]
+        [SerializeField] private Vector3 startPos;
+        public Vector3 StartPos => startPos;
+        
         [SerializeField] private float jumpForce;
+        
         [Header("Input System")]
         private PlayerActionInput _control;
         public PlayerActionInput _Control => _control;

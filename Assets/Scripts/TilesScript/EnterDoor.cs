@@ -12,12 +12,16 @@ namespace TilesScript
             doorTile.AlreadyEnter = true;
             _Player.CurrentRoom = RoomState.SecretRoom;
 
-            doorTile.SecretRoomParent.gameObject.SetActive(true);
-            doorTile.NormalLevelParent.gameObject.SetActive(false);
-
-            if(doorTile.IsGenerateDone) return;
-            // LevelGenerator.Instance.GenerateTileSecretRoom(doorTile.transform.position.y, doorTile.transform.position, doorTile.gameObject);
-            doorTile.IsGenerateDone = true;
+            
+            doorEvent.Raise();
+            // doorTile.SecretRoomParent.gameObject.SetActive(true);
+            // doorTile.NormalLevelParent.gameObject.SetActive(false);
+            //
+            
+            GameManager._instance.secretRoomGenerate.GenerateTile(doorTile.transform.position.y, doorTile.transform.position, doorTile.gameObject);
+            // if(doorTile.IsGenerateDone) return;
+            // GameManager._instance.secretRoomGenerate.GenerateTile(doorTile.transform.position.y, doorTile.transform.position, doorTile.gameObject);
+            // doorTile.IsGenerateDone = true;
         }
     }
 }

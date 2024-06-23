@@ -135,6 +135,9 @@ GameObject:
   - component: {fileID: 45086115}
   - component: {fileID: 45086116}
   - component: {fileID: 45086117}
+  - component: {fileID: 45086118}
+  - component: {fileID: 45086120}
+  - component: {fileID: 45086119}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -179,8 +182,76 @@ MonoBehaviour:
   highScoreText: {fileID: 1900918981}
   gameOverPanel: {fileID: 380873764}
   currentGameState: 0
-  normalGenerate: {fileID: 893951788}
-  secretRoomGenerate: {fileID: 893951788}
+  normalGenerate:
+    _player: {fileID: 0}
+    retainStep: 7
+    tileMaxHeight: 0.2
+    currentHeight: 0
+    movingCoin: {fileID: 5023694764882526484, guid: 52a62bc6eb5e78e40bd097bc15ee4a4f, type: 3}
+    normalTileParent: {fileID: 174793486}
+    normalTilePrefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
+    tileStage:
+      tileDict:
+      - levelName: Level 1
+        key: 0
+        tileStageProperty:
+          tiles:
+          - {fileID: 11400000, guid: 303a86d2334f985479df50a9c64ed68a, type: 2}
+          - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
+          - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
+          - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
+          - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
+          - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
+          monsters:
+          - {fileID: 11400000, guid: d31a058ea63a35d4baaecddc7ff74f9a, type: 2}
+          - {fileID: 11400000, guid: 00edbc252bd961849b4d6800e9ee71f3, type: 2}
+      - levelName: Level 2
+        key: 1
+        tileStageProperty:
+          tiles:
+          - {fileID: 11400000, guid: 88ff03b2cb7d78f4896c82f0d8f8d704, type: 2}
+          - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
+          - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
+          - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
+          - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
+          - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
+          - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
+          monsters:
+          - {fileID: 11400000, guid: d31a058ea63a35d4baaecddc7ff74f9a, type: 2}
+          - {fileID: 11400000, guid: 00edbc252bd961849b4d6800e9ee71f3, type: 2}
+          - {fileID: 11400000, guid: 646779b604a5de546ae624637d7ce31c, type: 2}
+      - levelName: Level 3
+        key: 2
+        tileStageProperty:
+          tiles:
+          - {fileID: 11400000, guid: 92218feb0297df34fa7d465bd23ba983, type: 2}
+          - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
+          - {fileID: 11400000, guid: 8c6b5cafebdd08742ad69a551ee305e7, type: 2}
+          - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
+          - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
+          - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
+          - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
+          - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
+          monsters:
+          - {fileID: 11400000, guid: 646779b604a5de546ae624637d7ce31c, type: 2}
+          - {fileID: 11400000, guid: 26cb32ef4f6131449b26fee7a0d36686, type: 2}
+          - {fileID: 11400000, guid: 7a654de66afe7854ba003f92fb3a6fef, type: 2}
+    allObject:
+    - {fileID: 11400000, guid: 1c4601e8e7c45544e831c0c5f244bd5f, type: 2}
+    - {fileID: 11400000, guid: 8bb8c85fef59b234292d82e69b06ca52, type: 2}
+    - {fileID: 11400000, guid: 4a451d40d448c8741bf9303b900e183c, type: 2}
+    - {fileID: 11400000, guid: f9547f6206101e742aa7a29f2808a7e4, type: 2}
+  secretRoomGenerate:
+    _player: {fileID: 0}
+    retainStep: 7
+    tileMaxHeight: 0.2
+    currentHeight: 0
+    movingCoin: {fileID: 5023694764882526484, guid: 52a62bc6eb5e78e40bd097bc15ee4a4f, type: 3}
+    secretRoomParent: {fileID: 966204200}
+    fallingTile: {fileID: 9047672543347342820, guid: a5ddef7dd036ba144a68db5b7a94f46d, type: 3}
+    exitDoor: {fileID: 9047672543347342820, guid: da1e58e3f146ee34cac3515038bf244b, type: 3}
+  normalTileMove: {fileID: 174793487}
+  secretTileMove: {fileID: 966204201}
 --- !u!114 &45086116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +294,138 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &45086118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45086112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 6c917d72c93560446baaba347535eab5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 45086115}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: GenerateTileByStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 45086115}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: CheckMoveGroundTile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &45086119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45086112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: bf3b5e22d3a443b47be7a2418263491e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 45086115}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetTileNormalRoom
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 45086115}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetTileSecretRoom
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 45086115}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ReleaseSecretRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &45086120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45086112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: b5ac7ac25a85e864fa1048bd4b5defc4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 45086115}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetTileNormalRoom
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 45086115}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetTileSecretRoom
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &174793485
 GameObject:
@@ -268,9 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d139f2607ca62c44d8664c0be4101c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 644898870}
   moveDuration: 0.5
-  tileInRoom: 0
 --- !u!1 &178558483
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +1165,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
   m_PrefabInstance: {fileID: 2931928129090105148}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743554729}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01502cdc13a3a5b42b9d91a7bb163b0e, type: 3}
@@ -1030,95 +1231,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842527418}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &893951787
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 893951789}
-  - component: {fileID: 893951788}
-  m_Layer: 0
-  m_Name: LevelGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &893951788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893951787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f5125497c4dc2b429764410d747e07f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 644898870}
-  retainStep: 7
-  normalTilePrefab: {fileID: 9047672543347342820, guid: dd761ca97f3677b4bb22d1aee63ee9d9, type: 3}
-  tileLevel1:
-  - {fileID: 11400000, guid: 303a86d2334f985479df50a9c64ed68a, type: 2}
-  - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
-  - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
-  - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
-  - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
-  - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
-  - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
-  tileLevel2:
-  - {fileID: 11400000, guid: 88ff03b2cb7d78f4896c82f0d8f8d704, type: 2}
-  - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
-  - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
-  - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
-  - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
-  - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
-  - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
-  tileLevel3:
-  - {fileID: 11400000, guid: 48d5d92eba318b440b76550aade18b91, type: 2}
-  - {fileID: 11400000, guid: 8c6b5cafebdd08742ad69a551ee305e7, type: 2}
-  - {fileID: 11400000, guid: 3ef5befc24257844c83b0395c0a33867, type: 2}
-  - {fileID: 11400000, guid: 6e61932197beb024cbf6bee2d6abd115, type: 2}
-  - {fileID: 11400000, guid: 92218feb0297df34fa7d465bd23ba983, type: 2}
-  - {fileID: 11400000, guid: 61d83a2485955194d9f73f89002766ab, type: 2}
-  - {fileID: 11400000, guid: 2ee087668dbd8234eb1dfd29b8382f87, type: 2}
-  - {fileID: 11400000, guid: 866b304a206f7564c82bcff4723acb0c, type: 2}
-  tileMaxHeight: 0.2
-  currentHeight: 0
-  fallingTile: {fileID: 9047672543347342820, guid: a5ddef7dd036ba144a68db5b7a94f46d, type: 3}
-  exitDoor: {fileID: 9047672543347342820, guid: da1e58e3f146ee34cac3515038bf244b, type: 3}
-  secretRoomParent: {fileID: 966204200}
-  allMonsters:
-  - {fileID: 11400000, guid: 646779b604a5de546ae624637d7ce31c, type: 2}
-  - {fileID: 11400000, guid: d31a058ea63a35d4baaecddc7ff74f9a, type: 2}
-  - {fileID: 11400000, guid: 00edbc252bd961849b4d6800e9ee71f3, type: 2}
-  - {fileID: 11400000, guid: 26cb32ef4f6131449b26fee7a0d36686, type: 2}
-  - {fileID: 11400000, guid: 7a654de66afe7854ba003f92fb3a6fef, type: 2}
-  allObject:
-  - {fileID: 11400000, guid: 8bb8c85fef59b234292d82e69b06ca52, type: 2}
-  - {fileID: 11400000, guid: 1c4601e8e7c45544e831c0c5f244bd5f, type: 2}
-  - {fileID: 11400000, guid: f9547f6206101e742aa7a29f2808a7e4, type: 2}
-  - {fileID: 11400000, guid: 4a451d40d448c8741bf9303b900e183c, type: 2}
-  movingCoin: {fileID: 5023694764882526484, guid: 52a62bc6eb5e78e40bd097bc15ee4a4f, type: 3}
---- !u!4 &893951789
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893951787}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1305,9 +1417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d139f2607ca62c44d8664c0be4101c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 644898870}
   moveDuration: 0.5
-  tileInRoom: 1
 --- !u!1 &1317987268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,7 +1725,7 @@ MonoBehaviour:
   lavaIncreaseSpeed: 0.2
   decreaseLavaValue: 0.5
   duration: 2
-  activateLava: 1
+  activateLava: 0
   gameOverEvent: {fileID: 11400000, guid: b74923e500930ca49b48c35780880c1e, type: 2}
 --- !u!1 &1554302121
 GameObject:
@@ -1752,39 +1862,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554302121}
   m_CullTransparentMesh: 1
---- !u!1 &1743554729 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7839029507602420194, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-  m_PrefabInstance: {fileID: 2931928129090105148}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1743554736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743554729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: bf3b5e22d3a443b47be7a2418263491e, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 893951788}
-        m_TargetAssemblyTypeName: LevelGenerator, Assembly-CSharp
-        m_MethodName: ReleaseSecretRoom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1900918979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,7 +2110,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: jumpForce
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: startPos.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: startPos.y
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2081,7 +2166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2090,30 +2175,36 @@ PrefabInstance:
     - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 174793487}
+      objectReference: {fileID: 0}
     - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 893951788}
+      objectReference: {fileID: 0}
     - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 966204201}
     - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GeneratePlatformByStep
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
       value: MoveTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: LevelGenerator, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
       value: MoveGroundTile, Assembly-CSharp
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7839029507602420194, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1743554736}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
 --- !u!1001 &7510493422984527680
 PrefabInstance:
@@ -2181,6 +2272,5 @@ SceneRoots:
   - {fileID: 2931928129090105148}
   - {fileID: 842527421}
   - {fileID: 242009851}
-  - {fileID: 893951789}
   - {fileID: 45086114}
   - {fileID: 1335388219}

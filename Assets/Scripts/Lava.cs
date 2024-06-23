@@ -27,13 +27,15 @@ public class Lava : MonoBehaviour
     {
         if (other.CompareTag("Melt"))
         {
-            PoolManager.ReleaseObject(other.gameObject);
+            var tiles = other.GetComponent<FallingTile>();
+            if(tiles.IsFalling)
+                PoolManager.ReleaseObject(tiles.gameObject);
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
             gameOverEvent.Raise();
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 

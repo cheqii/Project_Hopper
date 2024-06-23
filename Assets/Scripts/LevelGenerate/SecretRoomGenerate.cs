@@ -1,9 +1,13 @@
+using System;
+using System.Collections.Generic;
 using ObjectPool;
 using TilesScript;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace LevelGenerate
 {
+    [Serializable]
     public class SecretRoomGenerate: LevelGenerator
     {
         [SerializeField] private Transform secretRoomParent;
@@ -53,7 +57,7 @@ namespace LevelGenerate
             newMovingCoin.transform.SetParent(tiles.transform);
         }
         
-        public void ReleaseSecretRoom()
+        public override void ReleaseAllTileInStage()
         {
             if(_player.CurrentRoom == RoomState.SecretRoom) return;
             foreach (Transform child in secretRoomParent)

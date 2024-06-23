@@ -24,6 +24,8 @@ namespace ObjectInGame
 
         [Header("Interactable")]
         [SerializeField] private InteractableObject interactableObject;
+
+        [SerializeField] protected Nf_GameEvent doorEvent;
     
         // Start is called before the first frame update
         void Start()

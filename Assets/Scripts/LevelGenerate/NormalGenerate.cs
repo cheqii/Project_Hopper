@@ -1,32 +1,37 @@
+using System;
 using System.Collections.Generic;
 using Character.Monster;
 using ObjectPool;
 using ScriptableObjects;
 using TilesScript;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace LevelGenerate
 {
+    [Serializable]
     public class NormalGenerate : LevelGenerator
     {
         #region -Tiles-
-        
+
+        [Space]
+        [SerializeField] private Transform normalTileParent;
         [SerializeField] private GameObject normalTilePrefab;
+
+        #region -Tile Stage with Dictionary-
+
+        [Space] 
+        [SerializeField] private TileStageDictionary tileStage;
+        public TileStageDictionary TileStage => tileStage;
         
-        [Header("Generate Tile Level")]
-        [SerializeField] private List<Tiles> tileLevel1;
-        [SerializeField] private List<Tiles> tileLevel2;
-        [SerializeField] private List<Tiles> tileLevel3;
+        private Dictionary<GameState, TileStageProperty> _dictionary;
+        public Dictionary<GameState, TileStageProperty> _Dictionary
+        {
+            get => _dictionary;
+            set => _dictionary = value;
+        }
 
         #endregion
-
-        #region -Monsters-
-        
-        [Header("Generate Monster")] 
-        [SerializeField] private List<MonsterData> monsterLevel1;
-        [SerializeField] private List<MonsterData> monsterLevel2;
-        [SerializeField] private List<MonsterData> monsterLevel3;
 
         #endregion
 
@@ -63,22 +68,16 @@ namespace LevelGenerate
             tile.SetToInitialTile(position);
 
             if(initialGenerate) return;
-            // GenerateObject(position, newTile, false);
-            // GenerateMonsterOnTile(position, newTile);
+            GenerateObject(position, newTile, false);
+            GenerateMonsterOnTile(position, newTile);
         }
         
-        private List<Tiles> GetTileByLevel()
+        private List<Tiles> GetTileByLevel(GameState state)
         {
-            switch (GameManager._instance.currentGameState)
+            if (_dictionary.TryGetValue(state, out var value))
             {
-                case GameState.Level1:
-                    return tileLevel1;
-                case GameState.Level2:
-                    return tileLevel2;
-                case GameState.Level3:
-                    return tileLevel3;
+                return value.tiles;
             }
-
             return null;
         }
         
@@ -86,14 +85,14 @@ namespace LevelGenerate
         {
             var totalChance = 0;
             
-            foreach (var tiles in GetTileByLevel())
+            foreach (var tiles in GetTileByLevel(GameManager._instance.currentGameState))
             {
                 totalChance += tiles.generateChance;
             }
 
             var rand = Random.Range(0, totalChance);
         
-            foreach (var tiles in GetTileByLevel())
+            foreach (var tiles in GetTileByLevel(GameManager._instance.currentGameState))
             {
                 if (rand < tiles.generateChance)
                 {
@@ -126,31 +125,25 @@ namespace LevelGenerate
             newMonster.transform.SetParent(tiles.transform);
         }
 
-        private List<MonsterData> GetMonsterByLevel()
+        private List<MonsterData> GetMonsterByLevel(GameState state)
         {
-            switch (GameManager._instance.currentGameState)
+            if (_dictionary.TryGetValue(state, out var value))
             {
-                case GameState.Level1:
-                    return monsterLevel1;
-                case GameState.Level2:
-                    return monsterLevel2;
-                case GameState.Level3:
-                    return monsterLevel3;
+                return value.monsters;
             }
-
             return null;
         }
 
         private GameObject GetRandomMonster()
         {
             var totalChance = 0;
-            foreach (var monster in GetMonsterByLevel())
+            foreach (var monster in GetMonsterByLevel(GameManager._instance.currentGameState))
             {
                 totalChance += monster.generateChance;
             }
 
             var rand = Random.Range(0, totalChance);
-            foreach (var monster in GetMonsterByLevel())
+            foreach (var monster in GetMonsterByLevel(GameManager._instance.currentGameState))
             {
                 if (rand < monster.generateChance)
                 {
@@ -210,6 +203,13 @@ namespace LevelGenerate
         }
 
         #endregion
-        
+
+        public override void ReleaseAllTileInStage()
+        {
+            foreach (Transform child in normalTileParent)
+            {
+                PoolManager.ReleaseObject(child.gameObject);
+            }
+        }
     }
 }

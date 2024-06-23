@@ -1,18 +1,28 @@
+using System;
 using Character;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace LevelGenerate
 {
-    public class LevelGenerator : MonoBehaviour
+    [Serializable]
+    public class LevelGenerator
     {
         [SerializeField] protected Player _player;
 
+        public Player _Player
+        {
+            get => _player;
+            set => _player = value;
+        }
+
         [Header("Generate Tile Attributes")]
         [Range(0, 10)]
+        
         [SerializeField] protected int retainStep = 7;
+        public int RetainStep => retainStep;
 
-        [SerializeField] protected float tileMaxHeight = 0.2f;
+        [SerializeField] private float tileMaxHeight = 0.2f; 
         [SerializeField] protected float currentHeight = 0f;
 
         [Header("Moving Coin")]
@@ -70,6 +80,11 @@ namespace LevelGenerate
         }
 
         #endregion
+
+        public virtual void ReleaseAllTileInStage()
+        {
+            
+        }
 
         protected Vector3 RoundVector(Vector3 vector)
         {

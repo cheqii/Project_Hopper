@@ -162,7 +162,7 @@ MonoBehaviour:
   isOpen: 1
   doorSprite: {fileID: 7550721502169764394}
   interactableObject: {fileID: 1893122567694465705}
-  exitRoomEvent: {fileID: 11400000, guid: bf3b5e22d3a443b47be7a2418263491e, type: 2}
+  doorEvent: {fileID: 11400000, guid: bf3b5e22d3a443b47be7a2418263491e, type: 2}
 --- !u!1 &9047672543347342820
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +346,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  doorType: 1
   normalLevelParent: {fileID: 0}
   secretRoomParent: {fileID: 0}
   door: {fileID: 1409618353998034756}

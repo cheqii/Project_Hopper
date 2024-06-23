@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Character;
 using DG.Tweening;
 using LevelGenerate;
+using ObjectPool;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,8 +28,9 @@ public class GameManager : MonoBehaviour
     public GameObject heartPrefab;
     public Transform heartContainer;
     public List<Image> heartImage;
-    
-    
+
+    #region -Score-
+
     [Header("Player Score")] 
     public int currentPlayerScore;
     public int highScore;
@@ -37,13 +39,27 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI currentScoreText;
     public TextMeshProUGUI highScoreText;
 
+    #endregion
+
     public GameObject gameOverPanel;
 
     [Header("Game State")]
     public GameState currentGameState = GameState.Level1;
 
-    public LevelGenerator normalGenerate;
-    public LevelGenerator secretRoomGenerate;
+    #region -Tiles-
+
+    [Space]
+    [Header("Normal Generate")]
+    public NormalGenerate normalGenerate;
+    [Header("Secret Room Generate")]
+    public SecretRoomGenerate secretRoomGenerate;
+
+    [Header("Move tile")]
+    [SerializeField] private MoveGroundTile normalTileMove;
+    [SerializeField] private MoveGroundTile secretTileMove;
+
+    #endregion
+
 
     private void Awake()
     {
@@ -57,11 +73,58 @@ public class GameManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         highScore = LoadHighScore();
         InitialHeart(player.MaxHealth);
+
+        normalGenerate._Player = player;
+        secretRoomGenerate._Player = player;
+        
+        normalGenerate._Dictionary = normalGenerate.TileStage.ToDictionary();
+        
+        for (int i = 0; i <= normalGenerate.RetainStep; i++)
+            normalGenerate.GenerateTile(i, true);
     }
+
+    #region -Tile Functions-
+
+    public void GenerateTileByStep()
+    {
+        if(!player.PlayerCheckGround()) return;
+        if(player.CurrentRoom == RoomState.SecretRoom) return;
+        var step = normalGenerate.RetainStep;
+        normalGenerate.GenerateTile(++step);
+    }
+
+    public void CheckMoveGroundTile()
+    {
+        if (player.CurrentRoom == RoomState.NormalRoom)
+            normalTileMove.MoveTile();
+        else 
+            secretTileMove.MoveTile();
+    }
+
+    public void SetTileNormalRoom(bool normalTile)
+    {
+        normalTileMove.transform.gameObject.SetActive(normalTile);
+    }
+
+    public void SetTileSecretRoom(bool secretRoom)
+    {
+        secretTileMove.transform.gameObject.SetActive(secretRoom);
+    }
+
+    public void ReleaseSecretRoom()
+    {
+        if(player.CurrentRoom == RoomState.SecretRoom) return;
+        foreach (Transform child in secretTileMove.transform)
+        {
+            PoolManager.ReleaseObject(child.gameObject);
+        }
+    }
+
+    #endregion
 
     public void OnGameOver()
     {
@@ -73,7 +136,10 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        
+        gameOverPanel.SetActive(false);
+        player.transform.position = player.StartPos;
+        currentPlayerScore = 0;
+        UpdatePlayerScore(0);
     }
 
     public void LoadScene(string sceneName)
@@ -86,7 +152,7 @@ public class GameManager : MonoBehaviour
         currentGameState = newState;
     }
 
-    public void CheckChangeStateByScore()
+    private void CheckChangeStateByScore()
     {
         switch (currentPlayerScore)
         {
@@ -118,7 +184,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckForHighScore()
     {
-        int currentHighScore = PlayerPrefs.GetInt("HighScore", 0);
+        var currentHighScore = PlayerPrefs.GetInt("HighScore", 0);
         if(currentPlayerScore <=  currentHighScore) return;
         PlayerPrefs.SetInt("HighScore", currentPlayerScore);
         PlayerPrefs.Save();
