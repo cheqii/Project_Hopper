@@ -38,14 +38,6 @@ namespace LevelGenerate
 
         #region -Tile Generate Method-
 
-        public void GeneratePlatformByStep()
-        {
-            // if(!_player.PlayerCheckGround()) return;
-            // if(_player.CurrentRoom == RoomState.SecretRoom) return;
-            // var step = retainStep;
-            // GenerateTile(++step);
-        }
-
         public virtual void GenerateTile(int step , bool initialGenerate = false)
         {
             
@@ -74,7 +66,7 @@ namespace LevelGenerate
 
         #region -Generate Objects-
 
-        protected virtual void GenerateObject(Vector3 position, GameObject tiles, bool secretRoom)
+        protected virtual void GenerateObject(Vector3 position, GameObject tiles)
         {
             
         }

@@ -29,11 +29,14 @@ namespace Character.Monster
 
         protected WaitForSeconds _preAttack;
         protected WaitForSeconds _cooldownAttack;
+
+        [SerializeField] private GameObject detector;
         
         #region -Unity Event Methods-
 
         protected virtual void OnDisable()
         {
+            detector.SetActive(true);
             playerDetect = null;
             isAttacking = false;
         }
@@ -61,6 +64,7 @@ namespace Character.Monster
             health = maxHealth;
             _monsterHpBar.UpdateMonsterHealth(true);
             transform.position = startPos;
+            detector.SetActive(true);
         }
 
         public virtual void Attack() // set this method in animation event

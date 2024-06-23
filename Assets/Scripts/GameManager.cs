@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         if(!player.PlayerCheckGround()) return;
         if(player.CurrentRoom == RoomState.SecretRoom) return;
         var step = normalGenerate.RetainStep;
-        normalGenerate.GenerateTile(++step);
+        normalGenerate.GenerateTile(++step, false);
     }
 
     public void CheckMoveGroundTile()
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
 
     public void SetTileNormalRoom(bool normalTile)
     {
-        normalTileMove.transform.gameObject.SetActive(normalTile);
+        normalTileMove.transform.parent.gameObject.SetActive(normalTile);
     }
 
     public void SetTileSecretRoom(bool secretRoom)
@@ -132,14 +132,6 @@ public class GameManager : MonoBehaviour
         CheckForHighScore();
         UpdateHighScore();
         DOTween.KillAll();
-    }
-
-    public void RestartGame()
-    {
-        gameOverPanel.SetActive(false);
-        player.transform.position = player.StartPos;
-        currentPlayerScore = 0;
-        UpdatePlayerScore(0);
     }
 
     public void LoadScene(string sceneName)
@@ -182,7 +174,7 @@ public class GameManager : MonoBehaviour
         highScoreText.text = $"Best Run: {LoadHighScore()}";
     }
 
-    public void CheckForHighScore()
+    private void CheckForHighScore()
     {
         var currentHighScore = PlayerPrefs.GetInt("HighScore", 0);
         if(currentPlayerScore <=  currentHighScore) return;

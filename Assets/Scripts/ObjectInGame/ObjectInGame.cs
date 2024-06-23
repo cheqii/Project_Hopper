@@ -24,11 +24,9 @@ namespace ObjectInGame
     
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
-            {
-                _player = other.GetComponent<Player>();
-                TriggerAction(_player);
-            }
+            if (!other.CompareTag("Player")) return;
+            _player = other.GetComponent<Player>();
+            TriggerAction(_player);
         }
 
         protected virtual void TriggerAction(Player player)

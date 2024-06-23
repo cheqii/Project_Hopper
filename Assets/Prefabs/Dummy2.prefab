@@ -502,6 +502,7 @@ MonoBehaviour:
   animator: {fileID: 8687708763809998917}
   isAttacking: 0
   _monsterHpBar: {fileID: 1760648850007784208}
+  detector: {fileID: 2573546554817621211}
 --- !u!114 &3472903363102538062
 MonoBehaviour:
   m_ObjectHideFlags: 0

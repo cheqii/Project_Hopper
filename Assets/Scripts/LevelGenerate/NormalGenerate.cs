@@ -42,7 +42,7 @@ namespace LevelGenerate
 
         #endregion
 
-        public override void GenerateTile(int step, bool initialGenerate = false)
+        public override void GenerateTile(int step, bool initialGenerate)
         {
             base.GenerateTile(step, initialGenerate);
             var tilePrefab = normalTilePrefab;
@@ -68,7 +68,7 @@ namespace LevelGenerate
             tile.SetToInitialTile(position);
 
             if(initialGenerate) return;
-            GenerateObject(position, newTile, false);
+            GenerateObject(position, newTile);
             GenerateMonsterOnTile(position, newTile);
         }
         
@@ -160,7 +160,7 @@ namespace LevelGenerate
 
         #region -Generate Objects-
 
-        protected override void GenerateObject(Vector3 position, GameObject tiles, bool secretRoom)
+        protected override void GenerateObject(Vector3 position, GameObject tiles)
         {
             if (tiles == null) return;
 
@@ -198,8 +198,8 @@ namespace LevelGenerate
 
                 rand -= objectData.generateChance;
             }
-        
-            return allObject[0].prefab;
+
+            return null;
         }
 
         #endregion

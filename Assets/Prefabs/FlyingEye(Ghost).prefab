@@ -428,6 +428,7 @@ MonoBehaviour:
   animator: {fileID: 8050306219892039399}
   isAttacking: 0
   _monsterHpBar: {fileID: 4394324712019489942}
+  detector: {fileID: 1454292016648402921}
   isWarning: 0
   isFlying: 0
   minCooldown: 2

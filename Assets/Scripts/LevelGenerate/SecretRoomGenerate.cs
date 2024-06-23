@@ -40,7 +40,7 @@ namespace LevelGenerate
                 var tile = newTile.GetComponent<TilesBlock>();
                 tile._Player = _player;
             
-                GenerateObject(tilePos, newTile, true);
+                GenerateObject(tilePos, newTile);
             }
 
             var exitRoomTile = PoolManager.SpawnObject(exitDoor, RoundVector(new Vector3(randomTile + 1, doorYPos, 0f)), Quaternion.identity);
@@ -50,7 +50,7 @@ namespace LevelGenerate
             doorTile._Player = _player;
         }
 
-        protected override void GenerateObject(Vector3 position, GameObject tiles, bool secretRoom)
+        protected override void GenerateObject(Vector3 position, GameObject tiles)
         {
             var objectPos = RoundVector(new Vector3(tiles.transform.position.x, position.y + 1));
             var newMovingCoin = PoolManager.SpawnObject(movingCoin, RoundVector(objectPos), Quaternion.identity);
