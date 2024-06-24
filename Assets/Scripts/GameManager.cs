@@ -126,6 +126,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    #region -Game State-
+
     public void OnGameOver()
     {
         SoundManager.Instance.musicSource.Stop();
@@ -161,6 +163,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    #endregion
 
     #region *Score*
 
