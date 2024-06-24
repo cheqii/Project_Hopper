@@ -51,6 +51,7 @@ namespace ObjectInGame
         public void InteractWithObject(int damage = default)
         {
             if(isOpen) return;
+            SoundManager.Instance.PlaySFX("Trigger");
             isOpen = true;
             animator.SetTrigger("Interact");
             SpawnItem();

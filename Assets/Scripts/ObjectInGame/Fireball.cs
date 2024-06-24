@@ -92,6 +92,7 @@ namespace ObjectInGame
                 warningSign.SetActive(false);
             
             isWarning = true;
+            SoundManager.Instance.PlaySFX("Fireball");
         }
 
         private void FireballToPlayer()
@@ -106,6 +107,7 @@ namespace ObjectInGame
             while (true)
             {
                 yield return _warning;
+                SoundManager.Instance.PlaySFX("WarningFireball");
                 warningSignAnimator.SetTrigger("Flashing");
 
                 yield return _warning;

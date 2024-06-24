@@ -51,10 +51,5 @@ namespace TilesScript
             var endPos = new Vector3(transform.position.x, Vector3.down.y * 4.5f);
             transform.DOMove(endPos, 1f);
         }
-
-        public void SetFalling(bool checkFalling)
-        {
-            isFalling = checkFalling;
-        }
     }
 }

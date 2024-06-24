@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 
 public class Lava : MonoBehaviour
 {
+    [SerializeField] private Vector3 lavaStartPos;
     [SerializeField] private float lavaIncreaseSpeed;
     [SerializeField] private float decreaseLavaValue;
 
@@ -28,14 +29,14 @@ public class Lava : MonoBehaviour
         if (other.CompareTag("Melt"))
         {
             var tiles = other.GetComponent<FallingTile>();
-            if(tiles.IsFalling)
-                PoolManager.ReleaseObject(tiles.gameObject);
+            tiles.ReleaseTile();
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
-            gameOverEvent.Raise();
+            SoundManager.Instance.PlaySFX("Dead");
             other.gameObject.SetActive(false);
+            gameOverEvent.Raise();
         }
     }
 
@@ -47,6 +48,7 @@ public class Lava : MonoBehaviour
 
     public void DecreaseLava()
     {
+        if(GameManager._instance.player.CurrentRoom == RoomState.SecretRoom) return;
         if(transform.position.y <= -9f) return;
         StartCoroutine(SmoothDecrease());
     }
@@ -65,5 +67,10 @@ public class Lava : MonoBehaviour
         }
 
         transform.position = endPos;
+    }
+
+    public void ResetLava()
+    {
+        transform.position = lavaStartPos;
     }
 }

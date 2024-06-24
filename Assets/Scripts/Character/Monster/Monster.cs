@@ -76,6 +76,8 @@ namespace Character.Monster
 
         public override void TakeDamage(int damage)
         {
+            SoundManager.Instance.PlaySFX("EnemyHurt");
+            
             animator.ResetTrigger("Attack");
             animator.SetTrigger("Hurt");
 
@@ -122,6 +124,7 @@ namespace Character.Monster
 
         protected virtual void AttackingBehavior()
         {
+            SoundManager.Instance.PlaySFX("EnemyAttack");
             animator.SetTrigger("Attack");
             isAttacking = false;
         }

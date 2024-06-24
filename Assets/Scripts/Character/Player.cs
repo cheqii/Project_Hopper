@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using Interaction;
+using MoreMountains.Feedbacks;
 using UnityEngine.Serialization;
 
 namespace Character
@@ -44,6 +45,8 @@ namespace Character
         [Header("Player Action Event")]
         [SerializeField] private Nf_GameEvent jumpEvent;
         [SerializeField] private Nf_GameEvent gameOverEvent;
+
+        [SerializeField] private MMF_Player hurtFeedback;
 
         private Rigidbody2D rb;
         
@@ -93,6 +96,7 @@ namespace Character
             
             isGuard = false;
             jumpEvent.Raise();
+            SoundManager.Instance.PlaySFX("Jump");
             animator.SetTrigger("Jump");
             isGuard = false;
             
@@ -104,6 +108,7 @@ namespace Character
         
         private void Attack(InputAction.CallbackContext callback = default)
         {
+            SoundManager.Instance.PlaySFX("PlayerAttack");
             isGuard = false;
             animator.SetTrigger("Attack");
             isGuard = false;
@@ -113,6 +118,7 @@ namespace Character
 
         private void Guard(InputAction.CallbackContext callback = default)
         {
+            SoundManager.Instance.PlaySFX("Guard");
             animator.SetTrigger("IsGuard");
             isGuard = true;
             print("player is on guard");
@@ -124,6 +130,8 @@ namespace Character
         {
             if(isGuard) return;
             base.TakeDamage(damage);
+            hurtFeedback.PlayFeedbacks();
+            SoundManager.Instance.PlaySFX("Hurt");
             animator.SetTrigger("Hurt");
             GameManager._instance.UpdatePlayerHealthUI(false);
 

@@ -4,8 +4,10 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    public Sound[] sounds, sfxSounds;
 
+    public AudioSource musicSource, sfxSource;
+    
     public static SoundManager Instance;
     private void Awake()
     {
@@ -29,10 +31,10 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        Play("BGM");
+        PlayMusic("BGM");
     }
 
-    public void Play(string name)
+    public void PlayMusic(string name)
     {
         Sound s = Array.Find(sounds, sounds => sounds.name == name);
         if (s == null)
@@ -40,6 +42,20 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning($"Sound: {name} not found");
             return;
         }
-        s.source.Play();
+
+        musicSource.clip = s.clip;
+        musicSource.Play();
+    }
+
+    public void PlaySFX(string name)
+    {
+        Sound s = Array.Find(sfxSounds, sounds => sounds.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning($"Sound: {name} not found");
+            return;
+        }
+        
+        sfxSource.PlayOneShot(s.clip);
     }
 }

@@ -36,6 +36,7 @@ namespace ObjectInGame
 
         private void OpenTheDoor()
         {
+            SoundManager.Instance.PlaySFX("Trigger");
             isOpen = true;
             doorSprite.color = Color.gray;
         }

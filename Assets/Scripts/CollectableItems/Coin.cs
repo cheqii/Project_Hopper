@@ -14,6 +14,7 @@ namespace CollectableItems
         protected override void TriggerAction(Player player)
         {
             base.TriggerAction(player);
+            SoundManager.Instance.PlaySFX("GetCoin");
             GameManager._instance.UpdatePlayerScore(value);
             PoolManager.ReleaseObject(gameObject);
         }
