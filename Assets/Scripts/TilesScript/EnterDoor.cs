@@ -15,8 +15,7 @@ namespace TilesScript
             
             doorEvent.Raise();
 
-            GameManager._instance.secretRoomGenerate.GenerateTile(doorTile.transform.position.y, 
-                doorTile.transform.position, doorTile.gameObject);
+            GameManager._instance.secretRoomGenerate.GenerateTile(doorTile.transform.position.y, doorTile.transform.position, doorTile.gameObject);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Character.Monster;
+using ObjectInGame;
 using ObjectPool;
 using ScriptableObjects;
 using TilesScript;
@@ -174,10 +175,10 @@ namespace LevelGenerate
 
             var newObject = PoolManager.SpawnObject(GetRandomObject(), RoundVector(objectPos), Quaternion.identity);
             var _object = newObject.GetComponent<ObjectInGame.ObjectInGame>();
-        
+
             newObject.transform.SetParent(tiles.transform);
-            _object._Player = _player;
             _object.SetToInitialObject(objectPos);
+            _object._Player = _player;
         }
 
         private GameObject GetRandomObject()
@@ -203,13 +204,5 @@ namespace LevelGenerate
         }
 
         #endregion
-
-        public override void ReleaseAllTileInStage()
-        {
-            foreach (Transform child in normalTileParent)
-            {
-                PoolManager.ReleaseObject(child.gameObject);
-            }
-        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,13 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
+
+    private void Start()
+    {
+        bgmSlider.value = SoundManager.Instance.musicSource.volume;
+        sfxSlider.value = SoundManager.Instance.sfxSource.volume;
+    }
+
     public void MusicVolume()
     {
         SoundManager.Instance.MusicVolume(bgmSlider.value);

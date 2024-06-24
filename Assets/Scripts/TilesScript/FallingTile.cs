@@ -13,12 +13,6 @@ namespace TilesScript
 
         [SerializeField] private bool isFalling;
 
-        public bool IsFalling
-        {
-            get => isFalling;
-            set => isFalling = value;
-        }
-
         public override void SetToInitialTile(Vector3 startPos = default)
         {
             base.SetToInitialTile(startPos);

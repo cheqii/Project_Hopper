@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using Interaction;
 using MoreMountains.Feedbacks;
+using Unity.Mathematics;
 using UnityEngine.Serialization;
 
 namespace Character
@@ -47,6 +48,9 @@ namespace Character
         [SerializeField] private Nf_GameEvent gameOverEvent;
 
         [SerializeField] private MMF_Player hurtFeedback;
+
+        [SerializeField] private ParticleSystem bloodParticle;
+        private ParticleSystem bloodParticleInstance;
 
         private Rigidbody2D rb;
         
@@ -131,6 +135,7 @@ namespace Character
             if(isGuard) return;
             base.TakeDamage(damage);
             hurtFeedback.PlayFeedbacks();
+            SpawnBloodParticle();
             SoundManager.Instance.PlaySFX("Hurt");
             animator.SetTrigger("Hurt");
             GameManager._instance.UpdatePlayerHealthUI(false);
@@ -170,6 +175,11 @@ namespace Character
                 return interactable;
             }
             return null;
+        }
+
+        private void SpawnBloodParticle()
+        {
+            bloodParticleInstance = Instantiate(bloodParticle, transform);
         }
     }
 }

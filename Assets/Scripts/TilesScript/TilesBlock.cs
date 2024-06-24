@@ -62,9 +62,6 @@ namespace TilesScript
         public virtual void ReleaseTile()
         {
             PoolManager.ReleaseObject(gameObject);
-            
-            if(objectOnTile == null) return;
-            PoolManager.ReleaseObject(objectOnTile);
         }
 
         protected virtual void StartAction()

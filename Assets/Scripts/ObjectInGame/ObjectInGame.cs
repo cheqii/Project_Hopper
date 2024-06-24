@@ -19,7 +19,7 @@ namespace ObjectInGame
 
         public virtual void SetToInitialObject(Vector3 startPos = default)
         {
-            transform.position = startPos;
+            // transform.position = startPos;
         }
     
         protected virtual void OnTriggerEnter2D(Collider2D other)

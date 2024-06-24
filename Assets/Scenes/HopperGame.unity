@@ -482,7 +482,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3799,7 +3799,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: GetCoin
     clip: {fileID: 8300000, guid: 695b653b5caa3ae4299b823eafcfaaa6, type: 3}
-    volume: 0.125
+    volume: 0.01
     pitch: 1
     loops: 0
     source: {fileID: 0}
@@ -4964,6 +4964,10 @@ PrefabInstance:
       propertyPath: hurtFeedback
       value: 
       objectReference: {fileID: 1032813464}
+    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+      propertyPath: bloodParticle
+      value: 
+      objectReference: {fileID: 7913749437518634134, guid: bbe561763cc09d5448e01ab05263cbe0, type: 3}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -5105,6 +5109,18 @@ PrefabInstance:
     - target: {fileID: 3216816078577923547, guid: 3a83f1b4d76851d4b8f7d1453c9f0106, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780294292105066984, guid: 3a83f1b4d76851d4b8f7d1453c9f0106, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.26415092
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780294292105066984, guid: 3a83f1b4d76851d4b8f7d1453c9f0106, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.2344547
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780294292105066984, guid: 3a83f1b4d76851d4b8f7d1453c9f0106, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.21555711
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
