@@ -3907,86 +3907,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e6009a2e78c8441a1b8a7e031ef4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: BGM
-    clip: {fileID: 8300000, guid: d0bf1437f6cbd164baba5d661ba6e976, type: 3}
-    volume: 1
-    pitch: 1
-    loops: 1
-    source: {fileID: 0}
-  sfxSounds:
-  - name: Hurt
-    clip: {fileID: 8300000, guid: cf0636b64d023414fa93ac5712f18895, type: 3}
-    volume: 1
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: PlayerAttack
-    clip: {fileID: 8300000, guid: 8db249bade687c84ca26516004074489, type: 3}
-    volume: 1
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: Guard
-    clip: {fileID: 8300000, guid: e37bf252276547a479f91d764cee7fc8, type: 3}
-    volume: 1
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: GetCoin
-    clip: {fileID: 8300000, guid: 695b653b5caa3ae4299b823eafcfaaa6, type: 3}
-    volume: 0.01
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: EnemyHurt
-    clip: {fileID: 8300000, guid: 50c762ef35818ed4eb6cc7a752030625, type: 3}
-    volume: 1
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: EnemyAttack
-    clip: {fileID: 8300000, guid: b14fe417cac695d49943832d8bb6ba96, type: 3}
-    volume: 0.35
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: WarningFireball
-    clip: {fileID: 8300000, guid: 1d058259a26dc314f8bd3fabbfd1691b, type: 3}
-    volume: 0.35
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: Jump
-    clip: {fileID: 8300000, guid: df03fc71a9ae02447bf2d6b5573e5375, type: 3}
-    volume: 0.35
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: Fireball
-    clip: {fileID: 8300000, guid: 438e19a5537bde8418c424e99b1fd418, type: 3}
-    volume: 0.35
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: Trigger
-    clip: {fileID: 8300000, guid: d36cf1e20a2320f469da1f33e77347e7, type: 3}
-    volume: 0.5
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: Dead
-    clip: {fileID: 8300000, guid: 7b6dc27779d363e4f887ec72ede435ed, type: 3}
-    volume: 1
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
-  - name: Potion
-    clip: {fileID: 8300000, guid: 572694a844989e846989d18340f1739e, type: 3}
-    volume: 0.35
-    pitch: 1
-    loops: 0
-    source: {fileID: 0}
+  MusicSound:
+    soundDict:
+    - key: BGM
+      sound:
+        clip: {fileID: 8300000, guid: d0bf1437f6cbd164baba5d661ba6e976, type: 3}
+        volume: 1
+        pitch: 1
+        loops: 1
+        source: {fileID: 0}
+  SFXSound:
+    soundDict:
+    - key: Hurt
+      sound:
+        clip: {fileID: 8300000, guid: cf0636b64d023414fa93ac5712f18895, type: 3}
+        volume: 1
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: PlayerAttack
+      sound:
+        clip: {fileID: 8300000, guid: 8db249bade687c84ca26516004074489, type: 3}
+        volume: 1
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: Guard
+      sound:
+        clip: {fileID: 8300000, guid: e37bf252276547a479f91d764cee7fc8, type: 3}
+        volume: 1
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: GetCoin
+      sound:
+        clip: {fileID: 8300000, guid: 695b653b5caa3ae4299b823eafcfaaa6, type: 3}
+        volume: 0.01
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: EnemyHurt
+      sound:
+        clip: {fileID: 8300000, guid: 50c762ef35818ed4eb6cc7a752030625, type: 3}
+        volume: 1
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: EnemyAttack
+      sound:
+        clip: {fileID: 8300000, guid: b14fe417cac695d49943832d8bb6ba96, type: 3}
+        volume: 0.35
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: WarningFireball
+      sound:
+        clip: {fileID: 8300000, guid: 1d058259a26dc314f8bd3fabbfd1691b, type: 3}
+        volume: 0.35
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: Jump
+      sound:
+        clip: {fileID: 8300000, guid: df03fc71a9ae02447bf2d6b5573e5375, type: 3}
+        volume: 0.35
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: Fireball
+      sound:
+        clip: {fileID: 8300000, guid: 438e19a5537bde8418c424e99b1fd418, type: 3}
+        volume: 0.35
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: Trigger
+      sound:
+        clip: {fileID: 8300000, guid: d36cf1e20a2320f469da1f33e77347e7, type: 3}
+        volume: 0.5
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: Dead
+      sound:
+        clip: {fileID: 8300000, guid: 7b6dc27779d363e4f887ec72ede435ed, type: 3}
+        volume: 1
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
+    - key: Potion
+      sound:
+        clip: {fileID: 8300000, guid: 572694a844989e846989d18340f1739e, type: 3}
+        volume: 0.35
+        pitch: 1
+        loops: 0
+        source: {fileID: 0}
   musicSource: {fileID: 133065112}
   sfxSource: {fileID: 1453273606}
 --- !u!4 &1377050192

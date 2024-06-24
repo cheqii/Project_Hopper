@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 public class SoundManager : MonoBehaviour
 {
-    public Sound[] sounds, sfxSounds;
+    public SoundDictionary MusicSound, SFXSound;
+    private Dictionary<string, Sound> musicDictionary, sfxDictionary;
 
     public AudioSource musicSource, sfxSource;
     
@@ -18,45 +21,26 @@ public class SoundManager : MonoBehaviour
         }
         
         DontDestroyOnLoad(gameObject);
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loops;
-        }
     }
 
     private void Start()
     {
+        musicDictionary = MusicSound.ToDictionary();
+        sfxDictionary = SFXSound.ToDictionary();
         PlayMusic("BGM");
     }
 
     public void PlayMusic(string name)
     {
-        Sound s = Array.Find(sounds, sounds => sounds.name == name);
-        if (s == null)
-        {
-            Debug.LogWarning($"Sound: {name} not found");
-            return;
-        }
-
-        musicSource.clip = s.clip;
+        if (!musicDictionary.TryGetValue(name, out var sound)) return;
+        musicSource.clip = sound.clip;
         musicSource.Play();
     }
 
     public void PlaySFX(string name)
     {
-        Sound s = Array.Find(sfxSounds, sounds => sounds.name == name);
-        if (s == null)
-        {
-            Debug.LogWarning($"Sound: {name} not found");
-            return;
-        }
-        
-        sfxSource.PlayOneShot(s.clip);
+        if (!sfxDictionary.TryGetValue(name, out var sound)) return;
+        sfxSource.PlayOneShot(sound.clip);
     }
 
     public void MusicVolume(float value)
