@@ -25,9 +25,6 @@ namespace LevelGenerate
         [SerializeField] private float tileMaxHeight = 0.2f; 
         [SerializeField] protected float currentHeight = 0f;
 
-        [Header("Moving Coin")]
-        [SerializeField] protected GameObject movingCoin;
-
         private void Start()
         {
             // for (int i = 0; i <= retainStep; i++)

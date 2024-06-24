@@ -16,7 +16,6 @@ namespace LevelGenerate
         #region -Tiles-
 
         [Space]
-        [SerializeField] private Transform normalTileParent;
         [SerializeField] private GameObject normalTilePrefab;
 
         #region -Tile Stage with Dictionary-

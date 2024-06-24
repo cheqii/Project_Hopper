@@ -13,6 +13,10 @@ namespace LevelGenerate
         [SerializeField] private Transform secretRoomParent;
         [SerializeField] private GameObject fallingTile;
         [SerializeField] private GameObject exitDoor;
+        
+        [Header("Moving Coin")]
+        [SerializeField] protected GameObject movingCoin;
+        
         public override void GenerateTile(int step, bool initialGenerate = false)
         {
             base.GenerateTile(step, initialGenerate);

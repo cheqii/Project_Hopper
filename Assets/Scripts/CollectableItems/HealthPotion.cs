@@ -14,6 +14,7 @@ namespace CollectableItems
         protected override void TriggerAction(Player player)
         {
             base.TriggerAction(player);
+            SoundManager.Instance.PlaySFX("Potion");
             player.FullHeal(1);
             GameManager._instance.UpdatePlayerHealthUI(true);
             PoolManager.ReleaseObject(gameObject);
