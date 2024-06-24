@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
 
     public void OnGameOver()
     {
+        SoundManager.Instance.musicSource.Stop();
         gameOverPanel.SetActive(true);
         CheckForHighScore();
         UpdateHighScore();
@@ -136,6 +137,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        SoundManager.Instance.musicSource.Play();
         SceneManager.LoadScene(sceneName);
     }
 
