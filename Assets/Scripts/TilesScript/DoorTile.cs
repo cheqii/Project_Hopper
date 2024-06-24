@@ -10,21 +10,6 @@ namespace TilesScript
 {
     public class DoorTile : TilesBlock
     {
-        [Header("Door Destination")] 
-        [SerializeField] private Transform normalLevelParent;
-        public Transform NormalLevelParent
-        {
-            get => normalLevelParent;
-            set => normalLevelParent = value;
-        }
-        
-        [SerializeField] private Transform secretRoomParent;
-        public Transform SecretRoomParent
-        {
-            get => secretRoomParent;
-            set => secretRoomParent = value;
-        }
-        
         [Header("Door")]
         [SerializeField] private Door door;
         
@@ -35,13 +20,6 @@ namespace TilesScript
             set => alreadyEnter = value;
         }
 
-        [SerializeField] private bool isGenerateDone;
-        public bool IsGenerateDone
-        {
-            get => isGenerateDone;
-            set => isGenerateDone = value;
-        }
-
         protected override void Start()
         {
             base.Start();
@@ -50,7 +28,6 @@ namespace TilesScript
         public override void SetToInitialTile(Vector3 startPos = default)
         {
             base.SetToInitialTile(startPos);
-            isGenerateDone = false;
             alreadyEnter = false;
             door.IsOpen = false;
             door.DoorSprite.color = Color.black;
@@ -59,8 +36,6 @@ namespace TilesScript
         protected override void StartAction()
         {
             base.StartAction();
-            normalLevelParent = PoolManager.Instance.root.parent;
-            secretRoomParent = PoolManager.Instance.secretRoom;
         }
 
         public override void CheckPlayerOnTile()

@@ -12,7 +12,6 @@ namespace TilesScript
             doorTile.AlreadyEnter = true;
             _Player.CurrentRoom = RoomState.SecretRoom;
 
-            
             doorEvent.Raise();
 
             GameManager._instance.secretRoomGenerate.GenerateTile(doorTile.transform.position.y, doorTile.transform.position, doorTile.gameObject);
