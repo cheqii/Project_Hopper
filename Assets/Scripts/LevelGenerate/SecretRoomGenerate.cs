@@ -13,6 +13,11 @@ namespace LevelGenerate
         [SerializeField] private Transform secretRoomParent;
         [SerializeField] private GameObject fallingTile;
         [SerializeField] private GameObject exitDoor;
+        public override void GenerateTile(int step, bool initialGenerate = false)
+        {
+            base.GenerateTile(step, initialGenerate);
+        }
+
         public void GenerateTile(float doorYPos, Vector3 doorCurrentTransform, GameObject startDoor)
         {
             if(_player.CurrentRoom == RoomState.NormalRoom) return;
