@@ -134,10 +134,6 @@ GameObject:
   - component: {fileID: 45086114}
   - component: {fileID: 45086115}
   - component: {fileID: 45086116}
-  - component: {fileID: 45086117}
-  - component: {fileID: 45086120}
-  - component: {fileID: 45086119}
-  - component: {fileID: 45086121}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -265,194 +261,6 @@ MonoBehaviour:
   logStatus: 0
   root: {fileID: 174793486}
   secretRoom: {fileID: 966204200}
---- !u!114 &45086117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45086112}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventName: GameOver
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 45086115}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  isListenerRegistered: 0
---- !u!114 &45086119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45086112}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventName: ExitSecretRoom
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 45086115}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetTileNormalRoom
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 45086115}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetTileSecretRoom
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 45086115}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReleaseSecretRoom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1335388220}
-        m_TargetAssemblyTypeName: Lava, Assembly-CSharp
-        m_MethodName: ResetLava
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  isListenerRegistered: 0
---- !u!114 &45086120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45086112}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventName: EnterSecretRoom
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 45086115}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetTileNormalRoom
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 45086115}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetTileSecretRoom
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  isListenerRegistered: 0
---- !u!114 &45086121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45086112}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventName: Jump
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 45086115}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: CheckMoveGroundTile
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 45086115}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GenerateTileByStep
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1335388220}
-        m_TargetAssemblyTypeName: Lava, Assembly-CSharp
-        m_MethodName: DecreaseLava
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  isListenerRegistered: 0
 --- !u!1 &133065111
 GameObject:
   m_ObjectHideFlags: 0
@@ -3749,10 +3557,6 @@ MonoBehaviour:
   activateLava: 0
   gameOverEvent:
     eventName: GameOver
-    Listeners: []
-    _event:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1373317884
 GameObject:
   m_ObjectHideFlags: 0
@@ -4552,7 +4356,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isListenerRegistered: 0
 --- !u!114 &1758512328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4617,7 +4420,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isListenerRegistered: 0
 --- !u!114 &1758512329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4658,7 +4460,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  isListenerRegistered: 0
 --- !u!114 &1758512330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4687,7 +4488,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isListenerRegistered: 0
 --- !u!114 &1758512331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4700,46 +4500,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fcecd258cdd0c4fb4d85dcee595deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ListenerDictionary:
-    listenerDict:
-    - key: Jump
-      eventListener: {fileID: 1758512327}
-    - key: GameOver
-      eventListener: {fileID: 1758512330}
-    - key: EnterSecretRoom
-      eventListener: {fileID: 1758512329}
-    - key: ExitSecretRoom
-      eventListener: {fileID: 1758512328}
   EventDictionary:
     eventDict:
     - key: Jump
       gameEvent:
         eventName: Jump
-        Listeners: []
-        _event:
-          m_PersistentCalls:
-            m_Calls: []
     - key: GameOver
       gameEvent:
         eventName: GameOver
-        Listeners: []
-        _event:
-          m_PersistentCalls:
-            m_Calls: []
     - key: EnterSecretRoom
       gameEvent:
         eventName: EnterSecretRoom
-        Listeners: []
-        _event:
-          m_PersistentCalls:
-            m_Calls: []
     - key: ExitSecretRoom
       gameEvent:
         eventName: ExitSecretRoom
-        Listeners: []
-        _event:
-          m_PersistentCalls:
-            m_Calls: []
 --- !u!4 &1758512332
 Transform:
   m_ObjectHideFlags: 0
@@ -5394,7 +5168,7 @@ PrefabInstance:
     - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: jump
       value: 
-      objectReference: {fileID: 45086117}
+      objectReference: {fileID: 0}
     - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: jumpEvent
       value: 
