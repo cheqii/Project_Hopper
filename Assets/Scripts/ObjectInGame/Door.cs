@@ -27,13 +27,6 @@ namespace ObjectInGame
         [Header("Interactable")]
         [SerializeField] private InteractableObject interactableObject;
 
-        [SerializeField] protected Nf_GameEvent doorEvent;
-
-        private void OnEnable()
-        {
-            // doorEvent.RegisterListener(Nf_EventManager._instance.GetEventListener(doorEvent.eventName));
-        }
-
         // Start is called before the first frame update
         void Start()
         {

@@ -8,7 +8,6 @@ namespace Event
     [Serializable]
     public class Nf_GameEvent
     {
-        public string eventName;
         private UnityEvent<Component, object> _event = new Nf_CustomGameEvent();
 
         public void Raise(Component sender, object data)
@@ -30,7 +29,7 @@ namespace Event
     [Serializable]
     public class Nf_GameEventDictProperty
     {
-        public string key;
+        public PlayerState key;
         public Nf_GameEvent gameEvent;
     }
 
@@ -39,9 +38,9 @@ namespace Event
     {
         public List<Nf_GameEventDictProperty> eventDict;
 
-        public Dictionary<string, Nf_GameEvent> ToDictionary()
+        public Dictionary<PlayerState, Nf_GameEvent> ToDictionary()
         {
-            Dictionary<string, Nf_GameEvent> newEvent = new Dictionary<string, Nf_GameEvent>();
+            Dictionary<PlayerState, Nf_GameEvent> newEvent = new Dictionary<PlayerState, Nf_GameEvent>();
 
             foreach (var dictionary in eventDict)
             {

@@ -18,6 +18,14 @@ public enum GameState
     Level3
 }
 
+public enum PlayerState
+{
+    Jump,
+    GameOver,
+    EnterSecretRoom,
+    ExitSecretRoom
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance;

@@ -50,14 +50,6 @@ namespace Character
 
         #endregion
 
-        #region -Action Event-
-
-        [Header("Player Action Event")]
-        [SerializeField] private Nf_GameEvent jumpEvent;
-        [SerializeField] private Nf_GameEvent gameOverEvent;
-
-        #endregion
-
         #region -Feedbacks-
 
         [Space]
@@ -113,7 +105,7 @@ namespace Character
             if (!PlayerCheckGround()) return;
             
             isGuard = false;
-            Nf_EventManager._instance.RaiseEvent(jumpEvent.eventName, this, null);
+            Nf_EventManager._instance.RaiseEvent(PlayerState.Jump, this, null);
             SoundManager.Instance.PlaySFX("Jump");
             animator.SetTrigger("Jump");
             isGuard = false;
@@ -155,7 +147,7 @@ namespace Character
             GameManager._instance.UpdatePlayerHealthUI(false);
 
             if (health > 0) return;
-            Nf_EventManager._instance.RaiseEvent(gameOverEvent.eventName, this, null);
+            Nf_EventManager._instance.RaiseEvent(PlayerState.GameOver, this, null);
             Destroy(gameObject);
             // gameObject.SetActive(false);
         }

@@ -17,8 +17,6 @@ public class Lava : MonoBehaviour
 
     [SerializeField] private bool activateLava;
 
-    [SerializeField] private Nf_GameEvent gameOverEvent;
-    
     void Update()
     {
         if(GameManager._instance.player == null) return;
@@ -38,7 +36,7 @@ public class Lava : MonoBehaviour
         {
             SoundManager.Instance.PlaySFX("Dead");
             other.gameObject.SetActive(false);
-            Nf_EventManager._instance.RaiseEvent(gameOverEvent.eventName, this, null);
+            Nf_EventManager._instance.RaiseEvent(PlayerState.GameOver, this, null);
         }
     }
 

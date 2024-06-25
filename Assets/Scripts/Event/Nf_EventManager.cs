@@ -9,7 +9,7 @@ namespace Event
         public static Nf_EventManager _instance;
 
         public Nf_GameEventDictionary EventDictionary;
-        private Dictionary<string, Nf_GameEvent> eventDictionary;
+        private Dictionary<PlayerState, Nf_GameEvent> _dictionary;
 
         private void Awake()
         {
@@ -19,50 +19,24 @@ namespace Event
 
         private void OnEnable()
         {
-            eventDictionary = EventDictionary.ToDictionary();
+            _dictionary = EventDictionary.ToDictionary();
         }
 
         private void OnDisable()
         {
-            eventDictionary.Clear();
+            _dictionary.Clear();
         }
         
-        public Nf_GameEvent GetEvent(string eventName)
+        public Nf_GameEvent GetEvent(PlayerState state)
         {
-            eventDictionary.TryGetValue(eventName, out var gameEvent);
+            _dictionary.TryGetValue(state, out var gameEvent);
             return gameEvent;
         }
 
-        public void RaiseEvent(string eventName, Component sender = default, object data = default)
+        public void RaiseEvent(PlayerState state, Component sender = default, object data = default)
         {
-            if (eventDictionary.TryGetValue(eventName, out var gameEvent))
-            {
+            if (_dictionary.TryGetValue(state, out var gameEvent))
                 gameEvent.Raise(sender, data);
-            }
         }
-    }
-}
-
-[Serializable]
-public class Nf_ListenerDictProperty
-{
-    public string key;
-    public Nf_EventListener eventListener;
-}
-
-[Serializable]
-public class Nf_EventListenerDictionary
-{
-    public List<Nf_ListenerDictProperty> listenerDict;
-    public Dictionary<string, Nf_EventListener> ToDictionary()
-    {
-        Dictionary<string, Nf_EventListener> newListeners = new Dictionary<string, Nf_EventListener>();
-
-        foreach (var dictionary in listenerDict)
-        {
-            newListeners.Add(dictionary.key, dictionary.eventListener);
-        }
-
-        return newListeners;
     }
 }

@@ -1,13 +1,15 @@
 using Event;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class Nf_CustomGameEvent : UnityEvent<Component, object>{} 
 
 public class Nf_EventListener : MonoBehaviour
 {
-    public string eventName;
+    public PlayerState state;
     public Nf_CustomGameEvent Response;
 
     private bool _isListenerRegistered;
@@ -15,17 +17,17 @@ public class Nf_EventListener : MonoBehaviour
     private void OnEnable()
     {
         RegisterListener();
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         if (Nf_EventManager._instance != null)
             UnregisterListener();
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         RegisterListener();
     }
@@ -33,7 +35,7 @@ public class Nf_EventListener : MonoBehaviour
     private void RegisterListener()
     {
         if (_isListenerRegistered || Nf_EventManager._instance == null) return;
-        var gameEvent = Nf_EventManager._instance.GetEvent(eventName);
+        var gameEvent = Nf_EventManager._instance.GetEvent(state);
         
         if (gameEvent == null) return;
         gameEvent.RegisterListener(OnEventRaise);
@@ -43,7 +45,7 @@ public class Nf_EventListener : MonoBehaviour
     private void UnregisterListener()
     {
         if (!_isListenerRegistered || Nf_EventManager._instance == null) return;
-        var gameEvent = Nf_EventManager._instance.GetEvent(eventName);
+        var gameEvent = Nf_EventManager._instance.GetEvent(state);
         
         if (gameEvent == null) return;
         gameEvent.UnRegisterListener(OnEventRaise);

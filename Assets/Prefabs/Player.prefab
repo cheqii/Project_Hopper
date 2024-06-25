@@ -216,7 +216,6 @@ GameObject:
   - component: {fileID: 1008613121611420466}
   - component: {fileID: 4600207697784066625}
   - component: {fileID: 35541912851006961}
-  - component: {fileID: 7879644293468667542}
   - component: {fileID: 3581700246065045610}
   m_Layer: 6
   m_Name: Player
@@ -381,6 +380,7 @@ MonoBehaviour:
   maxHealth: 3
   health: 0
   attackDamage: 1
+  startPos: {x: 1, y: 1.3, z: 0}
   jumpForce: 5
   groundLayer:
     serializedVersion: 2
@@ -389,73 +389,9 @@ MonoBehaviour:
   linePosY: 0.75
   animator: {fileID: 3581700246065045610}
   facingObject: {fileID: 0}
-  playerInSecretRoom: 0
-  jumpEvent: {fileID: 11400000, guid: 6c917d72c93560446baaba347535eab5, type: 2}
-  gameOverEvent: {fileID: 11400000, guid: b74923e500930ca49b48c35780880c1e, type: 2}
---- !u!114 &7879644293468667542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7839029507602420194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c38ef45fb3602f4aa6a8341ff57a375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: 6c917d72c93560446baaba347535eab5, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Lava, Assembly-CSharp
-        m_MethodName: DecreaseLava
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MoveGroundTile, Assembly-CSharp
-        m_MethodName: MoveTile
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelGenerator, Assembly-CSharp
-        m_MethodName: GeneratePlatformByStep
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MoveGroundTile, Assembly-CSharp
-        m_MethodName: MoveSecretRoomTile
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  currentRoom: 0
+  hurtFeedback: {fileID: 0}
+  bloodParticle: {fileID: 7913749437518634134, guid: bbe561763cc09d5448e01ab05263cbe0, type: 3}
 --- !u!95 &3581700246065045610
 Animator:
   serializedVersion: 5
