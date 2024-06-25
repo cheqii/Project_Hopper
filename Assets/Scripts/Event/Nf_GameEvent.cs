@@ -1,47 +1,55 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = System.Object;
+using UnityEngine.Events;
 
-
-[CreateAssetMenu(menuName = "Nefer_GameEvent")]
-public class Nf_GameEvent : ScriptableObject
+namespace Event
 {
-    [HideInInspector]
-    public List<Nf_EventListener> Listeners = new List<Nf_EventListener>();
+    [Serializable]
+    public class Nf_GameEvent
+    {
+        public string eventName;
+        private UnityEvent<Component, object> _event = new Nf_CustomGameEvent();
 
-    //use this method if you want to raise event.
-    public void Raise()
-    {
-        foreach (var item in Listeners)
+        public void Raise(Component sender, object data)
         {
-            item.OnEventRaise(null, null);
+            _event.Invoke(sender, data);
+        }
+
+        public void RegisterListener(UnityAction<Component, object> listener)
+        {
+            _event.AddListener(listener);
+        }
+
+        public void UnRegisterListener(UnityAction<Component, object> listener)
+        {
+            _event.RemoveListener(listener);
         }
     }
-    
-    //use this method if you want to raise event and use some sender variable.
-    public void Raise(Component sender, object data)
+
+    [Serializable]
+    public class Nf_GameEventDictProperty
     {
-        foreach (var item in Listeners)
-        {
-            item.OnEventRaise(sender, data);
-        }
+        public string key;
+        public Nf_GameEvent gameEvent;
     }
-    
-    
-    public void RegisterListener(Nf_EventListener Listener)
+
+    [Serializable]
+    public class Nf_GameEventDictionary
     {
-        if (!Listeners.Contains(Listener))
+        public List<Nf_GameEventDictProperty> eventDict;
+
+        public Dictionary<string, Nf_GameEvent> ToDictionary()
         {
-            Listeners.Add(Listener);
+            Dictionary<string, Nf_GameEvent> newEvent = new Dictionary<string, Nf_GameEvent>();
+
+            foreach (var dictionary in eventDict)
+            {
+                newEvent.Add(dictionary.key, dictionary.gameEvent);
+            }
+
+            return newEvent;
         }
+
     }
-    
-    public void UnRegisterListener(Nf_EventListener Listener)
-    {
-        if (Listeners.Contains(Listener))
-        {
-            Listeners.Remove(Listener);
-        }
-    }
-    
 }

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using Event;
 using Interaction;
 using MoreMountains.Feedbacks;
 using Unity.Mathematics;
@@ -11,9 +12,13 @@ namespace Character
 {
     public class Player : Character
     {
+        #region -Player Property-
+
         [Header("Start Position")]
         [SerializeField] private Vector3 startPos;
         public Vector3 StartPos => startPos;
+        
+        private Rigidbody2D rb;
         
         [SerializeField] private float jumpForce;
         
@@ -43,17 +48,26 @@ namespace Character
             set => currentRoom = value;
         }
 
+        #endregion
+
+        #region -Action Event-
+
         [Header("Player Action Event")]
         [SerializeField] private Nf_GameEvent jumpEvent;
         [SerializeField] private Nf_GameEvent gameOverEvent;
 
+        #endregion
+
+        #region -Feedbacks-
+
+        [Space]
         [SerializeField] private MMF_Player hurtFeedback;
 
         [SerializeField] private ParticleSystem bloodParticle;
         private ParticleSystem bloodParticleInstance;
 
-        private Rigidbody2D rb;
-        
+        #endregion
+
         private void Awake()
         {
             _control = new PlayerActionInput();
@@ -99,7 +113,7 @@ namespace Character
             if (!PlayerCheckGround()) return;
             
             isGuard = false;
-            jumpEvent.Raise();
+            Nf_EventManager._instance.RaiseEvent(jumpEvent.eventName, this, null);
             SoundManager.Instance.PlaySFX("Jump");
             animator.SetTrigger("Jump");
             isGuard = false;
@@ -141,8 +155,9 @@ namespace Character
             GameManager._instance.UpdatePlayerHealthUI(false);
 
             if (health > 0) return;
+            Nf_EventManager._instance.RaiseEvent(gameOverEvent.eventName, this, null);
             Destroy(gameObject);
-            gameOverEvent.Raise();
+            // gameObject.SetActive(false);
         }
         
         public void FullHeal(int value)

@@ -1,3 +1,4 @@
+using Event;
 using Interface;
 using ObjectInGame;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace TilesScript
             base.EnterTheDoor();
             _Player.CurrentRoom = RoomState.NormalRoom;
 
-            doorEvent.Raise();
+            Nf_EventManager._instance.RaiseEvent(doorEvent.eventName, this, null);
             
             _Player.transform.position = new Vector3(_Player.transform.position.x, transform.position.y + 0.5f);
         }

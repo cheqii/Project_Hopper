@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using Event;
 using ObjectPool;
 using TilesScript;
 using UnityEngine.Serialization;
@@ -37,7 +38,7 @@ public class Lava : MonoBehaviour
         {
             SoundManager.Instance.PlaySFX("Dead");
             other.gameObject.SetActive(false);
-            gameOverEvent.Raise();
+            Nf_EventManager._instance.RaiseEvent(gameOverEvent.eventName, this, null);
         }
     }
 

@@ -1,3 +1,5 @@
+using System;
+using Event;
 using Interaction;
 using Interface;
 using TilesScript;
@@ -26,7 +28,12 @@ namespace ObjectInGame
         [SerializeField] private InteractableObject interactableObject;
 
         [SerializeField] protected Nf_GameEvent doorEvent;
-    
+
+        private void OnEnable()
+        {
+            // doorEvent.RegisterListener(Nf_EventManager._instance.GetEventListener(doorEvent.eventName));
+        }
+
         // Start is called before the first frame update
         void Start()
         {
