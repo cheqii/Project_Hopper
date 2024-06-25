@@ -99,11 +99,13 @@ namespace Character
             if (!PlayerCheckGround()) return;
             
             isGuard = false;
-            jumpEvent.Raise();
+
+            GameManager._instance.GenerateTileByStep();
+            GameManager._instance.CheckMoveGroundTile();
+            
             SoundManager.Instance.PlaySFX("Jump");
             animator.SetTrigger("Jump");
-            isGuard = false;
-            
+
             rb.velocity = Vector2.up * jumpForce;
             
             if(currentRoom == RoomState.SecretRoom) return;
@@ -142,7 +144,7 @@ namespace Character
 
             if (health > 0) return;
             Destroy(gameObject);
-            gameOverEvent.Raise();
+            GameManager._instance.OnGameOver();
         }
         
         public void FullHeal(int value)

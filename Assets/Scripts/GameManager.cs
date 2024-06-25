@@ -6,6 +6,7 @@ using LevelGenerate;
 using ObjectPool;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -16,6 +17,14 @@ public enum GameState
     Level1,
     Level2,
     Level3
+}
+
+public enum PlayerState
+{
+    Jump,
+    EnterSecretRoom,
+    ExitSecretRoom,
+    Dead
 }
 
 public class GameManager : MonoBehaviour
@@ -55,11 +64,12 @@ public class GameManager : MonoBehaviour
     public SecretRoomGenerate secretRoomGenerate;
 
     [Header("Move tile")]
-    [SerializeField] private MoveGroundTile normalTileMove;
-    [SerializeField] private MoveGroundTile secretTileMove;
+    [SerializeField] private MoveNormalTile normalTileMove;
+    [SerializeField] private MoveSecretTile secretTileMove;
 
     #endregion
 
+    [SerializeField] private Lava lava;
 
     private void Awake()
     {
@@ -83,36 +93,34 @@ public class GameManager : MonoBehaviour
         
         normalGenerate._Dictionary = normalGenerate.TileStage.ToDictionary();
         
-        for (int i = 0; i <= normalGenerate.RetainStep; i++)
+        for (var i = 0; i <= normalGenerate.RetainStep; i++)
             normalGenerate.GenerateTile(i, true);
     }
 
     #region -Tile Functions-
 
-    public void GenerateTileByStep()
+    public void  GenerateTileByStep()
     {
         if(!player.PlayerCheckGround()) return;
         if(player.CurrentRoom == RoomState.SecretRoom) return;
         var step = normalGenerate.RetainStep;
         normalGenerate.GenerateTile(++step, false);
     }
-
+    
     public void CheckMoveGroundTile()
     {
-        if (player.CurrentRoom == RoomState.NormalRoom)
-            normalTileMove.MoveTile();
-        else 
-            secretTileMove.MoveTile();
+        normalTileMove.MoveTileState(player.CurrentRoom);
+        secretTileMove.MoveTileState(player.CurrentRoom);
     }
 
-    public void SetTileNormalRoom(bool normalTile)
+    public void SetTile(bool normalTile, bool secretRoom)
     {
         normalTileMove.transform.parent.gameObject.SetActive(normalTile);
-    }
-
-    public void SetTileSecretRoom(bool secretRoom)
-    {
         secretTileMove.transform.gameObject.SetActive(secretRoom);
+        
+        if(player.CurrentRoom != RoomState.NormalRoom) return;
+        ReleaseSecretRoom();
+        lava.ResetLava();
     }
 
     public void ReleaseSecretRoom()

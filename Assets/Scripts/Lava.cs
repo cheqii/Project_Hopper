@@ -1,13 +1,17 @@
 using System;
 using System.Collections;
+using Character;
 using UnityEngine;
 using DG.Tweening;
+using Interface;
 using ObjectPool;
 using TilesScript;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
 public class Lava : MonoBehaviour
 {
+    private Player _player;
     [SerializeField] private Vector3 lavaStartPos;
     [SerializeField] private float lavaIncreaseSpeed;
     [SerializeField] private float decreaseLavaValue;
@@ -17,7 +21,13 @@ public class Lava : MonoBehaviour
     [SerializeField] private bool activateLava;
 
     [SerializeField] private Nf_GameEvent gameOverEvent;
-    
+
+    private void Start()
+    {
+        _player = GameManager._instance.player;
+        _player._Control.PlayerAction.Jump.performed += context => DecreaseLava();
+    }
+
     void Update()
     {
         if(GameManager._instance.player == null) return;
@@ -37,7 +47,7 @@ public class Lava : MonoBehaviour
         {
             SoundManager.Instance.PlaySFX("Dead");
             other.gameObject.SetActive(false);
-            gameOverEvent.Raise();
+            GameManager._instance.OnGameOver();
         }
     }
 

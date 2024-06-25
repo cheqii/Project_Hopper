@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Character.Monster;
+using Interface;
 using ObjectInGame;
 using ObjectPool;
 using ScriptableObjects;
 using TilesScript;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace LevelGenerate

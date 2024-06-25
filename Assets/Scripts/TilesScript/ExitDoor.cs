@@ -11,7 +11,7 @@ namespace TilesScript
             base.EnterTheDoor();
             _Player.CurrentRoom = RoomState.NormalRoom;
 
-            doorEvent.Raise();
+            GameManager._instance.SetTile(true, false);
             
             _Player.transform.position = new Vector3(_Player.transform.position.x, transform.position.y + 0.5f);
         }
