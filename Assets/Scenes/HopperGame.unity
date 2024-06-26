@@ -5166,61 +5166,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: jump
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: jumpEvent
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: jumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: startPos.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: startPos.y
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: hurtFeedback
       value: 
       objectReference: {fileID: 1032813464}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: bloodParticle
-      value: 
-      objectReference: {fileID: 7913749437518634134, guid: bbe561763cc09d5448e01ab05263cbe0, type: 3}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: jumpEvent.eventName
-      value: Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: gameOverEvent.eventName
-      value: GameOver
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: jumpEvent.Listeners.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: EventDictionary.evenDict.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: EventDictionary.evenDict.Array.data[0].key
-      value: Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: jumpEvent._event.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 35541912851006961, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: jumpEvent._event.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5332491138702838723, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -5265,44 +5213,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1335388220}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_Target
-      value: 
-      objectReference: {fileID: 966204201}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GeneratePlatformByStep
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: MoveTile
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: LevelGenerator, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: MoveGroundTile, Assembly-CSharp
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7879644293468667542, guid: 27bf8d2d943c9a34d9c0f9bf4d94255d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

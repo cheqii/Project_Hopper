@@ -156,8 +156,7 @@ namespace Character
 
             if (health > 0) return;
             Nf_EventManager._instance.RaiseEvent(gameOverEvent.eventName, this, null);
-            Destroy(gameObject);
-            // gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
         
         public void FullHeal(int value)
