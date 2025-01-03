@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Monster
+  - InteractableObject
+  - Lava
+  - Melt
+  - Detector
+  - TNT
   layers:
   - Default
   - TransparentFX
@@ -11,11 +18,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - Monster
+  - TNT
+  - Object
   - 
   - 
   - 
@@ -40,4 +47,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: ForeGround
+    uniqueID: 72147705
     locked: 0
