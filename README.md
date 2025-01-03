@@ -1,2 +1,2 @@
 # Project_Hopper
-2d casual game: Intern game project practice
+2d casual game: practice game project
